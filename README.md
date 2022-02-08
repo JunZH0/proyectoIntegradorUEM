@@ -1,4 +1,4 @@
-# Proyecto Ingrador UEM
+# Proyecto Integrador UEM
 
 Integrantes
   - Jun
