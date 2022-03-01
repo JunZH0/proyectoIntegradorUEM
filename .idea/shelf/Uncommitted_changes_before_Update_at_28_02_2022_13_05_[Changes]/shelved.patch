@@ -1,0 +1,86 @@
+Index: Java/.idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Java/.idea/modules.xml b/Java/.idea/modules.xml
+new file mode 100644
+--- /dev/null	(date 1644319319594)
++++ b/Java/.idea/modules.xml	(date 1644319319594)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/Java.iml" filepath="$PROJECT_DIR$/.idea/Java.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: Java/.idea/Java.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Java/.idea/Java.iml b/Java/.idea/Java.iml
+new file mode 100644
+--- /dev/null	(date 1644319319478)
++++ b/Java/.idea/Java.iml	(date 1644319319478)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: Java/.idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Java/.idea/vcs.xml b/Java/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1644319319631)
++++ b/Java/.idea/vcs.xml	(date 1644319319631)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: Java/.idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Java/.idea/misc.xml b/Java/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1644319319612)
++++ b/Java/.idea/misc.xml	(date 1644319319612)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectRootManager">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: Java/.idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Java/.idea/.gitignore b/Java/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1644319319899)
++++ b/Java/.idea/.gitignore	(date 1644319319899)
+@@ -0,0 +1,3 @@
++# Default ignored files
++/shelf/
++/workspace.xml
