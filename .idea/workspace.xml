@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de5d8fe7-4230-46b8-90bf-8e4af4e44ae0" name="Changes" comment="Archivo .sql creado">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BBDD/CreacionTablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/BBDD/CreacionTablas.sql" afterDir="false" />
-    </list>
+    <list default="true" id="de5d8fe7-4230-46b8-90bf-8e4af4e44ae0" name="Changes" comment="Archivo .sql creado" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
