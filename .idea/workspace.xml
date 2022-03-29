@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de5d8fe7-4230-46b8-90bf-8e4af4e44ae0" name="Changes" comment="Archivo .sql creado">
+    <list default="true" id="de5d8fe7-4230-46b8-90bf-8e4af4e44ae0" name="Changes" comment="Estructura paquetes Java">
+      <change beforePath="$PROJECT_DIR$/.idea/proyectoIntegradorUEM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/proyectoIntegradorUEM.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +29,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Java/PharmaCode" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\rbalj\Documents\proyectoIntegradorUEM\Java\PharmaCode" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -59,7 +65,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648536342210</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Estructura paquetes Java">
+      <created>1648544751622</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1648544751622</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -77,6 +90,7 @@
     <MESSAGE value="Añadido prodcutbacklog" />
     <MESSAGE value="Documentación actualizada (MER, Backlog)" />
     <MESSAGE value="Archivo .sql creado" />
-    <option name="LAST_COMMIT_MESSAGE" value="Archivo .sql creado" />
+    <MESSAGE value="Estructura paquetes Java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Estructura paquetes Java" />
   </component>
 </project>
