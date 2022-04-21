@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de5d8fe7-4230-46b8-90bf-8e4af4e44ae0" name="Changes" comment="Estructura paquetes Java">
+    <list default="true" id="de5d8fe7-4230-46b8-90bf-8e4af4e44ae0" name="Changes" comment="Corrección errores datos.sql">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BBDD/CreacionTablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/BBDD/CreacionTablas.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BBDD/Datos.sql" beforeDir="false" afterPath="$PROJECT_DIR$/BBDD/Datos.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +37,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "settings.editor.selected.configurable": "SQL Dialects"
   }
 }]]></component>
@@ -53,6 +59,7 @@
       <updated>1644320645243</updated>
       <workItem from="1650281693035" duration="100000" />
       <workItem from="1650281911974" duration="160000" />
+      <workItem from="1650561414828" duration="794000" />
     </task>
     <task id="LOCAL-00001" summary="Añadido prodcutbacklog">
       <created>1646049960421</created>
@@ -89,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648546744397</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Corrección errores datos.sql">
+      <created>1650561740603</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1650561740603</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,6 +125,7 @@
     <MESSAGE value="Documentación actualizada (MER, Backlog)" />
     <MESSAGE value="Archivo .sql creado" />
     <MESSAGE value="Estructura paquetes Java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Estructura paquetes Java" />
+    <MESSAGE value="Corrección errores datos.sql" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrección errores datos.sql" />
   </component>
 </project>
