@@ -1,4 +1,4 @@
-package pi.main;
+package src.pi.main;
 
 public class GestorMain {
 

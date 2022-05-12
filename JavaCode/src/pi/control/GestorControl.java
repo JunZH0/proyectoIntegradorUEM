@@ -1,4 +1,4 @@
-package pi.control;
+package src.pi.control;
 
 public class GestorControl {
 
