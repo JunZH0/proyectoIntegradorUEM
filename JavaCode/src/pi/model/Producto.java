@@ -1,4 +1,4 @@
-package src.pi.model;
+package pi.model;
 
 public class Producto {
 	private int idProducto;

@@ -1,4 +1,4 @@
-package src.pi.view;
+package pi.view;
 
 import javax.swing.JFrame;
 

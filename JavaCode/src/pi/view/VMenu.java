@@ -1,4 +1,4 @@
-package src.pi.view;
+package pi.view;
 
 public class VMenu {
 
