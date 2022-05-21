@@ -13,6 +13,10 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class VInicio extends JFrame{
+	public static final String BTN_ACCEDER = "Acceder";
+	public static final int ANCHO = 800;
+	public static final int ALTO = 600;
+	
 	private JTextField txtEmpleado;
 	private JTextField txtPwd;
 	
@@ -26,6 +30,8 @@ public class VInicio extends JFrame{
 		setTitle("PharmaCode PGS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
+		centrarVentana();
+		setSize(ANCHO, ALTO);
 		
 		JLabel lblPharmacode = new JLabel("PharmaCode");
 		lblPharmacode.setBounds(186, 34, 120, 17);
@@ -43,11 +49,10 @@ public class VInicio extends JFrame{
 		getContentPane().add(txtPwd);
 		txtPwd.setColumns(10);
 		
-		JButton btnAcceso = new JButton("Acceder");
+		JButton btnAcceso = new JButton(BTN_ACCEDER);
 		btnAcceso.setBounds(186, 180, 86, 27);
 		getContentPane().add(btnAcceso);
 		
-		centrarVentana();
 		
 		
 	}
@@ -57,20 +62,14 @@ public class VInicio extends JFrame{
 	}
 	
 	
+	
 	public void centrarVentana() {
-		
-		// asignamos tamaño a la ventana 
 		setPreferredSize(new Dimension());  
-		// Se obtienen las dimensiones en pixels de la pantalla.       
 		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
-		// Se asigna para funcionar en pantalla completa
 		setBounds(100, 100, (int) pantalla.getWidth(), (int) pantalla.getHeight());
 		setLocationRelativeTo(null);
-		// Se obtienen las dimensiones en pixels de la ventana.       
 		Dimension ventana = this.getPreferredSize();               
-		// Una cuenta para situar la ventana en el centro de la pantalla.       
-		setLocation((pantalla.width - ventana.width) / 2,  (pantalla.height - ventana.height) / 2);
+		setLocation((pantalla.width - ventana.width) / 2,  (pantalla.height - ventana.height) / 2);		
 		
-		
-		}
+	}
 }

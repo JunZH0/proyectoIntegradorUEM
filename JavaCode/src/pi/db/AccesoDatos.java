@@ -12,9 +12,33 @@ public class AccesoDatos {
 		
 		
 		public AccesoDB() {
-			driver = "org.sqlite.JDBC"; 
-			url = "jdbc:sqlite:db/DDBBPharmaCode.db";
+			/*driver = "org.sqlite.JDBC"; 
+			url = "jdbc:sqlite:db/DDBBPharmaCode.db";*/
+			
+			Properties prop = new Properties();
+			InputStream is = null;
 		}
+		
+		try {
+			is = new FileInputStream("ConfiguracionDB.properties"); //provoca excepción por si no encuentra el fichero
+			prop.load(is); //esto también provocará excepción si hay problema a la hora de leer el fichero
+			
+			//tal como lo escribamos en el fichero .properties, se lo pasamos como String a ambos atributos:
+			driver = prop.getProperty("DRIVER");
+			url = prop.getProperty("URL");
+		} catch (FileNotFoundException e) {
+				e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (is != null) is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}
 		
 		public Connection hacerConexion() throws ClassNotFoundException, SQLException {
 			Class.forName(driver);

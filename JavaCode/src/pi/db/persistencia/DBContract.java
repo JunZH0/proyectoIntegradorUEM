@@ -1,4 +1,4 @@
-package src.pi.db.persistencia;
+package pi.db.persistencia;
 
 public class DBContract {
 	
@@ -50,7 +50,7 @@ public class DBContract {
 	public static final String COL_HORA_PEDIDO = "HORA_PEDIDO";
 	public static final String COL_CANT_PEDIDO = "CANTIDAD_PEDIDO";
 	
-	
+
 	//Tabla Stock_Producto:
 	public static final String NOM_TAB_STOCK_PROD_= "STOCK_PRODUCTO";
 	//ID_PRODUCTO
