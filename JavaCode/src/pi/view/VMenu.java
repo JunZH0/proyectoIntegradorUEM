@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 
-import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -16,7 +15,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-public class VMenu {
+import pi.control.GestorControl;
+
+public class VMenu extends JFrame {
 	public static final int ALTO = 600;
 	public static final int ANCHO = 800;
 
@@ -28,6 +29,9 @@ public class VMenu {
 	public static final String MNIM_CONS_EMPLE = "Consultar";
 	public static final String MNIM_REG_EMPLE = "Registar";
 	public static final String MNIM_MOD_EMPLE = "Modificar";
+	public static final String MNIM_CONS_PROV = "Consultar";
+	public static final String MNIM_REG_PROV = "Registrar";
+	public static final String MNIM_MOD_PROV = "Modificar";
 	
 	private JMenu mnProducto;
 	private JMenuItem mntmRegistroProd;
@@ -44,6 +48,13 @@ public class VMenu {
 	private JMenuItem mntmRegistroEmple;
 	private JSeparator separator_6;
 	private JMenuItem mntmModEmple;
+	private JMenu mnProveedor;
+	private JSeparator separator_7;
+	private JMenuItem mntmConsultaProv;
+	private JSeparator separator_8;
+	private JMenuItem mntmRegistroProv;
+	private JSeparator separator_9;
+	private JMenuItem mntmModProv;
 	
 	
 	public VMenu() {
@@ -119,6 +130,27 @@ public class VMenu {
 		
 		mntmModEmple = new JMenuItem(MNIM_MOD_EMPLE);
 		mnEmpleado.add(mntmModEmple);
+		
+		separator_7 = new JSeparator();
+		mbMenu.add(separator_7);
+		
+		mnProveedor = new JMenu("Proveedor");
+		mbMenu.add(mnProveedor);
+		
+		mntmConsultaProv = new JMenuItem(MNIM_CONS_PROV);
+		mnProveedor.add(mntmConsultaProv);
+		
+		separator_8 = new JSeparator();
+		mnProveedor.add(separator_8);
+		
+		mntmRegistroProv = new JMenuItem(MNIM_REG_PROV);
+		mnProveedor.add(mntmRegistroProv);
+		
+		separator_9 = new JSeparator();
+		mnProveedor.add(separator_9);
+		
+		mntmModProv = new JMenuItem(MNIM_MOD_PROV);
+		mnProveedor.add(mntmModProv);
 		
 		separator_4 = new JSeparator();
 		mbMenu.add(separator_4);
