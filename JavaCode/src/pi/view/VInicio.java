@@ -57,7 +57,7 @@ public class VInicio extends JFrame{
 		
 	}
 	
-	public void hacerVisiblie() {
+	public void hacerVisible() {
 		setVisible(true);
 	}
 	
