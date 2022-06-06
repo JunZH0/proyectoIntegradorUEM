@@ -2,11 +2,13 @@ package pi.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import pi.model.Proveedor;
 import pi.view.PConsultarEmple;
 import pi.view.PConsultarProv;
 import pi.view.PConsultarStock;
@@ -35,7 +37,7 @@ public class GestorControl implements ActionListener{
 	PConsultarProv pConProv;
 	PModificarProv pModProv;
 	PRegistrarProv pRegProv;
-	
+	DBPersistencia bdPers;
 	
 	
 	
@@ -76,7 +78,7 @@ public class GestorControl implements ActionListener{
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_MOD_EMPLE)) {
 				vMenu.cargarPanel(pModEmple);
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_CONS_PROV)) {
-				vMenu.cargarPanel(pConProv);
+				listarResultados();
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_REG_PROV)) {
 				vMenu.cargarPanel(pRegProv);
 			}  else if (ev.getActionCommand().equals(VMenu.MNIM_MOD_PROV)) {
@@ -102,6 +104,15 @@ public class GestorControl implements ActionListener{
 	
 	
 	
+	private void listarResultados() {
+		ArrayList<Proveedor> listaProv = new ArrayList<>();
+		listaProv = dbPers.seleccionarProveedores();
+		pConProv.rellenarTabla(listaProv);
+		vMenu.cargarPanel(pConProv);
+	}
+
+
+
 	public void salirApp() {
 		int resp = JOptionPane.showConfirmDialog(vInicio, "Se va a cerrar la aplicación, ¿desea continuar?",
 				"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
