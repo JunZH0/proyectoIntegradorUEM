@@ -7,12 +7,14 @@ public class Proveedor {
 	private String telefProv;
 	
 	
+	
 	public Proveedor(int idProv, String nombreProv, String cifProv, String telefProv) {
 		this.idProv = idProv;
 		this.nombreProv = nombreProv;
 		this.cifProv = cifProv;
 		this.telefProv = telefProv;
 	}
+	
 	
 	
 	public int getIdProv() {
@@ -27,7 +29,6 @@ public class Proveedor {
 	public String getTelefProv() {
 		return telefProv;
 	}
-	
 	
 	
 }
