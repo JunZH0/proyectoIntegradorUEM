@@ -56,7 +56,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -97,7 +97,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -136,7 +136,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -149,6 +149,43 @@ public class DBPersistencia {
 		
 		
 		return res;
+	}
+
+
+	public int provRestaurante(String nombreProv) {
+
+		int resultado = 0;
+		
+		String query = "DELETE FROM " + DBContract.NOM_TAB_PROV + " WHERE " + DBContract.COL_NOM_PROV + "=?"; 
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = acceso.hacerConexion();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, nombreProv);
+
+			resultado = pstmt.executeUpdate(); 
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) { 
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
+			e.printStackTrace();
+		} finally { 
+			try {
+				if (pstmt != null) pstmt.close(); 
+				if (con != null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+		
+		return resultado;
+	
 	}
 	
 	

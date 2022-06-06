@@ -88,25 +88,48 @@ public class GestorControl implements ActionListener{
 			
 		} else if (ev.getSource() instanceof JButton) {
 			if (ev.getActionCommand().equals(PRegistrarProv.BTN_REG_PROV)) {
-				registrarProv();
+                registrarProv();
+	        } else if (ev.getActionCommand().equals(PConsultarProv.BTN_ELIMINAR)) {
+                eliminarProv();
+            }
+		}
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private void eliminarProv() {
+		String nombreProv = pConProv.poveedorEliminar();
+		if (nombreProv == null) {
+			JOptionPane.showMessageDialog(pConProv, "No se ha seleccionado ning�n restaurante", "Error selecci�n", JOptionPane.ERROR_MESSAGE);
+		} else {
+			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el restaurante, �desea continuar?",
+					"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			if (resp == JOptionPane.YES_OPTION) {
+				int res = dbPers.provRestaurante(nombreProv);
+				listarResultadosProv();
+				if (res==1) {
+					JOptionPane.showMessageDialog(pConProv, "Se ha eliminado el restaurante", "Informaci�n", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(pConProv, "No se ha podido eliminar el restaurante", "Error eliminaci�n", JOptionPane.ERROR_MESSAGE);
+				}						
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
 	private void listarResultadosProv() {
 		ArrayList<Proveedor> listaProv = new ArrayList<>();
 		listaProv = dbPers.seleccionarProveedores();
