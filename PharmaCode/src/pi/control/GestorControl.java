@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import pi.db.persistencia.DBPersistencia;
 import pi.model.Proveedor;
 import pi.view.PConsultarEmple;
 import pi.view.PConsultarProv;
@@ -37,7 +38,7 @@ public class GestorControl implements ActionListener{
 	PConsultarProv pConProv;
 	PModificarProv pModProv;
 	PRegistrarProv pRegProv;
-	DBPersistencia bdPers;
+	DBPersistencia dbPers;
 	
 	
 	
