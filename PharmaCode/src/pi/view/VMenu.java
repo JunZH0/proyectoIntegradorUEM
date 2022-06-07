@@ -23,15 +23,15 @@ public class VMenu extends JFrame {
 
 	public static final String MNIM_SALIR = "Salir";
 	public static final String MNIM_CONS_STOCK = "Stock";
-	public static final String MNIM_REG_PROD = "Registrar";
-	public static final String MNIM_MOD_PROD = "Modificar";
+	public static final String MNIM_REG_PROD = "Registrar Producto";
+	public static final String MNIM_MOD_PROD = "Modificar Producto";
 	public static final String MNIM_REG_VENTA = "Registrar Venta";
-	public static final String MNIM_CONS_EMPLE = "Consultar";
-	public static final String MNIM_REG_EMPLE = "Registar";
-	public static final String MNIM_MOD_EMPLE = "Modificar";
-	public static final String MNIM_CONS_PROV = "Consultar";
-	public static final String MNIM_REG_PROV = "Registrar";
-	public static final String MNIM_MOD_PROV = "Modificar";
+	public static final String MNIM_CONS_EMPLE = "Consultar Empleado";
+	public static final String MNIM_REG_EMPLE = "Registar Empleado";
+	public static final String MNIM_MOD_EMPLE = "Modificar  Empleado";
+	public static final String MNIM_CONS_PROV = "Consultar Proveedor";
+	public static final String MNIM_REG_PROV = "Registrar Proveedor";
+	public static final String MNIM_MOD_PROV = "Modificar  Proovedor";
 	
 	private JMenu mnProducto;
 	private JMenuItem mntmRegistroProd;
@@ -55,6 +55,7 @@ public class VMenu extends JFrame {
 	private JMenuItem mntmRegistroProv;
 	private JSeparator separator_9;
 	private JMenuItem mntmModProv;
+	//private JLabel lblLogo;
 	
 	
 	public VMenu() {
@@ -78,6 +79,11 @@ public class VMenu extends JFrame {
 		lblInicio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInicio.setFont(new Font("Tahoma", Font.BOLD, 20));
 		scrpContenedor.setColumnHeaderView(lblInicio);
+		
+		/*lblLogo = new JLabel("");
+		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogo.setIcon(new ImageIcon(VMenu.class.getResource("/img/LogoPharma.png")));
+		scrpContenedor.setViewportView(lblLogo);*/
 	}
 
 
@@ -169,11 +175,7 @@ public class VMenu extends JFrame {
 		Dimension ventana = this.getPreferredSize();                      
 		setLocation((pantalla.width - ventana.width) / 2,  (pantalla.height - ventana.height) / 2);
 	}
-	
-	
-	public void hacerVisible() {
-		setVisible(true);
-	}
+
 	
 	
 	public void cargarPanel(JPanel panel) {
@@ -191,5 +193,9 @@ public class VMenu extends JFrame {
 		mntmSalir.addActionListener(controlador);
 	}
 	
+	
+	public void hacerVisible() {
+		setVisible(true);
+	}
 	
 }

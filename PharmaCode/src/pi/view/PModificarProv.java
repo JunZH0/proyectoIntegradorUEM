@@ -94,7 +94,7 @@ public class PModificarProv extends JPanel {
 	
 	
 
-	public void setControlaador(GestorControl controlador) {
+	public void setControlador(GestorControl controlador) {
 		btnModificar.addActionListener(controlador);	
 		btnBuscar.addActionListener(controlador);
 		btnCancelar.addActionListener(controlador);

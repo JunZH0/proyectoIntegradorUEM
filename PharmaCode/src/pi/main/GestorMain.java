@@ -38,6 +38,12 @@ public class GestorMain {
 				
 				GestorControl controlador = new GestorControl(vInicio, vMenu, pConStock, pModProd, pRegProd, pRegVenta, pConEmple, pModEmple, pRegEmple, pConProv, pModProv, pRegProv);
 				
+				vInicio.setControlador(controlador);
+				vMenu.setControlador(controlador);
+				pConProv.setControlador(controlador);
+				pModProv.setControlador(controlador);
+				pRegProv.setControlador(controlador);
+				
 				
 				vInicio.hacerVisible();
 			}

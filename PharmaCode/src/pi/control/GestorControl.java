@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import pi.db.persistencia.DBPersistencia;
+import pi.model.Empleado;
 import pi.model.Proveedor;
 import pi.view.PConsultarEmple;
 import pi.view.PConsultarProv;
@@ -26,6 +27,8 @@ import pi.view.VMenu;
 
 public class GestorControl implements ActionListener{
 	
+	private final int TOTAL_INTENTOS = 3;
+	private int contIntentos;
 	VInicio vInicio;
 	VMenu vMenu;
 	PConsultarStock pConStock;
@@ -58,6 +61,7 @@ public class GestorControl implements ActionListener{
 		this.pConProv = pConProv;
 		this.pModProv = pModProv;
 		this.pRegProv = pRegProv;
+		this.dbPers = new DBPersistencia();
 	}
 
 
@@ -98,6 +102,8 @@ public class GestorControl implements ActionListener{
 			} else if (ev.getActionCommand().equals(PModificarProv.BTN_CANCEL_PROV)) {
 				pModProv.limpiarComponentes();
 				pModProv.hacerVisibleMod(false);
+			} else if (ev.getActionCommand().equals(VInicio.BTN_ACCEDER)) {
+				intentoAcceder();
 			}
 		}
 			
@@ -109,6 +115,38 @@ public class GestorControl implements ActionListener{
 	
 	
 	
+	private void intentoAcceder() {
+		boolean noAccede = true;
+		Empleado empleado = vInicio.obtenerUsuario();
+		
+		if (empleado != null) {
+			contIntentos++;
+			String pwd = dbPers.consultarPwdPorUsuario(empleado.getApellidoEmple());
+			String error = "";
+			if (pwd == null) {
+				error = "El usuario introducido no existe";
+				if (contIntentos<TOTAL_INTENTOS) {
+					error += " Te equedan " + (TOTAL_INTENTOS - contIntentos);
+				}
+				vInicio.mostrarError("Error usuario");
+			} else if (!pwd.equals(empleado.getPassword())) {
+				vInicio.mostrarError("La contraseña introducida no es correcta");
+			} else {
+				noAccede = false; 
+				vInicio.dispose();
+				vInicio.limpiarDatos();
+				vMenu.hacerVisible();
+			}
+			
+			if (noAccede && contIntentos == 3) {
+				vInicio.mostrarError("Se han agotado los 3 intentos");
+				System.exit(0);
+			}
+		}
+	}
+
+
+
 	private void buscarProvMod() {
 		String nomProv = pModProv.obtenerNombre();
 		if (nomProv.isBlank()) {
@@ -200,7 +238,7 @@ public class GestorControl implements ActionListener{
 
 
 	public void salirApp() {
-		int resp = JOptionPane.showConfirmDialog(vInicio, "Se va a cerrar la aplicación, �desea continuar?",
+		int resp = JOptionPane.showConfirmDialog(vInicio, "Se va a cerrar la aplicación, ¿desea continuar?",
 				"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		if (resp == JOptionPane.YES_OPTION) {
 			System.exit(0);

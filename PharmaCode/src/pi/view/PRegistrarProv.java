@@ -79,7 +79,7 @@ public class PRegistrarProv extends JPanel {
 	
 	
 
-	public void setControlaador(GestorControl controlador) {
+	public void setControlador(GestorControl controlador) {
 		btnRegistrar.addActionListener(controlador);	
 	}
 

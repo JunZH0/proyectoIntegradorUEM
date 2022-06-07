@@ -9,6 +9,7 @@ public class DBContract {
 	public static final String COL_APE_EMP = "APELLIDO";
 	public static final String COL_TURNO_EMP = "TURNO";
 	public static final String COL_ES_ADM_EMP = "ES_ADMIN";
+	public static final String COL_PWD_EMP = "PASSWORD";
 	
 	
 	//Tabla Producto:

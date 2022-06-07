@@ -97,7 +97,7 @@ public class PConsultarProv extends JPanel {
 
 
 
-	public void setControlaador(GestorControl controlador) {
+	public void setControlador(GestorControl controlador) {
 		btnEliminar.addActionListener(controlador);	
 	}
 

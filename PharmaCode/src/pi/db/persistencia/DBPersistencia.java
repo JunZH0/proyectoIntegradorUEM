@@ -278,6 +278,44 @@ public class DBPersistencia {
 
 		return res;
 	}
+
+
+	public String consultarPwdPorUsuario(String apellidoEmple) {
+		String pwd = null;
+		
+		String query = "SELECT " + DBContract.COL_PWD_EMP + " FROM " + DBContract.NOM_TAB_EMP + " WHERE " + DBContract.COL_APE_EMP + "= ?";
+		
+		Connection conexion = null;
+		PreparedStatement pstmt = null;
+		ResultSet rst = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstmt = conexion.prepareStatement(query);
+			pstmt.setString(1, apellidoEmple);
+			
+			rst = pstmt.executeQuery();
+			
+			if (rst.next()) {
+				pwd = rst.getString(DBContract.COL_PWD_EMP);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rst != null) rst.close();
+				if (pstmt != null) pstmt.close();
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return pwd;
+	}
 	
 	
 	
