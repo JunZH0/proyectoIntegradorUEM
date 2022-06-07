@@ -1,6 +1,7 @@
 package pi.db.persistencia;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -68,6 +69,86 @@ public class DBPersistencia {
 		}
 		
 		return listaProv;
+	}
+
+
+	public int selecIdProv(String nombreProv) {
+		int idProv = 0;
+		
+		
+		String query = "SELECT " + DBContract.COL_ID_PROV + " FROM " + DBContract.NOM_TAB_PROV + " WHERE " + DBContract.COL_NOM_PROV + " LIKE =?";
+		
+		Connection conexion = null;
+		PreparedStatement pstmt = null;
+		ResultSet rst = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstmt = conexion.prepareStatement(query);
+			pstmt.setString(1, nombreProv + "%");
+			
+			rst = pstmt.executeQuery();
+			
+			if (rst.next()) { 
+				idProv = rst.getInt(DBContract.COL_ID_PROV);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rst != null) rst.close();
+				if (pstmt != null) pstmt.close();
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		
+		return idProv;
+	}
+
+
+	public int registrarProv(Proveedor nuevoProv) {
+		int res = 0;
+		
+		String query = "INSERT INTO " + DBContract.NOM_TAB_PROV + " (" + DBContract.COL_NOM_PROV + ", " + DBContract.COL_CIF_PROV + ", " + DBContract.COL_TELF_PROV + ") VALUES (?, ?, ?)";
+		
+		Connection conexion = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstm = conexion.prepareStatement(query);
+			
+			pstm.setString(1, nuevoProv.getNombreProv());
+			pstm.setString(2, nuevoProv.getCifProv());
+			pstm.setString(3, nuevoProv.getTelefProv());
+			
+			res = pstm.executeUpdate();
+						
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null) pstm.close(); 
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+		
+		return res;
 	}
 	
 	

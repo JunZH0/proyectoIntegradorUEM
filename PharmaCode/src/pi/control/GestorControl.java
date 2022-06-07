@@ -87,7 +87,9 @@ public class GestorControl implements ActionListener{
 			}
 			
 		} else if (ev.getSource() instanceof JButton) {
-			
+			if (ev.getActionCommand().equals(PRegistrarProv.BTN_REG_PROV)) {
+				registrarProv();
+			}
 		}
 	}
 	
@@ -105,6 +107,27 @@ public class GestorControl implements ActionListener{
 	
 	
 	
+	private void registrarProv() {
+		Proveedor nuevoProv = pRegProv.obtenerDatosProv();
+		if (nuevoProv != null) {
+			int idProv = dbPers.selecIdProv(nuevoProv.getNombreProv());
+			if (idProv <= 0) {
+				pRegProv.mostrarError("Ese proveedor ya exista");
+			} else {
+				int resp = dbPers.registrarProv(nuevoProv);
+				
+				if (resp == 1) {
+					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
+					pRegProv.limpiarComponentes();
+				} else {
+					pRegProv.mostrarError("No se ha podido añadir el restaurante");
+				}
+			}
+		}
+	}
+
+
+
 	private void listarResultados() {
 		ArrayList<Proveedor> listaProv = new ArrayList<>();
 		listaProv = dbPers.seleccionarProveedores();

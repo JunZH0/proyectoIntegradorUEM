@@ -17,10 +17,9 @@ import pi.model.Proveedor;
 
 public class PConsultarProv extends JPanel {
 
-	public static final String BTN_ELIMINAR = "Eliminar";
+	public static final String BTN_ELIMINAR_PROV = "Eliminar";
 
 	private JLabel lblListadoRest;
-	private JButton btnConsultar;
 	private JTable tblRestaurantes;
 	private JScrollPane scrpTablaRest;
 	private DefaultTableModel dtmTablaConsulta;
@@ -56,7 +55,7 @@ public class PConsultarProv extends JPanel {
 		tblRestaurantes = new JTable();
 		scrpTablaRest.setViewportView(tblRestaurantes);
 		
-		btnEliminar = new JButton(BTN_ELIMINAR);
+		btnEliminar = new JButton(BTN_ELIMINAR_PROV);
 		btnEliminar.setBounds(628, 156, 115, 23);
 		add(btnEliminar);
 		
@@ -99,9 +98,7 @@ public class PConsultarProv extends JPanel {
 
 
 	public void setControlaador(GestorControl controlador) {
-		btnConsultar.addActionListener(controlador);
-		btnEliminar.addActionListener(controlador);
-		
+		btnEliminar.addActionListener(controlador);	
 	}
 
 
@@ -120,9 +117,7 @@ public class PConsultarProv extends JPanel {
 			fila[3] = proveedor.getTelefProv();
 			
 			dtmTablaConsulta.addRow(fila);
-			
 		}
-		
 	}
 	
 	
