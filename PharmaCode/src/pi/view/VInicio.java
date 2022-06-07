@@ -34,23 +34,23 @@ public class VInicio extends JFrame{
 		setSize(ANCHO, ALTO);
 		
 		JLabel lblPharmacode = new JLabel("PharmaCode");
-		lblPharmacode.setBounds(186, 34, 120, 17);
+		lblPharmacode.setBounds(340, 34, 120, 17);
 		getContentPane().add(lblPharmacode);
 		
 		txtEmpleado = new JTextField();
 		txtEmpleado.setToolTipText("Empleado");
-		txtEmpleado.setBounds(170, 77, 114, 21);
+		txtEmpleado.setBounds(318, 86, 114, 21);
 		getContentPane().add(txtEmpleado);
 		txtEmpleado.setColumns(10);
 		
 		txtPwd = new JTextField();
 		txtPwd.setToolTipText("Contraseña");
-		txtPwd.setBounds(170, 132, 114, 21);
+		txtPwd.setBounds(318, 142, 114, 21);
 		getContentPane().add(txtPwd);
 		txtPwd.setColumns(10);
 		
 		JButton btnAcceso = new JButton(BTN_ACCEDER);
-		btnAcceso.setBounds(186, 180, 86, 27);
+		btnAcceso.setBounds(329, 211, 86, 27);
 		getContentPane().add(btnAcceso);
 		
 		
