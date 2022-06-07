@@ -172,7 +172,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) { 
-			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiÓn, sentencia incorrecta");
 			e.printStackTrace();
 		} finally { 
 			try {
@@ -186,6 +186,97 @@ public class DBPersistencia {
 		
 		return resultado;
 	
+	}
+
+
+	public Proveedor selecionarUnProveedor(String nomProv) {
+		Proveedor proveedor = null;
+		
+		String query = "SELECT * FROM " + DBContract.NOM_TAB_PROV + " WHERE " + DBContract.COL_NOM_PROV + " LIKE ?";
+		
+		Connection conexion = null;
+		PreparedStatement pstmt = null;
+		ResultSet rst = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstmt = conexion.prepareStatement(query);
+			pstmt.setString(1, nomProv + "%");
+			
+			rst = pstmt.executeQuery();
+			
+			String nombre;
+			String cif;
+			String telefono;
+
+			
+			if (rst.next()) {
+				nombre = rst.getString(DBContract.COL_NOM_PROV);
+				cif = rst.getString(DBContract.COL_CIF_PROV);
+				telefono = rst.getString(DBContract.COL_TELF_PROV);
+
+				proveedor = new Proveedor(0, nombre, cif, telefono);
+				
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rst != null) rst.close();
+				if (pstmt != null) pstmt.close();
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		
+		
+		return proveedor;
+	}
+
+
+	public int modProveedor(Proveedor modProv) {
+		int res = 0;
+		
+		String query = "UPDATE " + DBContract.NOM_TAB_PROV  + " SET " + DBContract.COL_CIF_PROV + "= ?, " + DBContract.COL_TELF_PROV + "= ? WHERE " + DBContract.COL_NOM_PROV + "= ?";
+		
+		Connection conexion = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstm = conexion.prepareStatement(query);
+			
+			pstm.setString(1, modProv.getCifProv());
+			pstm.setString(2, modProv.getTelefProv());
+			pstm.setString(3, modProv.getNombreProv());
+	
+			res = pstm.executeUpdate();
+						
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null) pstm.close(); 
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+
+		return res;
 	}
 	
 	

@@ -91,7 +91,14 @@ public class GestorControl implements ActionListener{
                 registrarProv();
 	        } else if (ev.getActionCommand().equals(PConsultarProv.BTN_ELIMINAR_PROV)) {
                 eliminarProv();
-            }
+            } else if (ev.getActionCommand().equals(PModificarProv.BTN_BUSC_PROV)) {
+				buscarProvMod();
+			} else if (ev.getActionCommand().equals(PModificarProv.BTN_MOD_PROV)) {
+				modificarProv();
+			} else if (ev.getActionCommand().equals(PModificarProv.BTN_CANCEL_PROV)) {
+				pModProv.limpiarComponentes();
+				pModProv.hacerVisibleMod(false);
+			}
 		}
 			
 	}
@@ -102,6 +109,42 @@ public class GestorControl implements ActionListener{
 	
 	
 	
+	private void buscarProvMod() {
+		String nomProv = pModProv.obtenerNombre();
+		if (nomProv.isBlank()) {
+			JOptionPane.showMessageDialog(pModProv, "Debe introducir un nombre", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			int idProv = dbPers.selecIdProv(nomProv);
+			if (idProv <= 0) {
+				pModProv.mostrarError("No se ha encontrado ningún restaurante con el nombre introducido");
+			} else {
+				Proveedor proveedor = dbPers.selecionarUnProveedor(nomProv);
+				pModProv.rellenarDatos(proveedor);
+				pModProv.hacerVisibleMod(true);
+			}
+		}
+	}
+
+
+
+	private void modificarProv() {
+		Proveedor modProv = pModProv.comprobarDatosModProv();
+		if (modProv  == null) {
+			pModProv.mostrarError("No han podido guardarse los cambios");
+		} else {
+			int resp = dbPers.modProveedor(modProv);
+			
+			if (resp == 1) {
+				JOptionPane.showMessageDialog(pModProv, "Se ha modificado el restaurante con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+				pModProv.limpiarComponentes();
+			} else {
+				pModProv.mostrarError("No han podido guardarse los cambios");
+			}
+		}
+	}
+
+
+
 	private void registrarProv() {
 		Proveedor nuevoProv = pRegProv.obtenerDatosProv();
 		if (nuevoProv != null) {
@@ -112,10 +155,10 @@ public class GestorControl implements ActionListener{
 				int resp = dbPers.registrarProv(nuevoProv);
 				
 				if (resp == 1) {
-					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado el restaurante", "Informaci�n", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
 					pRegProv.limpiarComponentes();
 				} else {
-					pRegProv.mostrarError("No se ha podido a�adir el restaurante");
+					pRegProv.mostrarError("No se ha podido añadir el restaurante");
 				}
 			}
 		}
@@ -129,7 +172,7 @@ public class GestorControl implements ActionListener{
 	private void eliminarProv() {
 		String nombreProv = pConProv.poveedorEliminar();
 		if (nombreProv == null) {
-			JOptionPane.showMessageDialog(pConProv, "No se ha seleccionado ning�n restaurante", "Error selecci�n", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(pConProv, "No se ha seleccionado ning�n restaurante", "Error selección", JOptionPane.ERROR_MESSAGE);
 		} else {
 			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el restaurante, �desea continuar?",
 					"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -137,9 +180,9 @@ public class GestorControl implements ActionListener{
 				int res = dbPers.borrarProv(nombreProv);
 				listarResultadosProv();
 				if (res==1) {
-					JOptionPane.showMessageDialog(pConProv, "Se ha eliminado el restaurante", "Informaci�n", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pConProv, "Se ha eliminado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(pConProv, "No se ha podido eliminar el restaurante", "Error eliminaci�n", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(pConProv, "No se ha podido eliminar el restaurante", "Error eliminación", JOptionPane.ERROR_MESSAGE);
 				}						
 			}
 		}
@@ -157,7 +200,7 @@ public class GestorControl implements ActionListener{
 
 
 	public void salirApp() {
-		int resp = JOptionPane.showConfirmDialog(vInicio, "Se va a cerrar la aplicaci�n, �desea continuar?",
+		int resp = JOptionPane.showConfirmDialog(vInicio, "Se va a cerrar la aplicación, �desea continuar?",
 				"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		if (resp == JOptionPane.YES_OPTION) {
 			System.exit(0);

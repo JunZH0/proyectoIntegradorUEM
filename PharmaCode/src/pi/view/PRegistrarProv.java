@@ -1,7 +1,7 @@
 package pi.view;
 
 import java.awt.Font;
-import java.util.ArrayList;
+
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -16,7 +16,7 @@ import javax.swing.JButton;
 
 public class PRegistrarProv extends JPanel {
 	
-	public static final String BTN_REG_PROV = "Registrar";
+	public static final String BTN_REG_PROV = "Registrar  proveedor";
 	
 	private JTextField txtNombre;
 	private JTextField txtCif;
@@ -33,7 +33,7 @@ public class PRegistrarProv extends JPanel {
 		setSize(VInicio.ANCHO, VInicio.ALTO);
 		setLayout(null);
 		
-		JLabel lblTitulo = new JLabel("Registrar de Proveedor");
+		JLabel lblTitulo = new JLabel("Registrar Proveedor");
 		lblTitulo.setBounds(0, 0, 800, 25);
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -62,7 +62,7 @@ public class PRegistrarProv extends JPanel {
 		add(txtCif);
 		txtCif.setColumns(10);
 		
-		JLabel lblTelefono = new JLabel("Tel\u00E9fono:");
+		JLabel lblTelefono = new JLabel("Teléfono:");
 		lblTelefono.setBounds(106, 341, 83, 14);
 		add(lblTelefono);
 		
