@@ -152,7 +152,7 @@ public class DBPersistencia {
 	}
 
 
-	public int provRestaurante(String nombreProv) {
+	public int borrarProv(String nombreProv) {
 
 		int resultado = 0;
 		
