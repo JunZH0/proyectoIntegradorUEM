@@ -153,7 +153,7 @@ public class DBPersistencia {
 	}
 
 
-<<<<<<< HEAD
+
 	public int borrarProv(String nombreProv) {
 
 		int resultado = 0;
@@ -247,40 +247,25 @@ public class DBPersistencia {
 		int res = 0;
 		
 		String query = "UPDATE " + DBContract.NOM_TAB_PROV  + " SET " + DBContract.COL_CIF_PROV + "= ?, " + DBContract.COL_TELF_PROV + "= ? WHERE " + DBContract.COL_NOM_PROV + "= ?";
-		
+					
 		Connection conexion = null;
 		PreparedStatement pstm = null;
-=======
-	public void registrarProd(Producto nuevoProd) {
-		
-		String query = "INSERT INTO " + DBContract.NOM_TAB_PROD + " (" +  DBContract.COL_NOM_PROD + ", " + DBContract.COL_DESCR_PROD + ", " + DBContract.COL_TIPO_PROD + ", " + DBContract.COL_PRECIO_PROD + ") VALUES (?,?,?,?)";
-				
-		Connection conexion = null;
-		PreparedStatement pstm = null;
-		int res = 0;
->>>>>>> jun
+
 		
 		try {
 			conexion = acceso.hacerConexion();
 			pstm = conexion.prepareStatement(query);
 			
-<<<<<<< HEAD
+
 			pstm.setString(1, modProv.getCifProv());
 			pstm.setString(2, modProv.getTelefProv());
 			pstm.setString(3, modProv.getNombreProv());
 	
 			res = pstm.executeUpdate();
 						
-			
-=======
-			pstm.setString(1, nuevoProd.getNombreProd());
-			pstm.setString(2, nuevoProd.getDescrProd());
-			pstm.setString(3, nuevoProd.getTipo());
-			pstm.setInt(4, (int) nuevoProd.getPrecioProd());
-			
-			res = pstm.executeUpdate();
+
 						
->>>>>>> jun
+
 		} catch (ClassNotFoundException e) {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
@@ -296,11 +281,14 @@ public class DBPersistencia {
 			} 
 		}
 		
-<<<<<<< HEAD
-
+		
 		return res;
-	}
+		
 
+
+		
+	}
+	
 
 	public String consultarPwdPorUsuario(String apellidoEmple) {
 		String pwd = null;
@@ -337,9 +325,52 @@ public class DBPersistencia {
 		}
 		
 		return pwd;
-=======
+
 	}
 	
+public void registrarProd(Producto nuevoProd) {
+		
+		String query = "INSERT INTO " + DBContract.NOM_TAB_PROD + " (" +  DBContract.COL_NOM_PROD + ", " + DBContract.COL_DESCR_PROD + ", " + DBContract.COL_TIPO_PROD + ", " + DBContract.COL_PRECIO_PROD + ") VALUES (?,?,?,?)";
+		
+
+		
+		Connection conexion = null;
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstm = conexion.prepareStatement(query);
+			
+
+
+			pstm.setString(1, nuevoProd.getNombreProd());
+			pstm.setString(2, nuevoProd.getDescrProd());
+			pstm.setString(3, nuevoProd.getTipo());
+			pstm.setInt(4, (int) nuevoProd.getPrecioProd());
+			
+			res = pstm.executeUpdate();
+						
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null) pstm.close(); 
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+		
+		
+}
+
 	
 	public ArrayList<String> getTiposProd() {
 		ArrayList<String> listTipo = new ArrayList<String>();
@@ -437,7 +468,7 @@ public class DBPersistencia {
 		
 		
 		return listProd;
->>>>>>> jun
+
 	}
 	
 	

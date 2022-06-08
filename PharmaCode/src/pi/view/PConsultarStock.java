@@ -2,6 +2,7 @@ package pi.view;
 
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
+import pi.control.GestorControl;
 import pi.db.persistencia.DBContract;
 import pi.db.persistencia.DBPersistencia;
 import pi.model.Producto;
@@ -27,6 +28,8 @@ public class PConsultarStock extends JPanel {
 	private JTable tblProd;
 	private ArrayList<Producto> listaProd;
 	private JScrollPane scrollPane;
+	private JButton btnConsultar;
+	public final static String BTN_CONSULTAR = "Consultar";
 	
 	
 	public PConsultarStock() {
@@ -57,9 +60,13 @@ public class PConsultarStock extends JPanel {
 		tblProd = new JTable();
 		scrollPane.setViewportView(tblProd);
 		
-		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar = new JButton("Consultar");
 		btnConsultar.setBounds(163, 273, 89, 23);
 		add(btnConsultar);
+	}
+	
+	public void setControlador(GestorControl c) {
+		btnConsultar.addActionListener(c);
 	}
 	
 	public void asignarTipo() {

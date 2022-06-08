@@ -24,7 +24,7 @@ public class PRegistrarProd extends JPanel {
 	private JComboBox cmbTipo;
 	private JSpinner spnPrecio;
 	private Producto producto;
-	
+	public final static String BTN_GUARDAR = "Guardar"; 
 	
 	
 	public PRegistrarProd() {
