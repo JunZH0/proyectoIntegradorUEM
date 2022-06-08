@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import pi.db.AccesoDB;
+import pi.model.Producto;
 import pi.model.Proveedor;
 
 public class DBPersistencia {
@@ -150,6 +151,45 @@ public class DBPersistencia {
 		
 		return res;
 	}
+
+
+	public void registrarProd(Producto nuevoProd) {
+		
+		String query = "INSERT INTO " + DBContract.NOM_TAB_PROD + " (" +  DBContract.COL_NOM_PROD + ", " + DBContract.COL_DESCR_PROD + ", " + DBContract.COL_TIPO_PROD + ", " + DBContract.COL_PRECIO_PROD + ") VALUES (?,?,?,?)";
+				
+		Connection conexion = null;
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstm = conexion.prepareStatement(query);
+			
+			pstm.setString(1, nuevoProd.getNombreProd());
+			pstm.setString(2, nuevoProd.getDescrProd());
+			pstm.setString(3, nuevoProd.getTipo());
+			pstm.setInt(4, (int) nuevoProd.getPrecioProd());
+			
+			res = pstm.executeUpdate();
+						
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null) pstm.close(); 
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+	}
+	
+	
 	
 	
 	
