@@ -10,10 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
+import java.awt.Font;
 
 public class PRegistrarProd extends JPanel {
 	private JButton btnGuardar;
@@ -33,6 +35,7 @@ public class PRegistrarProd extends JPanel {
 		
 		
 		JLabel lblRegistrarProductos = new JLabel("Registrar Productos");
+		lblRegistrarProductos.setFont(new Font("Tahoma", Font.BOLD, 20));
 		add(lblRegistrarProductos, "cell 2 0");
 		
 		JLabel lblNombre = new JLabel("Nombre");
@@ -61,7 +64,7 @@ public class PRegistrarProd extends JPanel {
 		add(txtDesc, "cell 2 8 2 1,grow");
 		
 		btnGuardar = new JButton("Guardar");
-		add(btnGuardar, "cell 3 10");
+		add(btnGuardar, "cell 2 10");
 	}
 	
 	public void setControlador(GestorControl c) {
@@ -100,10 +103,21 @@ public class PRegistrarProd extends JPanel {
 	}
 	
 	
-	public void obtenerTipo() {
+	public void asignarTipo(GestorControl c) {
+		
+		DBPersistencia dPersis = new DBPersistencia();
+		DefaultComboBoxModel<String> modelo = (DefaultComboBoxModel<String>) cmbTipo.getModel();
+		for(String tipo : dPersis.getTiposProd()) {
+			modelo.addElement(tipo);
+		}
 		
 		
-		
+	}
+	
+	public void limpiarDatos() {
+		txtNombre.setText(null);
+		txtDesc.setText(null);
+		cmbTipo.setSelectedIndex(0);
 	}
 		
 
