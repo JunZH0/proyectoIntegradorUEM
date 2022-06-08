@@ -7,7 +7,10 @@ import pi.db.persistencia.DBPersistencia;
 import pi.model.Producto;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.ScrollPane;
 import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
@@ -23,6 +26,7 @@ public class PConsultarStock extends JPanel {
 	private DefaultTableModel dtmProd;
 	private JTable tblProd;
 	private ArrayList<Producto> listaProd;
+	private JScrollPane scrollPane;
 	
 	
 	public PConsultarStock() {
@@ -46,7 +50,7 @@ public class PConsultarStock extends JPanel {
 		lblNewLabel_2.setBounds(19, 76, 46, 14);
 		add(lblNewLabel_2);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(36, 129, 379, 133);
 		add(scrollPane);
 		
@@ -91,9 +95,33 @@ public class PConsultarStock extends JPanel {
 		listaProd = new ArrayList<>();
 		
 		if(tipo.equals("Todas")) {
-			for (Producto prod : dbP.seleccionarProducto() )
+			for (Producto prod : dbP.seleccionarProducto() ) {
+				listaProd.add(prod);
+			}
+			
+		} else {
+			for (Producto prod : dbP.seleccionarProducto() ) {
+				if(prod.getTipo().equals(tipo)) {
+					listaProd.add(prod);
+				}
+				
+			}
+		}
+		if(listaProd.isEmpty()) {
+			scrollPane.setVisible(false);
+			mostrarAviso("No se han encontrado datos para el filtro introducido", "Resultado de consulta", 1);
+		} else {
+			scrollPane.setVisible(true);
+			for(Producto prod : listaProd) {
+				dtmProd.addRow(prod.getRowData());
+			}
 		}
 	
 		
+	}
+	
+	
+	public void mostrarAviso(String mensaje, String titulo, int i) {
+		JOptionPane.showMessageDialog(this,mensaje, titulo, i);
 	}
 }

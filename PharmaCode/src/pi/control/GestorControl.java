@@ -101,12 +101,6 @@ public class GestorControl implements ActionListener{
 	
 	
 	
-	
-	
-	
-	
-	
-	
 	private void registrarProv() {
 		Proveedor nuevoProv = pRegProv.obtenerDatosProv();
 		if (nuevoProv != null) {
