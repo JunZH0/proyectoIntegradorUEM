@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import pi.db.AccesoDB;
+import pi.model.Producto;
 import pi.model.Proveedor;
 
 public class DBPersistencia {
@@ -152,6 +153,7 @@ public class DBPersistencia {
 	}
 
 
+<<<<<<< HEAD
 	public int borrarProv(String nombreProv) {
 
 		int resultado = 0;
@@ -248,11 +250,21 @@ public class DBPersistencia {
 		
 		Connection conexion = null;
 		PreparedStatement pstm = null;
+=======
+	public void registrarProd(Producto nuevoProd) {
+		
+		String query = "INSERT INTO " + DBContract.NOM_TAB_PROD + " (" +  DBContract.COL_NOM_PROD + ", " + DBContract.COL_DESCR_PROD + ", " + DBContract.COL_TIPO_PROD + ", " + DBContract.COL_PRECIO_PROD + ") VALUES (?,?,?,?)";
+				
+		Connection conexion = null;
+		PreparedStatement pstm = null;
+		int res = 0;
+>>>>>>> jun
 		
 		try {
 			conexion = acceso.hacerConexion();
 			pstm = conexion.prepareStatement(query);
 			
+<<<<<<< HEAD
 			pstm.setString(1, modProv.getCifProv());
 			pstm.setString(2, modProv.getTelefProv());
 			pstm.setString(3, modProv.getNombreProv());
@@ -260,6 +272,15 @@ public class DBPersistencia {
 			res = pstm.executeUpdate();
 						
 			
+=======
+			pstm.setString(1, nuevoProd.getNombreProd());
+			pstm.setString(2, nuevoProd.getDescrProd());
+			pstm.setString(3, nuevoProd.getTipo());
+			pstm.setInt(4, (int) nuevoProd.getPrecioProd());
+			
+			res = pstm.executeUpdate();
+						
+>>>>>>> jun
 		} catch (ClassNotFoundException e) {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
@@ -275,6 +296,7 @@ public class DBPersistencia {
 			} 
 		}
 		
+<<<<<<< HEAD
 
 		return res;
 	}
@@ -315,6 +337,107 @@ public class DBPersistencia {
 		}
 		
 		return pwd;
+=======
+	}
+	
+	
+	public ArrayList<String> getTiposProd() {
+		ArrayList<String> listTipo = new ArrayList<String>();
+		
+		String query = "SELECT DISTINT " + DBContract.COL_TIPO_PROD + " FROM " + DBContract.NOM_TAB_PROD;
+		String tipo;
+		
+		
+		Connection conexion = null;
+		PreparedStatement pstm = null;
+		ResultSet rslt = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstm = conexion.prepareStatement(query);
+			rslt = pstm.executeQuery();
+			
+			while(rslt.next()) {
+				tipo = rslt.getString(DBContract.COL_TIPO_PROD);
+				
+				listTipo.add(tipo);
+			}
+						
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null) pstm.close(); 
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+		
+		
+		
+		
+		return listTipo;
+	}
+
+
+	public ArrayList<Producto> seleccionarProducto() {
+		ArrayList<Producto> listProd = new ArrayList<>();
+		
+		Producto producto;
+		int id = 0;
+		String nombre;
+		String descripcion = null;
+		String tipo;
+		int stock;
+		double precio;
+		
+		String query = "SELECT " + DBContract.COL_NOM_PROD + ", " + DBContract.COL_TIPO_PROD + ", " + DBContract.COL_STOCK_PROD + ", " + DBContract.COL_PRECIO_PROD + " FROM " + DBContract.NOM_TAB_PROD;
+		
+		Connection conexion = null;
+		PreparedStatement pstm = null;
+		ResultSet rslt = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstm = conexion.prepareStatement(query);
+			rslt = pstm.executeQuery();
+			
+			while(rslt.next()) {
+				nombre = rslt.getString(DBContract.COL_NOM_PROD);
+				tipo = rslt.getString(DBContract.COL_TIPO_PROD);
+				stock = rslt.getInt(DBContract.COL_STOCK_PROD);
+				precio = rslt.getDouble(DBContract.COL_PRECIO_PROD);
+				
+				producto = new Producto(id,nombre, descripcion , tipo, precio, stock);
+				
+				listProd.add(producto);
+				
+			}
+						
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null) pstm.close(); 
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+		
+		return listProd;
+>>>>>>> jun
 	}
 	
 	

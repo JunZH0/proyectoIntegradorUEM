@@ -38,6 +38,7 @@ public class VInicio extends JFrame{
 		centrarVentana();
 		setSize(ANCHO, ALTO);
 		
+
 		JLabel lblTitulo = new JLabel("* * * PHARMACODE * * *");
 		lblTitulo.setBounds(0, 0, 800, 25);
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -47,10 +48,20 @@ public class VInicio extends JFrame{
 		txtEmpleado = new JTextField();
 		txtEmpleado.setToolTipText("Empleado");
 		txtEmpleado.setBounds(338, 171, 114, 21);
+
+		JLabel lblPharmacode = new JLabel("PharmaCode");
+		lblPharmacode.setBounds(340, 34, 120, 17);
+		getContentPane().add(lblPharmacode);
+		
+		txtEmpleado = new JTextField();
+		txtEmpleado.setToolTipText("Empleado");
+		txtEmpleado.setBounds(318, 86, 114, 21);
+
 		getContentPane().add(txtEmpleado);
 		txtEmpleado.setColumns(10);
 		
 		txtPwd = new JTextField();
+
 		txtPwd.setToolTipText("Contraseña");
 		txtPwd.setBounds(338, 275, 114, 21);
 		getContentPane().add(txtPwd);
@@ -58,6 +69,14 @@ public class VInicio extends JFrame{
 		
 		btnAcceso = new JButton(BTN_ACCEDER);
 		btnAcceso.setBounds(349, 356, 86, 27);
+		txtPwd.setToolTipText("ContraseÃ±a");
+		txtPwd.setBounds(318, 142, 114, 21);
+		getContentPane().add(txtPwd);
+		txtPwd.setColumns(10);
+		
+		JButton btnAcceso = new JButton(BTN_ACCEDER);
+		btnAcceso.setBounds(329, 211, 86, 27);
+
 		getContentPane().add(btnAcceso);
 		
 		JLabel lblUsuario = new JLabel("Usuario");

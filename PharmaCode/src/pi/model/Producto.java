@@ -49,7 +49,17 @@ public class Producto {
 		return stockProd;
 	}
 	
-	
+	public Object[] getRowData() {
+		Object[] data = new Object[4];
+				
+			data[0] = nombreProd;
+			data[1] = tipo;
+			data[2] = stockProd;
+			data[3] = precioProd;
+			
+			
+			return data;
+	}
 	
 	
 	

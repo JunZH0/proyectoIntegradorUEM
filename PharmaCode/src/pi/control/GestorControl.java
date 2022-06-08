@@ -115,6 +115,7 @@ public class GestorControl implements ActionListener{
 	
 	
 	
+<<<<<<< HEAD
 	private void intentoAcceder() {
 		boolean noAccede = true;
 		Empleado empleado = vInicio.obtenerUsuario();
@@ -183,6 +184,10 @@ public class GestorControl implements ActionListener{
 
 
 
+=======
+	
+	
+>>>>>>> jun
 	private void registrarProv() {
 		Proveedor nuevoProv = pRegProv.obtenerDatosProv();
 		if (nuevoProv != null) {
