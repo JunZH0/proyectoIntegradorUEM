@@ -86,7 +86,7 @@ public class VInicio extends JFrame{
 		
 		JLabel lblPwd = new JLabel("Contraseña");
 		lblPwd.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPwd.setBounds(349, 248, 86, 14);
+		lblPwd.setBounds(328, 118, 86, 14);
 		getContentPane().add(lblPwd);
 		
 		
