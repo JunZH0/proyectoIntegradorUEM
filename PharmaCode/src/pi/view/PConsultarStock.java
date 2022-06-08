@@ -2,20 +2,27 @@ package pi.view;
 
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
+import pi.db.persistencia.DBContract;
 import pi.db.persistencia.DBPersistencia;
+import pi.model.Producto;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JButton;
 
 public class PConsultarStock extends JPanel {
 	private JComboBox cmbTipo;
 	private DefaultTableModel dtmProd;
+	private JTable tblProd;
+	private ArrayList<Producto> listaProd;
 	
 	
 	public PConsultarStock() {
@@ -31,12 +38,24 @@ public class PConsultarStock extends JPanel {
 		add(lblNewLabel_1);
 		
 		cmbTipo = new JComboBox();
+		cmbTipo.addItem("Todas");
 		cmbTipo.setBounds(75, 72, 107, 22);
 		add(cmbTipo);
 		
 		JLabel lblNewLabel_2 = new JLabel("Tipo");
 		lblNewLabel_2.setBounds(19, 76, 46, 14);
 		add(lblNewLabel_2);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(36, 129, 379, 133);
+		add(scrollPane);
+		
+		tblProd = new JTable();
+		scrollPane.setViewportView(tblProd);
+		
+		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.setBounds(163, 273, 89, 23);
+		add(btnConsultar);
 	}
 	
 	public void asignarTipo() {
@@ -49,7 +68,32 @@ public class PConsultarStock extends JPanel {
 	
 	public void configurarTabla() {
 		
+		dtmProd = new DefaultTableModel() {
+			public boolean isCellEditable(int row, int column) {
+				
+				return false;
+			}
+		};
 		
+		tblProd.setModel(dtmProd);
+		
+		dtmProd.addColumn(DBContract.COL_NOM_PROD);
+		dtmProd.addColumn(DBContract.COL_TIPO_PROD);
+		dtmProd.addColumn(DBContract.COL_STOCK_PROD);
+		dtmProd.addColumn(DBContract.COL_PRECIO_PROD);
+	
+		
+	}
+	
+	public void obtenerDatos(DBPersistencia dbP) {
+		String tipo = (String) cmbTipo.getSelectedItem();
+		
+		listaProd = new ArrayList<>();
+		
+		if(tipo.equals("Todas")) {
+			for (Producto prod : dbP.seleccionarProducto() )
+		}
+	
 		
 	}
 }
