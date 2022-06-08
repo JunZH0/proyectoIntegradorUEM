@@ -98,7 +98,11 @@ public class PRegistrarProd extends JPanel {
 		JOptionPane.showMessageDialog(this, mensaje ,titulo, i);
 		
 	}
+	
+	
 	public void obtenerTipo() {
+		
+		
 		
 	}
 		

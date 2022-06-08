@@ -190,6 +190,49 @@ public class DBPersistencia {
 	}
 	
 	
+	public ArrayList<String> getTiposProd() {
+		ArrayList<String> listTipo = new ArrayList<String>();
+		
+		String query = "SELECT DISTINT " + DBContract.COL_TIPO_PROD + " FROM " + DBContract.NOM_TAB_PROD;
+		String tipo;
+		
+		
+		Connection conexion = null;
+		PreparedStatement pstm = null;
+		ResultSet rslt = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstm = conexion.prepareStatement(query);
+			rslt = pstm.executeQuery();
+			
+			while(rslt.next()) {
+				tipo = rslt.getString(DBContract.COL_TIPO_PROD);
+				
+				listTipo.add(tipo);
+			}
+						
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null) pstm.close(); 
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+		
+		
+		
+		
+		return listTipo;
+	}
 	
 	
 	
