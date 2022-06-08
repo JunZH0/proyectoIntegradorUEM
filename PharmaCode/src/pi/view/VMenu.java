@@ -55,7 +55,6 @@ public class VMenu extends JFrame {
 	private JMenuItem mntmRegistroProv;
 	private JSeparator separator_9;
 	private JMenuItem mntmModProv;
-	//private JLabel lblLogo;
 	
 	
 	public VMenu() {
@@ -79,11 +78,7 @@ public class VMenu extends JFrame {
 		lblInicio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInicio.setFont(new Font("Tahoma", Font.BOLD, 20));
 		scrpContenedor.setColumnHeaderView(lblInicio);
-		
-		/*lblLogo = new JLabel("");
-		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogo.setIcon(new ImageIcon(VMenu.class.getResource("/img/LogoPharma.png")));
-		scrpContenedor.setViewportView(lblLogo);*/
+
 	}
 
 
@@ -190,6 +185,10 @@ public class VMenu extends JFrame {
 		mntmConsultaEmple.addActionListener(controlador);
 		mntmModEmple.addActionListener(controlador);
 		mntmRegistroEmple.addActionListener(controlador);
+		mntmConsultaProv.addActionListener(controlador);
+		mntmModProv.addActionListener(controlador);
+		mntmRegistroProv.addActionListener(controlador);
+		mntmVenta.addActionListener(controlador);
 		mntmSalir.addActionListener(controlador);
 	}
 	

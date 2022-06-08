@@ -76,7 +76,7 @@ public class DBPersistencia {
 		int idProv = 0;
 		
 		
-		String query = "SELECT " + DBContract.COL_ID_PROV + " FROM " + DBContract.NOM_TAB_PROV + " WHERE " + DBContract.COL_NOM_PROV + " LIKE =?";
+		String query = "SELECT " + DBContract.COL_ID_PROV + " FROM " + DBContract.NOM_TAB_PROV + " WHERE " + DBContract.COL_NOM_PROV + " LIKE ?";
 		
 		Connection conexion = null;
 		PreparedStatement pstmt = null;
@@ -97,7 +97,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -136,7 +136,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -172,7 +172,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) { 
-			System.out.println("Error en la base de datos: error conexiÓn, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
 			e.printStackTrace();
 		} finally { 
 			try {

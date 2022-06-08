@@ -187,8 +187,8 @@ public class GestorControl implements ActionListener{
 		Proveedor nuevoProv = pRegProv.obtenerDatosProv();
 		if (nuevoProv != null) {
 			int idProv = dbPers.selecIdProv(nuevoProv.getNombreProv());
-			if (idProv <= 0) {
-				pRegProv.mostrarError("Ese proveedor ya exista");
+			if (idProv == 0) {
+				pRegProv.mostrarError("Ese proveedor ya existe");
 			} else {
 				int resp = dbPers.registrarProv(nuevoProv);
 				
