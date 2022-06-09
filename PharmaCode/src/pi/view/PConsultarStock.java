@@ -1,7 +1,6 @@
 package pi.view;
 
 import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
 import pi.control.GestorControl;
 import pi.db.persistencia.DBContract;
 import pi.db.persistencia.DBPersistencia;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -61,7 +59,7 @@ public class PConsultarStock extends JPanel {
 		scrollPane.setViewportView(tblProd);
 		
 		btnConsultar = new JButton("Consultar");
-		btnConsultar.setBounds(163, 273, 89, 23);
+		btnConsultar.setBounds(163, 273, 110, 23);
 		add(btnConsultar);
 	}
 	

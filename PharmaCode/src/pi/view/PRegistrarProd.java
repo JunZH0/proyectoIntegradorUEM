@@ -1,7 +1,6 @@
 package pi.view;
 
 import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
 import pi.control.GestorControl;
 import pi.db.persistencia.DBPersistencia;
 import pi.model.Producto;
@@ -31,40 +30,50 @@ public class PRegistrarProd extends JPanel {
 		init();
 	}
 	private void init() {
-		setLayout(new MigLayout("", "[][63.00][grow][185.00,left]", "[][][][][][][][][grow][][]"));
+		setLayout(null);
 		
 		
 		JLabel lblRegistrarProductos = new JLabel("Registrar Productos");
+		lblRegistrarProductos.setBounds(99, 6, 210, 28);
 		lblRegistrarProductos.setFont(new Font("Tahoma", Font.BOLD, 20));
-		add(lblRegistrarProductos, "cell 2 0");
+		add(lblRegistrarProductos);
 		
 		JLabel lblNombre = new JLabel("Nombre");
-		add(lblNombre, "cell 0 2");
+		lblNombre.setBounds(6, 65, 51, 17);
+		add(lblNombre);
 		
 		txtNombre = new JTextField();
-		add(txtNombre, "cell 2 2,growx");
+		txtNombre.setBounds(99, 63, 210, 21);
+		add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		JLabel lblCategoria = new JLabel("Tipo");
-		add(lblCategoria, "cell 0 4");
+		lblCategoria.setBounds(6, 119, 28, 17);
+		add(lblCategoria);
 		
 		cmbTipo = new JComboBox();
-		add(cmbTipo, "cell 2 4,growx");
+		cmbTipo.setBounds(99, 114, 210, 26);
+		add(cmbTipo);
 		
 		JLabel lblPrecio = new JLabel("Precio");
-		add(lblPrecio, "cell 0 6");
+		lblPrecio.setBounds(6, 171, 39, 17);
+		add(lblPrecio);
 		
 		spnPrecio = new JSpinner();
-		add(spnPrecio, "cell 2 6");
+		spnPrecio.setBounds(99, 169, 28, 22);
+		add(spnPrecio);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion");
-		add(lblDescripcion, "cell 0 8");
+		lblDescripcion.setBounds(6, 221, 74, 17);
+		add(lblDescripcion);
 		
 		txtDesc = new JTextArea();
-		add(txtDesc, "cell 2 8 2 1,grow");
+		txtDesc.setBounds(99, 221, 331, 78);
+		add(txtDesc);
 		
 		btnGuardar = new JButton("Guardar");
-		add(btnGuardar, "cell 2 10");
+		btnGuardar.setBounds(99, 377, 86, 27);
+		add(btnGuardar);
 	}
 	
 	public void setControlador(GestorControl c) {
@@ -119,6 +128,6 @@ public class PRegistrarProd extends JPanel {
 		txtDesc.setText(null);
 		cmbTipo.setSelectedIndex(0);
 	}
-		
-
+	
+	
 }
