@@ -72,7 +72,7 @@ public class PRegistrarProv extends JPanel {
 		txtTelefono.setColumns(10);
 		
 		btnRegistrar = new JButton(BTN_REG_PROV);
-		btnRegistrar.setBounds(355, 498, 89, 23);
+		btnRegistrar.setBounds(303, 442, 194, 23);
 		add(btnRegistrar);
 		
 	}
