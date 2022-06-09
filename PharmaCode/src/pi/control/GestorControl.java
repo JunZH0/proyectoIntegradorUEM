@@ -188,16 +188,16 @@ public class GestorControl implements ActionListener{
 		Proveedor nuevoProv = pRegProv.obtenerDatosProv();
 		if (nuevoProv != null) {
 			int idProv = dbPers.selecIdProv(nuevoProv.getNombreProv());
-			if (idProv == 0) {
+			if (idProv != 0) {
 				pRegProv.mostrarError("Ese proveedor ya existe");
 			} else {
 				int resp = dbPers.registrarProv(nuevoProv);
 				
 				if (resp == 1) {
-					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado el proveedor", "Información", JOptionPane.INFORMATION_MESSAGE);
 					pRegProv.limpiarComponentes();
 				} else {
-					pRegProv.mostrarError("No se ha podido añadir el restaurante");
+					pRegProv.mostrarError("No se ha podido añadir el proveedor");
 				}
 			}
 		}
@@ -213,7 +213,7 @@ public class GestorControl implements ActionListener{
 		if (nombreProv == null) {
 			JOptionPane.showMessageDialog(pConProv, "No se ha seleccionado ning�n restaurante", "Error selección", JOptionPane.ERROR_MESSAGE);
 		} else {
-			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el restaurante, �desea continuar?",
+			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el restaurante, ¿desea continuar?",
 					"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 			if (resp == JOptionPane.YES_OPTION) {
 				int res = dbPers.borrarProv(nombreProv);
