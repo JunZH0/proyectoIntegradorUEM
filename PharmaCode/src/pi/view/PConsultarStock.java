@@ -36,12 +36,12 @@ public class PConsultarStock extends JPanel {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Consulta de Stock");
-		lblNewLabel.setBounds(36, 7, 180, 25);
+		lblNewLabel.setBounds(36, 7, 237, 25);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Filtros");
-		lblNewLabel_1.setBounds(19, 43, 29, 14);
+		lblNewLabel_1.setBounds(19, 43, 46, 14);
 		add(lblNewLabel_1);
 		
 		cmbTipo = new JComboBox();

@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import pi.control.GestorControl;
+import pi.model.Producto;
 import pi.model.Proveedor;
 
 public class PModificarProv extends JPanel {
@@ -17,7 +18,7 @@ public class PModificarProv extends JPanel {
 	
 	public static final String BTN_MOD_PROV = "Modificar proveedor";
 	public static final String BTN_BUSC_PROV = "Buscar proveedor";
-	public static final String BTN_CANCEL_PROV = "Cancelar modificación";
+	public static final String BTN_CANCEL_PROV = "Cancelar modificaciï¿½n";
 	
 	private JTextField txtNombre;
 	private JTextField txtCif;
@@ -66,7 +67,7 @@ public class PModificarProv extends JPanel {
 		add(txtCif);
 		txtCif.setColumns(10);
 		
-		JLabel lblTelefono = new JLabel("Teléfono:");
+		JLabel lblTelefono = new JLabel("Telï¿½fono:");
 		lblTelefono.setBounds(106, 341, 83, 14);
 		add(lblTelefono);
 		
@@ -109,12 +110,7 @@ public class PModificarProv extends JPanel {
 
 
 
-	public void limpiarComponentes() {
-		txtNombre.setText("");
-		txtCif.setText("");
-		txtTelefono.setText("");
-	}
-
+	
 
 
 	public Proveedor comprobarDatosModProv() {
@@ -122,15 +118,15 @@ public class PModificarProv extends JPanel {
 		
 		String nombre = txtNombre.getText();
 		if (nombre.isBlank()) {
-			mostrarError("El nombre no puede estar vacío");
+			mostrarError("El nombre no puede estar vacï¿½o");
 		} else {
 			String cif = txtCif.getText();
 			if (cif.isBlank()) {
-				mostrarError("El CIF no puede estar vacío");
+				mostrarError("El CIF no puede estar vacï¿½o");
 			} else {
 				String telefono = txtTelefono.getText();
 				if (telefono.isBlank()) {
-					mostrarError("El teléfono no puede estar vacío");
+					mostrarError("El telï¿½fono no puede estar vacï¿½o");
 				} else {
 					modProv = new Proveedor(0, nombre, cif, telefono);
 				}
@@ -164,5 +160,7 @@ public class PModificarProv extends JPanel {
 		txtCif.setText(proveedor.getCifProv());
 		txtTelefono.setText(proveedor.getTelefProv());
 	}
+	
+	
 }
 
