@@ -22,7 +22,7 @@ public class PModificarProv extends JPanel {
 	private JTextField txtNombre;
 	private JTextField txtCif;
 	private JTextField txtTelefono;
-	JButton btnModificar;
+	private JButton btnModificar;
 	private JButton btnBuscar;
 	private JButton btnCancelar;
 	
@@ -78,16 +78,16 @@ public class PModificarProv extends JPanel {
 		
 		btnModificar = new JButton(BTN_MOD_PROV);
 		btnModificar.setEnabled(false);
-		btnModificar.setBounds(39, 498, 178, 23);
+		btnModificar.setBounds(67, 437, 178, 23);
 		add(btnModificar);
 		
 		btnBuscar = new JButton(BTN_BUSC_PROV);
-		btnBuscar.setBounds(307, 498, 178, 23);
+		btnBuscar.setBounds(311, 437, 178, 23);
 		add(btnBuscar);
 		
 		btnCancelar = new JButton(BTN_CANCEL_PROV);
 		btnCancelar.setEnabled(false);
-		btnCancelar.setBounds(569, 498, 178, 23);
+		btnCancelar.setBounds(572, 437, 178, 23);
 		add(btnCancelar);
 		
 	}
@@ -142,9 +142,9 @@ public class PModificarProv extends JPanel {
 
 
 	public void hacerVisibleMod(boolean bandera) {
-		btnBuscar.setVisible(!bandera);
-		btnModificar.setVisible(bandera);
-		btnCancelar.setVisible(bandera);
+		btnBuscar.setEnabled(!bandera);
+		btnModificar.setEnabled(bandera);
+		btnCancelar.setEnabled(bandera);
 		txtCif.setEnabled(bandera);
 		txtTelefono.setEnabled(bandera);
 		txtNombre.setEnabled(!bandera);

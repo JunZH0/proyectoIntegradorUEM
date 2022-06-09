@@ -88,6 +88,7 @@ public class GestorControl implements ActionListener{
 				vMenu.cargarPanel(pRegProv);
 			}  else if (ev.getActionCommand().equals(VMenu.MNIM_MOD_PROV)) {
 				vMenu.cargarPanel(pModProv);
+				pModProv.hacerVisibleMod(false);
 			}
 			
 		} else if (ev.getSource() instanceof JButton) {
@@ -133,7 +134,7 @@ public class GestorControl implements ActionListener{
 				if (contIntentos<TOTAL_INTENTOS) {
 					error += " Te equedan " + (TOTAL_INTENTOS - contIntentos);
 				}
-				vInicio.mostrarError("Error usuario");
+				vInicio.mostrarError(error);
 			} else if (!pwd.equals(empleado.getPassword())) {
 				vInicio.mostrarError("La contraseña introducida no es correcta");
 			} else {
