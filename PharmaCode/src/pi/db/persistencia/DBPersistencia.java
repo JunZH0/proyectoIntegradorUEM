@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import pi.db.AccesoDB;
 import pi.model.Proveedor;
+import pi.model.Ventas;
 
 public class DBPersistencia {
 	
@@ -315,6 +316,53 @@ public class DBPersistencia {
 		}
 		
 		return pwd;
+	}
+
+
+	public int selectIdVenta(int idVenta) {
+		int IdEmple = 0;
+		
+		String query = "SELECT " + DBContract.COL_ID_VENTA + " FROM " + DBContract.NOM_TAB_VENTA + "  WHERE " + DBContract.COL_ID_EMP + " = ?";
+		
+
+		Connection conexion = null;
+		PreparedStatement pstmt = null;
+		ResultSet rst = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstmt = conexion.prepareStatement(query);
+			pstmt.setInt(1, idVenta);
+			
+			rst = pstmt.executeQuery();
+			
+			if (rst.next()) { 
+				IdEmple = rst.getInt(DBContract.COL_ID_VENTA);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rst != null) rst.close();
+				if (pstmt != null) pstmt.close();
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return IdEmple;
+	}
+
+
+	public int registrarVenta(Ventas venta) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

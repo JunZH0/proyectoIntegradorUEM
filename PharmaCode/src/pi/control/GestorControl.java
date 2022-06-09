@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import pi.db.persistencia.DBPersistencia;
 import pi.model.Empleado;
 import pi.model.Proveedor;
+import pi.model.Ventas;
 import pi.view.PConsultarEmple;
 import pi.view.PConsultarProv;
 import pi.view.PConsultarStock;
@@ -105,6 +106,10 @@ public class GestorControl implements ActionListener{
 				pModProv.hacerVisibleMod(false);
 			} else if (ev.getActionCommand().equals(VInicio.BTN_ACCEDER)) {
 				intentoAcceder();
+			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_LIMPIAR_VENTA)) {
+				pRegVenta.limpiarCamposVenta();
+			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_REG_VENTA)) {
+				registrarVenta();
 			}
 		}
 			
@@ -116,6 +121,27 @@ public class GestorControl implements ActionListener{
 	
 	
 	
+	private void registrarVenta() {
+		Ventas venta = pRegVenta.obtenerDatosVenta();
+		if (venta != null) {
+			int idEmple = dbPers.selectIdVenta(venta.getIdVenta());
+			if (idEmple != 0) {
+				pRegVenta.mostrarError("Ya existe una venta con ese ID");
+			} else {
+				int resp = dbPers.registrarVenta(venta);
+				
+				if (resp == 1) {
+					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado la venta", "Información", JOptionPane.INFORMATION_MESSAGE);
+					pRegProv.limpiarComponentes();
+				} else {
+					pRegProv.mostrarError("No se ha podido registrar la venta");
+				}
+			}
+		} 
+	}
+
+
+
 	private void intentoAcceder() {
 		boolean noAccede = true;
 		Empleado empleado = vInicio.obtenerUsuario();
