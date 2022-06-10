@@ -80,7 +80,7 @@ public class PRegistrarProd extends JPanel {
 		btnGuardar.addActionListener(c);
 	}
 	
-	public void guardarDatos(DBPersistencia dPersis) {
+	public Producto obtenerDatosProd() {
 		
 		String nombre = txtNombre.getSelectedText();
 		String tipo = (String) cmbTipo.getSelectedItem();
@@ -97,16 +97,15 @@ public class PRegistrarProd extends JPanel {
 		
 		if(esValido) {
 			mostrarMensaje("Se ha registrado el medicamento correctamente", "Resultado de la operacion", 1);
-			producto = new Producto(ALLBITS, nombre, descripcion, tipo, precio, stock);
+			producto = new Producto(0, nombre, descripcion, tipo, precio, stock);
 			
-			dPersis.registrarProd(producto);
 		}
 		
-		
+		return producto;
 		
 	}
 	
-	private void mostrarMensaje(String mensaje, String titulo, int i) {
+	public void mostrarMensaje(String mensaje, String titulo, int i) {
 		JOptionPane.showMessageDialog(this, mensaje ,titulo, i);
 		
 	}

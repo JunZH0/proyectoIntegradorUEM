@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import pi.db.persistencia.DBPersistencia;
 import pi.model.Empleado;
+import pi.model.Producto;
 import pi.model.Proveedor;
 import pi.view.PConsultarEmple;
 import pi.view.PConsultarProv;
@@ -105,18 +106,13 @@ public class GestorControl implements ActionListener{
 			} else if (ev.getActionCommand().equals(VInicio.BTN_ACCEDER)) {
 				intentoAcceder();
 			} else if (ev.getActionCommand().equals(PRegistrarProd.BTN_GUARDAR)) {
-				pRegProd.guardarDatos(dbPers);
+				registrarProd();
 			} else if (ev.getActionCommand().equals(PConsultarStock.BTN_CONSULTAR)) {
 				pConStock.obtenerDatos(dbPers);
 			}
 		}
 			
 	}
-	
-	
-	
-	
-	
 	
 	
 
@@ -178,7 +174,7 @@ public class GestorControl implements ActionListener{
 			int resp = dbPers.modProveedor(modProv);
 			
 			if (resp == 1) {
-				JOptionPane.showMessageDialog(pModProv, "Se ha modificado el restaurante con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(pModProv, "Se ha modificado el proveedor con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
 				pModProv.limpiarComponentes();
 			} else {
 				pModProv.mostrarError("No han podido guardarse los cambios");
@@ -199,7 +195,7 @@ public class GestorControl implements ActionListener{
 				int resp = dbPers.registrarProv(nuevoProv);
 				
 				if (resp == 1) {
-					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado el proveedor", "Información", JOptionPane.INFORMATION_MESSAGE);
 					pRegProv.limpiarComponentes();
 				} else {
 					pRegProv.mostrarError("No se ha podido añadir el restaurante");
@@ -240,7 +236,34 @@ public class GestorControl implements ActionListener{
 		pConProv.rellenarTabla(listaProv);
 		vMenu.cargarPanel(pConProv);
 	}
+	
+	
+	private void registrarProd() {
+		Producto nuevoProd = pRegProd.obtenerDatosProd();
+		
+		if(nuevoProd != null) {
+			if(nuevoProd.equals(nuevoProd.getNombreProd())) {
+				pRegProd.mostrarMensaje("El producto ya existe", "Error", 1);
+				pRegProd.mostrarMensaje("No se ha registrado el producto", "Error", 1);
+			} else {
+				
+				int resp = dbPers.registrarProd(nuevoProd);;
+				
+				if(resp == 1) {
+					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+					pRegProd.limpiarDatos();
+				} else {
+					pRegProd.mostrarMensaje("No se ha registrado el producto", "Error", 1);
+				}
+				
+			}
+		}
+		
+	}
 
+	public void comprobarStock() {
+		String stock = pConStock.obtenerDatos(dbPers));
+	}
 
 
 	public void salirApp() {

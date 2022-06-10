@@ -98,7 +98,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -137,7 +137,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -174,7 +174,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) { 
-			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
 			e.printStackTrace();
 		} finally { 
 			try {
@@ -225,7 +225,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -270,7 +270,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -328,7 +328,7 @@ public class DBPersistencia {
 
 	}
 	
-public void registrarProd(Producto nuevoProd) {
+public int registrarProd(Producto nuevoProd) {
 		
 		String query = "INSERT INTO " + DBContract.NOM_TAB_PROD + " (" +  DBContract.COL_NOM_PROD + ", " + DBContract.COL_DESCR_PROD + ", " + DBContract.COL_TIPO_PROD + ", " + DBContract.COL_PRECIO_PROD + ") VALUES (?,?,?,?)";
 		
@@ -356,7 +356,7 @@ public void registrarProd(Producto nuevoProd) {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -367,7 +367,7 @@ public void registrarProd(Producto nuevoProd) {
 			} 
 		}
 		
-		
+		return res;
 		
 }
 
@@ -398,7 +398,7 @@ public void registrarProd(Producto nuevoProd) {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -417,7 +417,7 @@ public void registrarProd(Producto nuevoProd) {
 	}
 
 
-	public ArrayList<Producto> seleccionarProducto() {
+	public ArrayList<Producto> seleccionarProducto(String nomProd) {
 		ArrayList<Producto> listProd = new ArrayList<>();
 		
 		Producto producto;
@@ -455,7 +455,7 @@ public void registrarProd(Producto nuevoProd) {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -469,6 +469,58 @@ public void registrarProd(Producto nuevoProd) {
 		
 		return listProd;
 
+	}
+	
+	public int modProducto(Producto modProd) {
+		
+		int res = 0;
+		
+		String query = "UPDATE " + DBContract.NOM_TAB_PROD  + " SET " + DBContract.COL_TIPO_PROD + "= ?, " 
+		+ DBContract.COL_DESCR_PROD + "= ? " + DBContract.COL_PRECIO_PROD + "= ? "  + DBContract.COL_STOCK_PROD + "= ? " + 
+				"WHERE " + DBContract.COL_NOM_PROD + "= ?";
+					
+		Connection conexion = null;
+		PreparedStatement pstm = null;
+
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstm = conexion.prepareStatement(query);
+			
+
+			pstm.setString(1, modProd.getTipo());
+			pstm.setString(2, modProd.getDescrProd());
+			pstm.setDouble(3, modProd.getPrecioProd());
+			pstm.setInt(4, modProd.getStockProd());
+			pstm.setString(5,  modProd.getNombreProd());
+	
+			res = pstm.executeUpdate();
+						
+
+						
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null) pstm.close(); 
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+		
+		return res;
+		
+
+		
+		
+		
 	}
 	
 	

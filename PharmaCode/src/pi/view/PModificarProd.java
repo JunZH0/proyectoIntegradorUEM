@@ -24,7 +24,7 @@ public class PModificarProd extends JPanel {
 	private JTextArea txtArea;
 	private JComboBox cmbTipo;
 	private JSpinner spnStock;
-	private JButton btnLimpiuar;
+	private JButton btnLimpiar;
 	private JLabel lblPrecio;
 	private JTextField txtPrecio;
 	public PModificarProd() {
@@ -77,9 +77,9 @@ public class PModificarProd extends JPanel {
 		btnBuscarProducto.setBounds(276, 445, 171, 27);
 		add(btnBuscarProducto);
 		
-		btnLimpiuar = new JButton("Limpiar");
-		btnLimpiuar.setBounds(541, 445, 108, 27);
-		add(btnLimpiuar);
+		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setBounds(541, 445, 108, 27);
+		add(btnLimpiar);
 		
 		lblPrecio = new JLabel("Precio");
 		lblPrecio.setBounds(445, 208, 63, 17);
@@ -94,6 +94,7 @@ public class PModificarProd extends JPanel {
 	public void setControlador(GestorControl c) {
 		btnBuscarProducto.addActionListener(cmbTipo);
 		btnGuardar.addActionListener(c);
+		btnLimpiar.addActionListener(c);
 	}
 	
 	public void mostrarError(String error) {
@@ -104,7 +105,15 @@ public class PModificarProd extends JPanel {
 	public void limpiarCampos() {
 		txtArea.setText("");
 		txtNombre.setText("");
-		
+	}
+	
+	public void hacerVisibleMod(boolean bandera) {
+		btnBuscarProducto.setVisible(!bandera);
+		btnGuardar.setVisible(bandera);
+		btnLimpiar.setVisible(bandera);
+		txtArea.setEnabled(bandera);
+		txtNombre.setEnabled(bandera);
+		txtPrecio.setEnabled(!bandera);
 	}
 	
 	

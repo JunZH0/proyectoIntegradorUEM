@@ -100,12 +100,12 @@ public class PConsultarStock extends JPanel {
 		listaProd = new ArrayList<>();
 		
 		if(tipo.equals("Todas")) {
-			for (Producto prod : dbP.seleccionarProducto() ) {
+			for (Producto prod : dbP.seleccionarProducto(tipo) ) {
 				listaProd.add(prod);
 			}
 			
 		} else {
-			for (Producto prod : dbP.seleccionarProducto() ) {
+			for (Producto prod : dbP.seleccionarProducto(tipo) ) {
 				if(prod.getTipo().equals(tipo)) {
 					listaProd.add(prod);
 				}

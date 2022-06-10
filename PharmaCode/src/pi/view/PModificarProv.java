@@ -110,9 +110,6 @@ public class PModificarProv extends JPanel {
 
 
 
-	
-
-
 	public Proveedor comprobarDatosModProv() {
 		Proveedor modProv = null;
 		
