@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import pi.db.AccesoDB;
 import pi.model.Producto;
 import pi.model.Proveedor;
+import pi.model.Ventas;
 
 public class DBPersistencia {
 	
@@ -57,7 +58,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -469,6 +470,140 @@ public void registrarProd(Producto nuevoProd) {
 		
 		return listProd;
 
+	}
+
+
+	public int selectIdVenta(int idVenta) {
+		int IdEmple = 0;
+		
+		String query = "SELECT " + DBContract.COL_ID_VENTA + " FROM " + DBContract.NOM_TAB_VENTA + "  WHERE " + DBContract.COL_ID_EMP + " = ?";
+		
+
+		Connection conexion = null;
+		PreparedStatement pstmt = null;
+		ResultSet rst = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstmt = conexion.prepareStatement(query);
+			pstmt.setInt(1, idVenta);
+			
+			rst = pstmt.executeQuery();
+			
+			if (rst.next()) { 
+				IdEmple = rst.getInt(DBContract.COL_ID_VENTA);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rst != null) rst.close();
+				if (pstmt != null) pstmt.close();
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return IdEmple;
+	}
+
+
+	public int registrarVenta(Ventas venta) {
+		int res = 0;
+		
+		String query = "INSERT INTO " + DBContract.NOM_TAB_VENTA + " (" + DBContract.COL_ID_EMP + ", " + DBContract.COL_HORA_VENTA + ", " + DBContract.COL_FECHA_VENTA + ") VALUES (?, ?, ?)";
+		
+		
+		Connection conexion = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstm = conexion.prepareStatement(query);
+			
+			pstm.setInt(1, venta.getEmpleado());
+			pstm.setString(2, venta.getHoraVenta());
+			pstm.setString(3, venta.getFechaVenta());
+			
+			res = pstm.executeUpdate();
+						
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null) pstm.close(); 
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+		
+		
+		return res;
+	}
+
+
+	public ArrayList<Ventas> seleccionarVentas() {
+		ArrayList<Ventas> listaVentas = new ArrayList<Ventas>();
+		
+		String query = "SELECT * FROM " + DBContract.NOM_TAB_VENTA + " ORDER  BY " + DBContract.COL_FECHA_VENTA + " DESC";
+		
+		Connection conexion = null;
+		Statement stmt = null;
+		ResultSet rst = null;
+		
+
+		try {
+			conexion = acceso.hacerConexion();
+			stmt = conexion.createStatement();
+			rst = stmt.executeQuery(query);
+			
+			Ventas venta;
+			
+			int idVenta;
+			int idEmple;
+			String hora;
+			String fecha;
+			
+			while (rst.next()) {
+				idVenta = rst.getInt(DBContract.COL_ID_VENTA);
+				idEmple = rst.getInt(DBContract.COL_ID_EMP);
+				hora = rst.getString(DBContract.COL_HORA_VENTA);
+				fecha =  rst.getString(DBContract.COL_FECHA_VENTA);
+				
+				venta = new Ventas(idVenta, idEmple, hora, fecha);
+				listaVentas.add(venta);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rst != null) rst.close();
+				if (stmt != null) stmt.close();
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return listaVentas;
 	}
 	
 	

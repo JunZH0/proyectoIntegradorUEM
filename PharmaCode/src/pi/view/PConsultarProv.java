@@ -62,11 +62,7 @@ public class PConsultarProv extends JPanel {
 		configurarTabla();
 	}
 
-	
-	public void hacerTabVisi(boolean b) {
-		scrpTablaProv.setVisible(b);
-		lblListadoProv.setVisible(b);
-	}
+
 	
 	
 	
@@ -91,7 +87,6 @@ public class PConsultarProv extends JPanel {
 		tblProveedores.getColumn(DBContract.COL_CIF_PROV).setPreferredWidth(20);
 		tblProveedores.getColumn(DBContract.COL_TELF_PROV).setPreferredWidth(40);
 
-		
 	}
 
 

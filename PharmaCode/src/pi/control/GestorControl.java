@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import pi.db.persistencia.DBPersistencia;
 import pi.model.Empleado;
 import pi.model.Proveedor;
+import pi.model.Ventas;
 import pi.view.PConsultarEmple;
 import pi.view.PConsultarProv;
 import pi.view.PConsultarStock;
@@ -77,7 +78,7 @@ public class GestorControl implements ActionListener{
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_MOD_PROD)) {
 				vMenu.cargarPanel(pModProd);
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_REG_VENTA)) {
-				vMenu.cargarPanel(pRegVenta);
+				listarResultadosVenta();
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_CONS_EMPLE)) {
 				vMenu.cargarPanel(pConEmple);
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_MOD_EMPLE)) {
@@ -109,17 +110,57 @@ public class GestorControl implements ActionListener{
 				pRegProd.guardarDatos(dbPers);
 			} else if (ev.getActionCommand().equals(PConsultarStock.BTN_CONSULTAR)) {
 				pConStock.obtenerDatos(dbPers);
+			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_LIMPIAR_VENTA)) {
+				pRegVenta.limpiarCamposVenta();
+			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_REG_VENTA)) {
+				registrarVenta();
+			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_ACT_VENTAS)) {
+				actualizarVentas();
 			}
 		}
 			
 	}
+
+
 	
 	
 	
+
+	private void actualizarVentas() {
+		ArrayList<Ventas> listaVentas = new ArrayList<Ventas>();
+		listaVentas = dbPers.seleccionarVentas();
+		pRegVenta.rellenarTabla(listaVentas);
+	}
+
 	
 	
-	
-	
+	private void listarResultadosVenta() {
+		actualizarVentas();
+		vMenu.cargarPanel(pRegVenta);
+	}
+
+
+
+	private void registrarVenta() {
+		Ventas venta = pRegVenta.obtenerDatosVenta();
+		if (venta != null) {
+			int idEmple = dbPers.selectIdVenta(venta.getIdVenta());
+			if (idEmple != 0) {
+				pRegVenta.mostrarError("Ya existe una venta con ese ID");
+			} else {
+				int resp = dbPers.registrarVenta(venta);
+				
+				if (resp == 1) {
+					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado la venta", "Información", JOptionPane.INFORMATION_MESSAGE);
+					pRegVenta.limpiarCamposVenta();
+				} else {
+					pRegProv.mostrarError("No se ha podido registrar la venta");
+				}
+			}
+		} 
+	}
+
+
 
 	private void intentoAcceder() {
 		boolean noAccede = true;
