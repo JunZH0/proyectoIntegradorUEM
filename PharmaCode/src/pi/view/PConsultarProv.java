@@ -97,7 +97,7 @@ public class PConsultarProv extends JPanel {
 
 
 
-	public void setControlaador(GestorControl controlador) {
+	public void setControlador(GestorControl controlador) {
 		btnEliminar.addActionListener(controlador);	
 	}
 
@@ -122,15 +122,15 @@ public class PConsultarProv extends JPanel {
 	
 	
 
-	public String restauranteEliminar() {
-		String nombreRes = null;
+	public String poveedorEliminar() {
+		String nombreProv = null;
 		
 		if (tblRestaurantes.getSelectedRow() >= 0) {
-			int columna = 0;
+			int columna = 1;
 			int fila = tblRestaurantes.getSelectedRow();
-			nombreRes = tblRestaurantes.getModel().getValueAt(fila, columna).toString();
+			nombreProv = tblRestaurantes.getModel().getValueAt(fila, columna).toString();
 		}
-		return nombreRes;
+		return nombreProv;
 	}
 	
 

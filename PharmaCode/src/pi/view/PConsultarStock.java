@@ -1,7 +1,7 @@
 package pi.view;
 
 import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
+import pi.control.GestorControl;
 import pi.db.persistencia.DBContract;
 import pi.db.persistencia.DBPersistencia;
 import pi.model.Producto;
@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -27,18 +26,20 @@ public class PConsultarStock extends JPanel {
 	private JTable tblProd;
 	private ArrayList<Producto> listaProd;
 	private JScrollPane scrollPane;
+	private JButton btnConsultar;
+	public final static String BTN_CONSULTAR = "Consultar";
 	
 	
 	public PConsultarStock() {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Consulta de Stock");
-		lblNewLabel.setBounds(36, 7, 180, 25);
+		lblNewLabel.setBounds(36, 7, 237, 25);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Filtros");
-		lblNewLabel_1.setBounds(19, 43, 29, 14);
+		lblNewLabel_1.setBounds(19, 43, 46, 14);
 		add(lblNewLabel_1);
 		
 		cmbTipo = new JComboBox();
@@ -57,9 +58,13 @@ public class PConsultarStock extends JPanel {
 		tblProd = new JTable();
 		scrollPane.setViewportView(tblProd);
 		
-		JButton btnConsultar = new JButton("Consultar");
-		btnConsultar.setBounds(163, 273, 89, 23);
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.setBounds(163, 273, 110, 23);
 		add(btnConsultar);
+	}
+	
+	public void setControlador(GestorControl c) {
+		btnConsultar.addActionListener(c);
 	}
 	
 	public void asignarTipo() {
@@ -95,12 +100,12 @@ public class PConsultarStock extends JPanel {
 		listaProd = new ArrayList<>();
 		
 		if(tipo.equals("Todas")) {
-			for (Producto prod : dbP.seleccionarProducto() ) {
+			for (Producto prod : dbP.seleccionarProducto(tipo) ) {
 				listaProd.add(prod);
 			}
 			
 		} else {
-			for (Producto prod : dbP.seleccionarProducto() ) {
+			for (Producto prod : dbP.seleccionarProducto(tipo) ) {
 				if(prod.getTipo().equals(tipo)) {
 					listaProd.add(prod);
 				}
