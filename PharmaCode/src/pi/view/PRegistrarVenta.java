@@ -1,13 +1,18 @@
 package pi.view;
 
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 import pi.control.GestorControl;
+import pi.db.persistencia.DBContract;
 import pi.model.Ventas;
 
 import javax.swing.JTextField;
@@ -19,12 +24,17 @@ public class PRegistrarVenta extends JPanel {
 	
 	public static final String BTN_REG_VENTA = "Registrar Venta";
 	public static final String BTN_LIMPIAR_VENTA = "Limpiar campos";
+	public static final String BTN_ACT_VENTAS = "Actualizar";
 	
 	private JTextField txtIdEmple;
 	private JTextField txtHora;
 	private JTextField txtFecha;
 	private JButton btnRegVenta;
 	private JButton btnLimpiarVenta;
+	private JButton btnRefresTabla;
+	private JTable tblVentas;
+	private JScrollPane scrpTabla;
+	private DefaultTableModel dtmTablaVentas;
 	
 	
 	
@@ -79,14 +89,71 @@ public class PRegistrarVenta extends JPanel {
 		btnLimpiarVenta = new JButton(BTN_LIMPIAR_VENTA);
 		btnLimpiarVenta.setBounds(514, 458, 135, 23);
 		add(btnLimpiarVenta);
+		
+		btnRefresTabla = new JButton(BTN_ACT_VENTAS);
+		btnRefresTabla.setBounds(609, 77, 138, 23);
+		add(btnRefresTabla);
+		
+		scrpTabla = new JScrollPane();
+		scrpTabla.setBounds(419, 111, 328, 323);
+		add(scrpTabla);
+		
+		tblVentas = new JTable();
+		scrpTabla.setViewportView(tblVentas);
+		
+		JLabel lblVentas = new JLabel("Ventas:");
+		lblVentas.setBounds(419, 84, 86, 14);
+		add(lblVentas);
+		
+		configurarTabla();
 
 	}
 	
+	public void rellenarTabla(ArrayList<Ventas> listaVentas) {
+		dtmTablaVentas.getDataVector().clear();
+		Object[] fila = new Object[4];
+		
+		for (Ventas venta : listaVentas) {
+			fila[0] = venta.getIdVenta();
+			
+			fila[1] = venta.getEmpleado();
+			
+			fila[2] = venta.getHoraVenta();
+			
+			fila[3] = venta.getFechaVenta();
+			
+			dtmTablaVentas.addRow(fila);
+		}
+	}
 	
 	
-	public void setControlaador(GestorControl controlador) {
+	private void configurarTabla() {
+		dtmTablaVentas = new DefaultTableModel() {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		tblVentas.setModel(dtmTablaVentas);
+		
+		dtmTablaVentas.addColumn(DBContract.COL_ID_VENTA);
+		dtmTablaVentas.addColumn(DBContract.COL_ID_EMP);
+		dtmTablaVentas.addColumn(DBContract.COL_HORA_VENTA);
+		dtmTablaVentas.addColumn(DBContract.COL_FECHA_VENTA);
+		
+		tblVentas.getColumn(DBContract.COL_ID_VENTA).setPreferredWidth(20);
+		tblVentas.getColumn(DBContract.COL_ID_EMP).setPreferredWidth(20);
+		tblVentas.getColumn(DBContract.COL_HORA_VENTA).setPreferredWidth(30);
+		tblVentas.getColumn(DBContract.COL_FECHA_VENTA).setPreferredWidth(40);
+	}
+
+
+
+	public void setControlador(GestorControl controlador) {
 		btnLimpiarVenta.addActionListener(controlador);
 		btnRegVenta.addActionListener(controlador);
+		btnRefresTabla.addActionListener(controlador);
 		
 	}
 

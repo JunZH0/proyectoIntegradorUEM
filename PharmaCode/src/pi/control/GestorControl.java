@@ -78,7 +78,7 @@ public class GestorControl implements ActionListener{
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_MOD_PROD)) {
 				vMenu.cargarPanel(pModProd);
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_REG_VENTA)) {
-				vMenu.cargarPanel(pRegVenta);
+				listarResultadosVenta();
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_CONS_EMPLE)) {
 				vMenu.cargarPanel(pConEmple);
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_MOD_EMPLE)) {
@@ -110,17 +110,33 @@ public class GestorControl implements ActionListener{
 				pRegVenta.limpiarCamposVenta();
 			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_REG_VENTA)) {
 				registrarVenta();
+			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_ACT_VENTAS)) {
+				actualizarVentas();
 			}
 		}
 			
 	}
+
+
 	
 	
 	
+
+	private void actualizarVentas() {
+		ArrayList<Ventas> listaVentas = new ArrayList<Ventas>();
+		listaVentas = dbPers.seleccionarVentas();
+		pRegVenta.rellenarTabla(listaVentas);
+	}
+
 	
 	
-	
-	
+	private void listarResultadosVenta() {
+		actualizarVentas();
+		vMenu.cargarPanel(pRegVenta);
+	}
+
+
+
 	private void registrarVenta() {
 		Ventas venta = pRegVenta.obtenerDatosVenta();
 		if (venta != null) {
@@ -132,7 +148,7 @@ public class GestorControl implements ActionListener{
 				
 				if (resp == 1) {
 					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado la venta", "Información", JOptionPane.INFORMATION_MESSAGE);
-					pRegProv.limpiarComponentes();
+					pRegVenta.limpiarCamposVenta();
 				} else {
 					pRegProv.mostrarError("No se ha podido registrar la venta");
 				}
