@@ -161,6 +161,10 @@ public class PModificarProv extends JPanel {
 		txtTelefono.setText(proveedor.getTelefProv());
 	}
 	
-	
+	public void limpiarComponentes() {
+		txtNombre.setText("");
+		txtCif.setText("");
+		txtTelefono.setText("");
+	} 
 }
 
