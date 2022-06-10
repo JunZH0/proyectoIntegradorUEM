@@ -31,10 +31,14 @@ public class PConsultarStock extends JPanel {
 	
 	
 	public PConsultarStock() {
+		init();
+	}
+
+	private void init() {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Consulta de Stock");
-		lblNewLabel.setBounds(36, 7, 237, 25);
+		lblNewLabel.setBounds(129, 11, 237, 25);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		add(lblNewLabel);
 		

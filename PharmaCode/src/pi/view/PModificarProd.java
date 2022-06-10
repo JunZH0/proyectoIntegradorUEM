@@ -31,6 +31,10 @@ public class PModificarProd extends JPanel {
 	public final static String BTN_MODIFICAR = "Guardar";
 	
 	public PModificarProd() {
+		init();
+	}
+
+	private void init() {
 		setLayout(null);
 		
 		JLabel lblTitulo = new JLabel("Modificar Producto");
@@ -52,7 +56,8 @@ public class PModificarProd extends JPanel {
 		add(lblTipo);
 		
 		cmbTipo = new JComboBox();
-		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"Anticonceptivo", "Analgesico", "Antihistaminico", "Antibiotico", "Antitusivo", "Antiinflamatorio", "Antidiabetico", "Relajante muscular", "Antidepresivo", "Citotoxico"}));
+		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"Anticonceptivo", "Analgesico", "Antihistaminico", "Antibiotico",
+				"Antitusivo", "Antiinflamatorio", "Antidiabetico", "Relajante muscular", "Antidepresivo", "Citotoxico"}));
 		cmbTipo.setBounds(195, 203, 146, 26);
 		add(cmbTipo);
 		
