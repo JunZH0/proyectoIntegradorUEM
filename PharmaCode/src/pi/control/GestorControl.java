@@ -109,6 +109,8 @@ public class GestorControl implements ActionListener{
 				registrarProd();
 			} else if (ev.getActionCommand().equals(PConsultarStock.BTN_CONSULTAR)) {
 				pConStock.obtenerDatos(dbPers);
+			} else if (ev.getActionCommand().equals(PModificarProd.BTN_MODIFICAR)) {
+				modificarProd();
 			}
 		}
 			
@@ -126,7 +128,7 @@ public class GestorControl implements ActionListener{
 			String error = "";
 			if (pwd == null) {
 				error = "El usuario introducido no existe";
-				if (contIntentos<TOTAL_INTENTOS) {
+				if (contIntentos < TOTAL_INTENTOS) {
 					error += " Te equedan " + (TOTAL_INTENTOS - contIntentos);
 				}
 				vInicio.mostrarError("Error usuario");
@@ -262,7 +264,23 @@ public class GestorControl implements ActionListener{
 	}
 
 	public void comprobarStock() {
-		String stock = pConStock.obtenerDatos(dbPers));
+		
+	}
+	
+	public void modificarProd() {
+		Producto modProd = pModProd.comprobrarProducto();
+		if (modProd  == null) {
+			pModProd.mostrarError("No han podido guardarse los cambios");
+		} else {
+			int resp = dbPers.modProducto(modProd);
+			
+			if (resp == 1) {
+				JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+				pModProd.limpiarCampos();
+			} else {
+				pModProd.mostrarError("No han podido guardarse los cambios");
+			}
+		}
 	}
 
 

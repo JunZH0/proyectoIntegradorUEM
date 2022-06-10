@@ -27,6 +27,9 @@ public class PModificarProd extends JPanel {
 	private JButton btnLimpiar;
 	private JLabel lblPrecio;
 	private JTextField txtPrecio;
+	
+	public final static String BTN_MODIFICAR = "Guardar";
+	
 	public PModificarProd() {
 		setLayout(null);
 		
@@ -69,7 +72,7 @@ public class PModificarProd extends JPanel {
 		txtArea.setBounds(195, 279, 273, 119);
 		add(txtArea);
 		
-		btnGuardar = new JButton("Guardar");
+		btnGuardar = new JButton(BTN_MODIFICAR);
 		btnGuardar.setBounds(88, 445, 108, 27);
 		add(btnGuardar);
 		
