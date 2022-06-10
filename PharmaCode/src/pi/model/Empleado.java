@@ -1,6 +1,7 @@
 package pi.model;
 
 public class Empleado {
+	
 	private int idEmpleado;
 	private String nombreEmple;
 	private String apellidoEmple;
@@ -22,8 +23,8 @@ public class Empleado {
 		this.apellidoEmple = apellidoEmple;
 		this.password =  password;
 	}
-
-
+	
+	
 	public int getIdEmpleado() {
 		return idEmpleado;
 	}
