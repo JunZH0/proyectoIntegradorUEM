@@ -10,7 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import pi.control.GestorControl;
-import pi.model.Producto;
 import pi.model.Proveedor;
 
 public class PModificarProv extends JPanel {
@@ -18,7 +17,7 @@ public class PModificarProv extends JPanel {
 	
 	public static final String BTN_MOD_PROV = "Modificar proveedor";
 	public static final String BTN_BUSC_PROV = "Buscar proveedor";
-	public static final String BTN_CANCEL_PROV = "Cancelar modificaciï¿½n";
+	public static final String BTN_CANCEL_PROV = "Cancelar modificación";
 	
 	private JTextField txtNombre;
 	private JTextField txtCif;
