@@ -73,9 +73,6 @@ public class VInicio extends JFrame{
 		txtPwd.setBounds(318, 142, 114, 21);
 		getContentPane().add(txtPwd);
 		txtPwd.setColumns(10);
-		
-		JButton btnAcceso = new JButton(BTN_ACCEDER);
-		btnAcceso.setBounds(329, 211, 86, 27);
 
 		getContentPane().add(btnAcceso);
 		
