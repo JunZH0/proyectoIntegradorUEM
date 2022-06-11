@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import pi.db.persistencia.DBPersistencia;
 import pi.model.Empleado;
+import pi.model.Producto;
 import pi.model.Proveedor;
 import pi.model.Ventas;
 import pi.view.PConsultarEmple;
@@ -107,7 +108,7 @@ public class GestorControl implements ActionListener{
 			} else if (ev.getActionCommand().equals(VInicio.BTN_ACCEDER)) {
 				intentoAcceder();
 			} else if (ev.getActionCommand().equals(PRegistrarProd.BTN_GUARDAR)) {
-				pRegProd.guardarDatos(dbPers);
+				registrarProd();;
 			} else if (ev.getActionCommand().equals(PConsultarStock.BTN_CONSULTAR)) {
 				pConStock.obtenerDatos(dbPers);
 			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_LIMPIAR_VENTA)) {
@@ -281,6 +282,28 @@ public class GestorControl implements ActionListener{
 		listaProv = dbPers.seleccionarProveedores();
 		pConProv.rellenarTabla(listaProv);
 		vMenu.cargarPanel(pConProv);
+	}
+	
+	private void registrarProd() {
+		Producto nuevoProd = pRegProd.obtenerDatosProd();
+		
+		if(nuevoProd != null) {
+			if(nuevoProd.equals(nuevoProd.getNombreProd())) {
+				pRegProd.mostrarMensaje("El producto ya existe", "Error", 1);
+			} else {
+				
+				int resp = dbPers.registrarProd(nuevoProd);;
+				
+				if(resp == 1) {
+					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+					pRegProd.limpiarDatos();
+				} else {
+					pRegProd.mostrarMensaje("No se ha registrado el producto", "Error", 1);
+				}
+				
+			}
+		}
+		
 	}
 
 

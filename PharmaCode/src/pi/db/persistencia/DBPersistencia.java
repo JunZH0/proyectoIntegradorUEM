@@ -329,7 +329,7 @@ public class DBPersistencia {
 
 	}
 	
-public void registrarProd(Producto nuevoProd) {
+public int registrarProd(Producto nuevoProd) {
 		
 		String query = "INSERT INTO " + DBContract.NOM_TAB_PROD + " (" +  DBContract.COL_NOM_PROD + ", " + DBContract.COL_DESCR_PROD + ", " + DBContract.COL_TIPO_PROD + ", " + DBContract.COL_PRECIO_PROD + ") VALUES (?,?,?,?)";
 		
@@ -368,7 +368,7 @@ public void registrarProd(Producto nuevoProd) {
 			} 
 		}
 		
-		
+		return res;
 		
 }
 
@@ -376,7 +376,7 @@ public void registrarProd(Producto nuevoProd) {
 	public ArrayList<String> getTiposProd() {
 		ArrayList<String> listTipo = new ArrayList<String>();
 		
-		String query = "SELECT DISTINT " + DBContract.COL_TIPO_PROD + " FROM " + DBContract.NOM_TAB_PROD;
+		String query = "SELECT DISTINCT " + DBContract.COL_TIPO_PROD + " FROM " + DBContract.NOM_TAB_PROD;
 		String tipo;
 		
 		
@@ -403,6 +403,7 @@ public void registrarProd(Producto nuevoProd) {
 			e.printStackTrace();
 		} finally {
 			try {
+				if(rslt != null) rslt.close();
 				if (pstm != null) pstm.close(); 
 				if (conexion != null) conexion.close();
 			} catch (SQLException e) {
@@ -412,8 +413,7 @@ public void registrarProd(Producto nuevoProd) {
 		
 		
 		
-		
-		
+
 		return listTipo;
 	}
 

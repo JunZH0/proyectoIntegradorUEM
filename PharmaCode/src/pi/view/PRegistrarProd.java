@@ -51,7 +51,8 @@ public class PRegistrarProd extends JPanel {
 		lblCategoria.setBounds(6, 119, 28, 17);
 		add(lblCategoria);
 		
-		cmbTipo = new JComboBox();
+		cmbTipo = new JComboBox<String>();
+		cmbTipo.addItem("Todo");
 		cmbTipo.setBounds(99, 114, 210, 26);
 		add(cmbTipo);
 		
@@ -60,7 +61,7 @@ public class PRegistrarProd extends JPanel {
 		add(lblPrecio);
 		
 		spnPrecio = new JSpinner();
-		spnPrecio.setBounds(99, 169, 28, 22);
+		spnPrecio.setBounds(99, 169, 51, 22);
 		add(spnPrecio);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion");
@@ -80,7 +81,7 @@ public class PRegistrarProd extends JPanel {
 		btnGuardar.addActionListener(c);
 	}
 	
-	public void guardarDatos(DBPersistencia dPersis) {
+	public Producto obtenerDatosProd() {
 		
 		String nombre = txtNombre.getSelectedText();
 		String tipo = (String) cmbTipo.getSelectedItem();
@@ -97,22 +98,21 @@ public class PRegistrarProd extends JPanel {
 		
 		if(esValido) {
 			mostrarMensaje("Se ha registrado el medicamento correctamente", "Resultado de la operacion", 1);
-			producto = new Producto(ALLBITS, nombre, descripcion, tipo, precio, stock);
+			producto = new Producto(0, nombre, descripcion, tipo, precio, stock);
 			
-			dPersis.registrarProd(producto);
 		}
 		
-		
+		return producto;
 		
 	}
 	
-	private void mostrarMensaje(String mensaje, String titulo, int i) {
+	public void mostrarMensaje(String mensaje, String titulo, int i) {
 		JOptionPane.showMessageDialog(this, mensaje ,titulo, i);
 		
 	}
 	
 	
-	public void asignarTipo(GestorControl c) {
+	public void asignarTipo() {
 		
 		DBPersistencia dPersis = new DBPersistencia();
 		DefaultComboBoxModel<String> modelo = (DefaultComboBoxModel<String>) cmbTipo.getModel();
