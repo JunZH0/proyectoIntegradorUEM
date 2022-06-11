@@ -9,6 +9,11 @@ public class Empleado {
 	private String adminEmple;
 	private String password;
 	
+	public Empleado(int idEmpleado, String nombreEmple, String apellidoEmple) {
+		this.idEmpleado = idEmpleado;
+		this.nombreEmple = nombreEmple;
+		this.apellidoEmple = apellidoEmple;
+	}
 	
 	public Empleado(int idEmpleado, String nombreEmple, String apellidoEmple, String turnoEmple, String adminEmple, String password) {
 		this.idEmpleado = idEmpleado;
