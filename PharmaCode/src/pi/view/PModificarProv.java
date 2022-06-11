@@ -66,7 +66,7 @@ public class PModificarProv extends JPanel {
 		add(txtCif);
 		txtCif.setColumns(10);
 		
-		JLabel lblTelefono = new JLabel("Telï¿½fono:");
+		JLabel lblTelefono = new JLabel("Teléfono:");
 		lblTelefono.setBounds(106, 341, 83, 14);
 		add(lblTelefono);
 		
@@ -117,15 +117,15 @@ public class PModificarProv extends JPanel {
 		
 		String nombre = txtNombre.getText();
 		if (nombre.isBlank()) {
-			mostrarError("El nombre no puede estar vacï¿½o");
+			mostrarError("El nombre no puede estar vacío");
 		} else {
 			String cif = txtCif.getText();
 			if (cif.isBlank()) {
-				mostrarError("El CIF no puede estar vacï¿½o");
+				mostrarError("El CIF no puede estar vacío");
 			} else {
 				String telefono = txtTelefono.getText();
 				if (telefono.isBlank()) {
-					mostrarError("El telï¿½fono no puede estar vacï¿½o");
+					mostrarError("El teléfono no puede estar vacío");
 				} else {
 					modProv = new Proveedor(0, nombre, cif, telefono);
 				}
