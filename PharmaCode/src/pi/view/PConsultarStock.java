@@ -38,7 +38,7 @@ public class PConsultarStock extends JPanel {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Consulta de Stock");
-		lblNewLabel.setBounds(129, 11, 237, 25);
+		lblNewLabel.setBounds(255, 11, 237, 25);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
 		add(lblNewLabel);
 		
@@ -56,19 +56,20 @@ public class PConsultarStock extends JPanel {
 		add(lblNewLabel_2);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(36, 129, 379, 133);
+		scrollPane.setBounds(36, 129, 605, 216);
 		add(scrollPane);
 		
 		tblProd = new JTable();
 		scrollPane.setViewportView(tblProd);
 		
 		btnConsultar = new JButton("Consultar");
-		btnConsultar.setBounds(163, 273, 110, 23);
+		btnConsultar.setBounds(300, 391, 110, 23);
 		add(btnConsultar);
 	}
 	
 	public void setControlador(GestorControl c) {
 		btnConsultar.addActionListener(c);
+		asignarTipo();
 	}
 	
 	public void asignarTipo() {
@@ -99,6 +100,8 @@ public class PConsultarStock extends JPanel {
 	}
 	
 	public void obtenerDatos(DBPersistencia dbP) {
+		configurarTabla();
+		
 		String tipo = (String) cmbTipo.getSelectedItem();
 		
 		listaProd = new ArrayList<>();
@@ -109,6 +112,7 @@ public class PConsultarStock extends JPanel {
 			}
 			
 		} else {
+			scrollPane.setVisible(true);
 			for (Producto prod : dbP.seleccionarProducto(tipo) ) {
 				if(prod.getTipo().equals(tipo)) {
 					listaProd.add(prod);
@@ -128,6 +132,8 @@ public class PConsultarStock extends JPanel {
 	
 		
 	}
+	
+	
 	
 	
 	public void mostrarAviso(String mensaje, String titulo, int i) {

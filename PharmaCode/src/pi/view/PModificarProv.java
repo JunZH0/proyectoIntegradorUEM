@@ -159,10 +159,6 @@ public class PModificarProv extends JPanel {
 
 
 
-	public void limpiarComponentes() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public void limpiarComponentes() {
 		txtNombre.setText("");

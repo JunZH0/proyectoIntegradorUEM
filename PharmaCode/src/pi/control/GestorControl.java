@@ -108,14 +108,12 @@ public class GestorControl implements ActionListener{
 			} else if (ev.getActionCommand().equals(VInicio.BTN_ACCEDER)) {
 				intentoAcceder();
 			} else if (ev.getActionCommand().equals(PRegistrarProd.BTN_GUARDAR)) {
-<<<<<<< HEAD
-				registrarProd();
+				pRegProd.obtenerDatosProd();
 			} else if (ev.getActionCommand().equals(PConsultarStock.BTN_CONSULTAR)) {
 				pConStock.obtenerDatos(dbPers);
 			} else if (ev.getActionCommand().equals(PModificarProd.BTN_MODIFICAR)) {
 				modificarProd();
-=======
-				registrarProd();;
+				
 			} else if (ev.getActionCommand().equals(PConsultarStock.BTN_CONSULTAR)) {
 				pConStock.obtenerDatos(dbPers);
 			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_LIMPIAR_VENTA)) {
@@ -124,7 +122,9 @@ public class GestorControl implements ActionListener{
 				registrarVenta();
 			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_ACT_VENTAS)) {
 				actualizarVentas();
->>>>>>> main
+
+			} else if (ev.getActionCommand().equals(PRegistrarProd.BTN_LIMPIAR)) {
+				pRegProd.limpiarDatos();
 			}
 		}
 			
@@ -132,9 +132,6 @@ public class GestorControl implements ActionListener{
 
 
 	
-	
-<<<<<<< HEAD
-=======
 	
 
 	private void actualizarVentas() {
@@ -172,7 +169,7 @@ public class GestorControl implements ActionListener{
 	}
 
 
->>>>>>> main
+
 
 	private void intentoAcceder() {
 		boolean noAccede = true;
@@ -295,30 +292,27 @@ public class GestorControl implements ActionListener{
 		vMenu.cargarPanel(pConProv);
 	}
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> main
-	private void registrarProd() {
+
+	/*private void registrarProd() {
 		Producto nuevoProd = pRegProd.obtenerDatosProd();
 		
 		if(nuevoProd != null) {
-			if(nuevoProd.equals(nuevoProd.getNombreProd())) {
-				pRegProd.mostrarMensaje("El producto ya existe", "Error", 1);
-<<<<<<< HEAD
-				pRegProd.mostrarMensaje("No se ha registrado el producto", "Error", 1);
-=======
->>>>>>> main
+			int prod = dbPers.selectIdProducto(nuevoProd.getIdProducto());
+				
+			if (prod != 0) {
+				pRegProd.mostrarMensaje("Ya existe un producto con ese ID", "Error", 1);
+			}
+			
 			} else {
 				
 				int resp = dbPers.registrarProd(nuevoProd);;
 				
 				if(resp == 1) {
-<<<<<<< HEAD
-					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
-=======
+
+					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con éxito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
 					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
->>>>>>> main
+
 					pRegProd.limpiarDatos();
 				} else {
 					pRegProd.mostrarMensaje("No se ha registrado el producto", "Error", 1);
@@ -326,8 +320,8 @@ public class GestorControl implements ActionListener{
 				
 			}
 		}
-		
-	}
+		*/
+	
 
 	public void comprobarStock() {
 		

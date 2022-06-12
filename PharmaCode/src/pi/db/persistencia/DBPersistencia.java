@@ -331,7 +331,8 @@ public class DBPersistencia {
 	
 public int registrarProd(Producto nuevoProd) {
 		
-		String query = "INSERT INTO " + DBContract.NOM_TAB_PROD + " (" +  DBContract.COL_NOM_PROD + ", " + DBContract.COL_DESCR_PROD + ", " + DBContract.COL_TIPO_PROD + ", " + DBContract.COL_PRECIO_PROD + ") VALUES (?,?,?,?)";
+		String query = "INSERT INTO " + DBContract.NOM_TAB_PROD + " (" +  DBContract.COL_NOM_PROD + ", " + DBContract.COL_DESCR_PROD + ", " + DBContract.COL_TIPO_PROD 
+				+ ", " + DBContract.COL_PRECIO_PROD + ", " + DBContract.COL_STOCK_PROD + ") VALUES (?, ?, ?, ?, ?)";
 		
 
 		
@@ -348,7 +349,8 @@ public int registrarProd(Producto nuevoProd) {
 			pstm.setString(1, nuevoProd.getNombreProd());
 			pstm.setString(2, nuevoProd.getDescrProd());
 			pstm.setString(3, nuevoProd.getTipo());
-			pstm.setInt(4, (int) nuevoProd.getPrecioProd());
+			pstm.setDouble(4, (double) nuevoProd.getPrecioProd());
+			pstm.setInt(5, nuevoProd.getStockProd());
 			
 			res = pstm.executeUpdate();
 						
@@ -418,7 +420,7 @@ public int registrarProd(Producto nuevoProd) {
 	}
 
 
-	public ArrayList<Producto> seleccionarProducto(String nomProd) {
+	public ArrayList<Producto> seleccionarProducto(String tipo1) {
 		ArrayList<Producto> listProd = new ArrayList<>();
 		
 		Producto producto;
@@ -470,6 +472,46 @@ public int registrarProd(Producto nuevoProd) {
 		
 		return listProd;
 
+	}
+	
+	public int selectIdProducto(int idProd) {
+		int idProducto = 0;
+		
+		String query = "SELECT " + DBContract.COL_ID_PROD + " FROM " + DBContract.NOM_TAB_PROD + "  WHERE " + DBContract.COL_ID_PROD + " = ?";
+		
+
+		Connection conexion = null;
+		PreparedStatement pstmt = null;
+		ResultSet rst = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstmt = conexion.prepareStatement(query);
+			pstmt.setInt(1, idProd);
+			
+			rst = pstmt.executeQuery();
+			
+			if (rst.next()) { 
+				idProducto = rst.getInt(DBContract.COL_ID_PROD);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rst != null) rst.close();
+				if (pstmt != null) pstmt.close();
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return idProducto;
 	}
 
 

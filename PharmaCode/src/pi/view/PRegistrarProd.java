@@ -8,22 +8,28 @@ import pi.model.Producto;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import java.util.function.DoublePredicate;
+
+import javax.swing.JSpinner;
 
 public class PRegistrarProd extends JPanel {
 	private JButton btnGuardar;
 	private JTextField txtNombre;
 	private JTextArea txtDesc;
 	private JComboBox cmbTipo;
-	private JSpinner spnPrecio;
 	private Producto producto;
 	public final static String BTN_GUARDAR = "Guardar"; 
+	public final static String BTN_LIMPIAR = "Limpiar"; 
+	private JButton btnLimpiar;
+	private JTextField txtPrecio;
+	private JLabel lblStock;
+	private JSpinner spnStock;
+
 	
 	
 	public PRegistrarProd() {
@@ -52,17 +58,12 @@ public class PRegistrarProd extends JPanel {
 		add(lblCategoria);
 		
 		cmbTipo = new JComboBox<String>();
-		cmbTipo.addItem("Todo");
 		cmbTipo.setBounds(99, 114, 210, 26);
 		add(cmbTipo);
 		
 		JLabel lblPrecio = new JLabel("Precio");
 		lblPrecio.setBounds(6, 171, 39, 17);
 		add(lblPrecio);
-		
-		spnPrecio = new JSpinner();
-		spnPrecio.setBounds(99, 169, 51, 22);
-		add(spnPrecio);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion");
 		lblDescripcion.setBounds(6, 221, 74, 17);
@@ -75,34 +76,63 @@ public class PRegistrarProd extends JPanel {
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.setBounds(99, 377, 86, 27);
 		add(btnGuardar);
+		
+		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setBounds(302, 379, 89, 23);
+		add(btnLimpiar);
+		
+		txtPrecio = new JTextField();
+		txtPrecio.setBounds(99, 169, 66, 20);
+		add(txtPrecio);
+		txtPrecio.setColumns(10);
+		
+		spnStock = new JSpinner();
+		spnStock.setBounds(99, 330, 46, 20);
+		add(spnStock);
+		
+		lblStock = new JLabel("Stock");
+		lblStock.setBounds(11, 333, 46, 14);
+		add(lblStock);
 	}
+	
+	
+	DBPersistencia gPersis = new DBPersistencia();
 	
 	public void setControlador(GestorControl c) {
 		btnGuardar.addActionListener(c);
+		btnLimpiar.addActionListener(c);
+		asignarTipo();
 	}
 	
-	public Producto obtenerDatosProd() {
-		
-		String nombre = txtNombre.getSelectedText();
-		String tipo = (String) cmbTipo.getSelectedItem();
-		String descripcion = txtDesc.getSelectedText();
-		double precio = (double) spnPrecio.getValue();
-		int stock = 0;
-		
+	public void obtenerDatosProd() {
 		boolean esValido = true;
 		
+		String nombre = txtNombre.getText();
 		if (nombre.isEmpty()) {
-			mostrarMensaje("El campo no puede estar vacio", "Error de datos", 0);
+			mostrarMensaje("El campo nombre no puede estar vacio", "Error de datos", 0);
 			esValido = false;
-		}
-		
-		if(esValido) {
-			mostrarMensaje("Se ha registrado el medicamento correctamente", "Resultado de la operacion", 1);
-			producto = new Producto(0, nombre, descripcion, tipo, precio, stock);
 			
-		}
+			} else {
+				String descripcion = txtDesc.getText();
+				String tipo = (String) cmbTipo.getSelectedItem();
+				double precio;
+					if(txtPrecio.getText().equals("")) {
+						mostrarMensaje("El campo precio no puede estar vacio", "Error de datos", 0);
+					} else {
+						precio = Double.parseDouble(txtPrecio.getText());
+						int stock = (Integer) spnStock.getValue();
+					
+						precio = Double.parseDouble(txtPrecio.getText());
+						mostrarMensaje("Se ha registrado el medicamento correctamente", "Resultado de la operacion", 1);
+						producto = new Producto(0, nombre, descripcion, tipo, precio, stock);
+						gPersis.registrarProd(producto);
+					}
+				
+				
+			}
 		
-		return producto;
+		
+		//return producto;
 		
 	}
 	
@@ -111,7 +141,7 @@ public class PRegistrarProd extends JPanel {
 		
 	}
 	
-	
+	// Muestra en el comboBox a traves de una query los tipos de medicamento
 	public void asignarTipo() {
 		
 		DBPersistencia dPersis = new DBPersistencia();
@@ -127,7 +157,6 @@ public class PRegistrarProd extends JPanel {
 		txtNombre.setText(null);
 		txtDesc.setText(null);
 		cmbTipo.setSelectedIndex(0);
+		txtPrecio.setText(null);
 	}
-	
-	
 }
