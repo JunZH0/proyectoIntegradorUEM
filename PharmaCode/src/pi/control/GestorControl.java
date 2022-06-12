@@ -204,7 +204,7 @@ public class GestorControl implements ActionListener{
 		} else {
 			int idProv = dbPers.selecIdProv(nomProv);
 			if (idProv <= 0) {
-				pModProv.mostrarError("No se ha encontrado ningún restaurante con el nombre introducido");
+				pModProv.mostrarError("No se ha encontrado ningún proveedor con el nombre introducido");
 			} else {
 				Proveedor proveedor = dbPers.selecionarUnProveedor(nomProv);
 				pModProv.rellenarDatos(proveedor);
@@ -237,7 +237,7 @@ public class GestorControl implements ActionListener{
 			int resp = dbPers.modProveedor(modProv);
 			
 			if (resp == 1) {
-				JOptionPane.showMessageDialog(pModProv, "Se ha modificado el restaurante con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(pModProv, "Se ha modificado el proveedor con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
 				pModProv.limpiarComponentes();
 			} else {
 				pModProv.mostrarError("No han podido guardarse los cambios");
@@ -253,7 +253,7 @@ public class GestorControl implements ActionListener{
 			int resp = dbPers.modEmpleado(modEmple);
 			
 			if (resp == 1) {
-				JOptionPane.showMessageDialog(pModEmple, "Se ha modificado el restaurante con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(pModEmple, "Se ha modificado el empleado con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
 				pModEmple.limpiarComponentes();
 			} else {
 				pModEmple.mostrarError("No han podido guardarse los cambios");
@@ -290,7 +290,7 @@ public class GestorControl implements ActionListener{
 				int resp = dbPers.registrarEmpleado(nuevoEmple);
 				
 				if (resp == 1) {
-					JOptionPane.showMessageDialog(pRegEmple, "Se ha registrado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pRegEmple, "Se ha registrado el empleado", "Información", JOptionPane.INFORMATION_MESSAGE);
 					pRegEmple.limpiarComponentes();
 				} else {
 					pRegEmple.mostrarError("No se ha podido añadir el restaurante");
@@ -302,9 +302,9 @@ public class GestorControl implements ActionListener{
 	private void eliminarProv() {
 		String nombreProv = pConProv.poveedorEliminar();
 		if (nombreProv == null) {
-			JOptionPane.showMessageDialog(pConProv, "No se ha seleccionado ning�n restaurante", "Error selección", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(pConProv, "No se ha seleccionado ningún proveedor", "Error selección", JOptionPane.ERROR_MESSAGE);
 		} else {
-			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el restaurante, ¿desea continuar?",
+			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el proveedor, ¿desea continuar?",
 					"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 			if (resp == JOptionPane.YES_OPTION) {
 				int res = dbPers.borrarProv(nombreProv);
@@ -321,18 +321,18 @@ public class GestorControl implements ActionListener{
 	private void eliminarEmple() {
 		String nombreEmple = pConEmple.empleadoEliminar();
 		if (nombreEmple == null) {
-			JOptionPane.showMessageDialog(pConEmple, "No se ha seleccionado ning�n restaurante", "Error selección", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(pConEmple, "No se ha seleccionado ningún empleado", "Error selección", JOptionPane.ERROR_MESSAGE);
 		} else {
-			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el restaurante, �desea continuar?",
+			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el empleado, ¿desea continuar?",
 														"Confirmar salida", JOptionPane.YES_NO_OPTION,
 														JOptionPane.INFORMATION_MESSAGE);
 			if (resp == JOptionPane.YES_OPTION) {
 				int res = dbPers.borrarEmple(nombreEmple);
 				listarResultadosEmple();
 				if (res==1) {
-					JOptionPane.showMessageDialog(pConProv, "Se ha eliminado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pConProv, "Se ha eliminado el empleado", "Información", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(pConProv, "No se ha podido eliminar el restaurante", "Error eliminación", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(pConProv, "No se ha podido eliminar el empleado", "Error eliminación", JOptionPane.ERROR_MESSAGE);
 				}						
 			}
 		}
@@ -356,10 +356,10 @@ public class GestorControl implements ActionListener{
 				int resp = dbPers.registrarProd(nuevoProd);;
 				
 				if(resp == 1) {
-					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el proveedor con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 					pRegProd.limpiarDatos();
 				} else {
-					pRegProd.mostrarMensaje("No se ha registrado el producto", "Error", 1);
+					pRegProd.mostrarMensaje("No se ha registrado el proveedor", "Error", 1);
 				}
 				
 			}
