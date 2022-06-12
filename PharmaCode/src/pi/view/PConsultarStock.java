@@ -46,6 +46,7 @@ public class PConsultarStock extends JPanel {
 		add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Filtros");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel_1.setBounds(19, 43, 46, 14);
 		add(lblNewLabel_1);
 		

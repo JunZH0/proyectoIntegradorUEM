@@ -40,7 +40,7 @@ public class PRegistrarProd extends JPanel {
 		
 		
 		JLabel lblRegistrarProductos = new JLabel("Registrar Productos");
-		lblRegistrarProductos.setBounds(99, 6, 210, 28);
+		lblRegistrarProductos.setBounds(220, 11, 210, 28);
 		lblRegistrarProductos.setFont(new Font("Tahoma", Font.BOLD, 20));
 		add(lblRegistrarProductos);
 		

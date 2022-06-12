@@ -474,7 +474,8 @@ public int registrarProd(Producto nuevoProd) {
 
 	}
 	
-	public Producto seleccionarUnProducto(String tipo1) {
+	public Producto seleccionarUnProducto(String prod) {
+		
 		Producto producto = null;
 		
 		
@@ -485,7 +486,7 @@ public int registrarProd(Producto nuevoProd) {
 		int stock;
 		double precio;
 		
-		String query = "SELECT " + DBContract.COL_NOM_PROD + ", " + DBContract.COL_TIPO_PROD + ", " + DBContract.COL_PRECIO_PROD + ", " + DBContract.COL_STOCK_PROD + " FROM " + DBContract.NOM_TAB_PROD;
+		String query = "SELECT * FROM " + DBContract.NOM_TAB_PROD + " WHERE " + DBContract.COL_NOM_PROD + " LIKE ?";
 		
 		Connection conexion = null;
 		PreparedStatement pstm = null;
@@ -494,10 +495,12 @@ public int registrarProd(Producto nuevoProd) {
 		try {
 			conexion = acceso.hacerConexion();
 			pstm = conexion.prepareStatement(query);
+			pstm.setString(1, prod + "%");
 			rslt = pstm.executeQuery();
 			
-			while(rslt.next()) {
+			if(rslt.next()) {
 				nombre = rslt.getString(DBContract.COL_NOM_PROD);
+				descripcion = rslt.getString(DBContract.COL_DESCR_PROD);
 				tipo = rslt.getString(DBContract.COL_TIPO_PROD);
 				stock = rslt.getInt(DBContract.COL_STOCK_PROD);
 				precio = rslt.getDouble(DBContract.COL_PRECIO_PROD);
@@ -528,13 +531,12 @@ public int registrarProd(Producto nuevoProd) {
 
 	}
 	
-	public String seleccionarProductoUnico(String nomProd) {
+	public String comprobarExistProd(String nomProd) {
 	
 		
-	
 		String nombre = "";
 		
-		String query = "SELECT * FROM " + DBContract.NOM_TAB_PROD + " WHERE " + DBContract.COL_NOM_PROD + "= ?";
+		String query = "SELECT * FROM " + DBContract.NOM_TAB_PROD + " WHERE " + DBContract.COL_NOM_PROD + " LIKE ?";
 		
 		Connection conexion = null;
 		PreparedStatement pstmt = null;
@@ -787,8 +789,8 @@ public int registrarProd(Producto nuevoProd) {
 		int res = 0;
 		
 		String query = "UPDATE " + DBContract.NOM_TAB_PROD  + " SET " + DBContract.COL_TIPO_PROD + "= ?, " 
-		+ DBContract.COL_DESCR_PROD + "= ? " + DBContract.COL_PRECIO_PROD + "= ? "  + DBContract.COL_STOCK_PROD + "= ? " + 
-				"WHERE " + DBContract.COL_NOM_PROD + "= ?";
+		+ DBContract.COL_DESCR_PROD + "= ? ," + DBContract.COL_PRECIO_PROD + "= ? ,"  + DBContract.COL_STOCK_PROD + "= ? " + 
+				" WHERE " + DBContract.COL_NOM_PROD + "= ?";
 					
 		Connection conexion = null;
 		PreparedStatement pstm = null;

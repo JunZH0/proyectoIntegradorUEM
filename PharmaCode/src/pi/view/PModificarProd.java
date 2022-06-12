@@ -43,7 +43,7 @@ public class PModificarProd extends JPanel {
 		setLayout(null);
 		
 		JLabel lblTitulo = new JLabel("Modificar Producto");
-		lblTitulo.setBounds(265, 26, 202, 28);
+		lblTitulo.setBounds(314, 26, 202, 28);
 		lblTitulo.setFont(new Font("Dialog", Font.BOLD, 20));
 		add(lblTitulo);
 		
@@ -181,13 +181,16 @@ public class PModificarProd extends JPanel {
 	public void comprobrarProducto() {
 		String nomProd = txtNombre.getText();
 		if (nomProd.isBlank()) {
-			mostrarError("El nombre no puedes estar en blanco");
+			mostrarError("El nombre no puede estar en blanco");
 		} else {
-			String prod = dPersis.seleccionarProductoUnico(nomProd);
-			
-				Producto producto = dPersis.seleccionarUnProducto(prod);
-				rellenarDatos(producto);
-			
+			String prodExist = dPersis.comprobarExistProd(nomProd);
+				if(prodExist.isEmpty()) {
+					mostrarError("El producto introducido no existe");
+				} else {
+					Producto producto = dPersis.seleccionarUnProducto(nomProd);
+					rellenarDatos(producto);
+				}
+				
 		}
 	}
 	
