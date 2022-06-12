@@ -45,9 +45,6 @@ public class GestorControl implements ActionListener{
 	PRegistrarProv pRegProv;
 	DBPersistencia dbPers;
 	
-	
-	
-	
 	public GestorControl(VInicio vInicio, VMenu vMenu, PConsultarStock pConStock, PModificarProd pModProd,
 			PRegistrarProd pRegProd, PRegistrarVenta pRegVenta, PConsultarEmple pConEmple, PModificarEmple pModEmple,
 			PRegistrarEmple pRegEmple, PConsultarProv pConProv, PModificarProv pModProv, PRegistrarProv pRegProv) {
@@ -65,9 +62,7 @@ public class GestorControl implements ActionListener{
 		this.pRegProv = pRegProv;
 		this.dbPers = new DBPersistencia();
 	}
-
-
-
+	
 	public void actionPerformed(ActionEvent ev) {
 		if (ev.getSource() instanceof JMenuItem) {
 			if (ev.getActionCommand().equals(VMenu.MNIM_SALIR)) {
@@ -81,7 +76,8 @@ public class GestorControl implements ActionListener{
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_REG_VENTA)) {
 				listarResultadosVenta();
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_CONS_EMPLE)) {
-				vMenu.cargarPanel(pConEmple);
+				listarResultadosEmple();
+				
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_MOD_EMPLE)) {
 				vMenu.cargarPanel(pModEmple);
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_CONS_PROV)) {
@@ -117,9 +113,17 @@ public class GestorControl implements ActionListener{
 				registrarVenta();
 			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_ACT_VENTAS)) {
 				actualizarVentas();
+			} else if (ev.getActionCommand().equals(PModificarEmple.BTN_MOD_EMPLE)) {
+				modificarEmple();
+			} else if (ev.getActionCommand().equals(PModificarEmple.BTN_CANCEL_EMPLE)) {
+				pModEmple.limpiarComponentes();
+				pModEmple.hacerVisibleMod(false);
+			} else if (ev.getActionCommand().equals(PModificarEmple.BTN_BUSC_EMPLE)) {
+				buscarEmpleMod();
+			} else if (ev.getActionCommand().equals(PRegistrarEmple.BTN_REG_EMPLE)) {
+				registrarEmple();
 			}
 		}
-			
 	}
 
 
@@ -193,8 +197,6 @@ public class GestorControl implements ActionListener{
 		}
 	}
 
-
-
 	private void buscarProvMod() {
 		String nomProv = pModProv.obtenerNombre();
 		if (nomProv.isBlank()) {
@@ -211,8 +213,22 @@ public class GestorControl implements ActionListener{
 		}
 	}
 
-
-
+	private void buscarEmpleMod() {
+		String nomEmple = pModEmple.obtenerNombre();
+		if (nomEmple.isBlank()) {
+			JOptionPane.showMessageDialog(pModEmple, "Debe introducir un nombre", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			int idEmple = dbPers.selecIdEmple(nomEmple);
+			if (idEmple <= 0) {
+				pModEmple.mostrarError("No se ha encontrado ningun dato de emple");
+			} else {
+				Empleado empleado = dbPers.selecionarUnEmpleado(nomEmple);
+				pModEmple.rellenarDatos(empleado);
+				pModEmple.hacerVisibleMod(true);
+			}
+		}
+	}
+	
 	private void modificarProv() {
 		Proveedor modProv = pModProv.comprobarDatosModProv();
 		if (modProv  == null) {
@@ -228,10 +244,23 @@ public class GestorControl implements ActionListener{
 			}
 		}
 	}
-
-
-
-
+	
+	private void modificarEmple() {
+		Empleado modEmple = pModEmple.comprobarDatosModEmple();
+		if (modEmple  == null) {
+			pModEmple.mostrarError("No han podido guardarse los cambios");
+		} else {
+			int resp = dbPers.modEmpleado(modEmple);
+			
+			if (resp == 1) {
+				JOptionPane.showMessageDialog(pModEmple, "Se ha modificado el restaurante con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+				pModEmple.limpiarComponentes();
+			} else {
+				pModEmple.mostrarError("No han podido guardarse los cambios");
+			}
+		}
+	}
+	
 	private void registrarProv() {
 		Proveedor nuevoProv = pRegProv.obtenerDatosProv();
 		if (nuevoProv != null) {
@@ -250,11 +279,25 @@ public class GestorControl implements ActionListener{
 			}
 		}
 	}
-
 	
-	
-	
-	
+	private void registrarEmple() {
+		Empleado nuevoEmple = pRegEmple.obtenerDatosEmple();
+		if (nuevoEmple != null) {
+			int idEmple = dbPers.selecIdEmple(nuevoEmple.getNombreEmple());
+			if (idEmple == 0) {
+				pRegEmple.mostrarError("Ese proveedor ya existe");
+			} else {
+				int resp = dbPers.registrarEmpleado(nuevoEmple);
+				
+				if (resp == 1) {
+					JOptionPane.showMessageDialog(pRegEmple, "Se ha registrado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
+					pRegEmple.limpiarComponentes();
+				} else {
+					pRegEmple.mostrarError("No se ha podido añadir el restaurante");
+				}
+			}
+		}
+	}
 	
 	private void eliminarProv() {
 		String nombreProv = pConProv.poveedorEliminar();
@@ -274,9 +317,27 @@ public class GestorControl implements ActionListener{
 			}
 		}
 	}
-
-
-
+	
+	private void eliminarEmple() {
+		String nombreEmple = pConEmple.empleadoEliminar();
+		if (nombreEmple == null) {
+			JOptionPane.showMessageDialog(pConEmple, "No se ha seleccionado ning�n restaurante", "Error selección", JOptionPane.ERROR_MESSAGE);
+		} else {
+			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el restaurante, �desea continuar?",
+														"Confirmar salida", JOptionPane.YES_NO_OPTION,
+														JOptionPane.INFORMATION_MESSAGE);
+			if (resp == JOptionPane.YES_OPTION) {
+				int res = dbPers.borrarEmple(nombreEmple);
+				listarResultadosEmple();
+				if (res==1) {
+					JOptionPane.showMessageDialog(pConProv, "Se ha eliminado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(pConProv, "No se ha podido eliminar el restaurante", "Error eliminación", JOptionPane.ERROR_MESSAGE);
+				}						
+			}
+		}
+	}
+	
 	private void listarResultadosProv() {
 		ArrayList<Proveedor> listaProv = new ArrayList<>();
 		listaProv = dbPers.seleccionarProveedores();
@@ -305,8 +366,13 @@ public class GestorControl implements ActionListener{
 		}
 		
 	}
-
-
+	
+	private void listarResultadosEmple() {
+		ArrayList<Empleado> listaEmpleados = new ArrayList<>();
+		listaEmpleados = dbPers.seleccionarEmpleados();
+		pConEmple.rellenarTabla(listaEmpleados);
+		vMenu.cargarPanel(pConEmple);
+	}
 
 	public void salirApp() {
 		int resp = JOptionPane.showConfirmDialog(vInicio, "Se va a cerrar la aplicación, ¿desea continuar?",
@@ -315,6 +381,5 @@ public class GestorControl implements ActionListener{
 			System.exit(0);
 		}
 	}
-	
 	
 }

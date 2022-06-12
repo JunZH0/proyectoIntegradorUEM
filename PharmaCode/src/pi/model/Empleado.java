@@ -1,15 +1,21 @@
 package pi.model;
 
 public class Empleado {
+	
 	private int idEmpleado;
 	private String nombreEmple;
 	private String apellidoEmple;
 	private String turnoEmple;
-	private int adminEmple;
+	private String adminEmple;
 	private String password;
 	
+	public Empleado(int idEmpleado, String nombreEmple, String apellidoEmple) {
+		this.idEmpleado = idEmpleado;
+		this.nombreEmple = nombreEmple;
+		this.apellidoEmple = apellidoEmple;
+	}
 	
-	public Empleado(int idEmpleado, String nombreEmple, String apellidoEmple, String turnoEmple, int adminEmple, String password) {
+	public Empleado(int idEmpleado, String nombreEmple, String apellidoEmple, String turnoEmple, String adminEmple, String password) {
 		this.idEmpleado = idEmpleado;
 		this.nombreEmple = nombreEmple;
 		this.apellidoEmple = apellidoEmple;
@@ -22,8 +28,8 @@ public class Empleado {
 		this.apellidoEmple = apellidoEmple;
 		this.password =  password;
 	}
-
-
+	
+	
 	public int getIdEmpleado() {
 		return idEmpleado;
 	}
@@ -44,7 +50,7 @@ public class Empleado {
 	}
 
 
-	public int getAdminEmple() {
+	public String getAdminEmple() {
 		return adminEmple;
 	}
 	
