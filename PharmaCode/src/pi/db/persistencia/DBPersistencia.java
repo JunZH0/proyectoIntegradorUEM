@@ -573,11 +573,12 @@ public class DBPersistencia {
 
 	}
 	
-	public void registrarProd(Producto nuevoProd) {
+	public int registrarProd(Producto nuevoProd) {
 		
-		String query = "INSERT INTO " + DBContract.NOM_TAB_PROD + " (" +  DBContract.COL_NOM_PROD + ", " + DBContract.COL_DESCR_PROD + ", " + DBContract.COL_TIPO_PROD + ", " + DBContract.COL_PRECIO_PROD + ") VALUES (?,?,?,?)";
-		
-
+		String query = "INSERT INTO " + DBContract.NOM_TAB_PROD + " (" 
+						+  DBContract.COL_NOM_PROD + ", " + DBContract.COL_DESCR_PROD 
+						+ ", " + DBContract.COL_TIPO_PROD + ", " 
+						+ DBContract.COL_PRECIO_PROD + ") VALUES (?,?,?,?)";
 		
 		Connection conexion = null;
 		PreparedStatement pstm = null;
@@ -587,16 +588,13 @@ public class DBPersistencia {
 			conexion = acceso.hacerConexion();
 			pstm = conexion.prepareStatement(query);
 			
-
-
 			pstm.setString(1, nuevoProd.getNombreProd());
 			pstm.setString(2, nuevoProd.getDescrProd());
 			pstm.setString(3, nuevoProd.getTipo());
 			pstm.setInt(4, (int) nuevoProd.getPrecioProd());
 			
 			res = pstm.executeUpdate();
-						
-
+			
 		} catch (ClassNotFoundException e) {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
@@ -611,9 +609,7 @@ public class DBPersistencia {
 				e.printStackTrace();
 			} 
 		}
-		
 		return res;
-		
 }
 
 	
