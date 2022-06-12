@@ -16,7 +16,7 @@ public class PModificarEmple extends JPanel {
 	
 	public static final String BTN_MOD_EMPLE = "Modificar empleado";
 	public static final String BTN_BUSC_EMPLE = "Buscar empleado";
-	public static final String BTN_CANCEL_EMPLE = "Cancelar modificación";
+	public static final String BTN_CANCEL_EMPLE = "Cancelar Modificación";
 	
 	private JTextField txtNombreEmple;
 	private JTextField txtIdEmple;
