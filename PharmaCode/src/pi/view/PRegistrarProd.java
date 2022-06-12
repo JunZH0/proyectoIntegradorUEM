@@ -132,7 +132,7 @@ public class PRegistrarProd extends JPanel {
 			}
 		
 		
-		
+		//return producto;
 		
 	}
 	

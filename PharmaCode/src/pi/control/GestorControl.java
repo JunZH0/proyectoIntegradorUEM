@@ -128,11 +128,11 @@ public class GestorControl implements ActionListener{
 				registrarVenta();
 			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_ACT_VENTAS)) {
 				actualizarVentas();
-
+<<<<<<< HEAD
 
 			} else if (ev.getActionCommand().equals(PRegistrarProd.BTN_LIMPIAR)) {
 				pRegProd.limpiarDatos();
-
+=======
 			} else if (ev.getActionCommand().equals(PModificarEmple.BTN_MOD_EMPLE)) {
 				modificarEmple();
 			} else if (ev.getActionCommand().equals(PModificarEmple.BTN_CANCEL_EMPLE)) {
@@ -142,22 +142,31 @@ public class GestorControl implements ActionListener{
 				buscarEmpleMod();
 			} else if (ev.getActionCommand().equals(PRegistrarEmple.BTN_REG_EMPLE)) {
 				registrarEmple();
+>>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
 			}
 		}
 	}
 
-
+<<<<<<< HEAD
 
 	
 	
 
-
+=======
+>>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
 	private void actualizarVentas() {
 		ArrayList<Ventas> listaVentas = new ArrayList<Ventas>();
 		listaVentas = dbPers.seleccionarVentas();
 		pRegVenta.rellenarTabla(listaVentas);
 	}
+<<<<<<< HEAD
+	
+	
 
+	
+=======
+>>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
+	
 	private void listarResultadosVenta() {
 		actualizarVentas();
 		vMenu.cargarPanel(pRegVenta);
@@ -181,7 +190,14 @@ public class GestorControl implements ActionListener{
 			}
 		} 
 	}
+<<<<<<< HEAD
 
+
+
+
+=======
+	
+>>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
 	private void intentoAcceder() {
 		boolean noAccede = true;
 		Empleado empleado = vInicio.obtenerUsuario();
@@ -252,11 +268,11 @@ public class GestorControl implements ActionListener{
 			int resp = dbPers.modProveedor(modProv);
 			
 			if (resp == 1) {
-
+<<<<<<< HEAD
 				JOptionPane.showMessageDialog(pModProv, "Se ha modificado el proveedor con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-
+=======
 				JOptionPane.showMessageDialog(pModProv, "Se ha modificado el proveedor con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
-
+>>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
 				pModProv.limpiarComponentes();
 			} else {
 				pModProv.mostrarError("No han podido guardarse los cambios");
@@ -264,7 +280,7 @@ public class GestorControl implements ActionListener{
 		}
 	}
 	
-
+<<<<<<< HEAD
 	
 	private void modificarProd() {
 		Producto modProd = pModProd.comprobarDatosModProd();
@@ -284,7 +300,7 @@ public class GestorControl implements ActionListener{
 
 
 
-
+=======
 	private void modificarEmple() {
 		Empleado modEmple = pModEmple.comprobarDatosModEmple();
 		if (modEmple  == null) {
@@ -301,7 +317,7 @@ public class GestorControl implements ActionListener{
 		}
 	}
 	
-
+>>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
 	private void registrarProv() {
 		Proveedor nuevoProv = pRegProv.obtenerDatosProv();
 		if (nuevoProv != null) {
@@ -343,11 +359,11 @@ public class GestorControl implements ActionListener{
 	private void eliminarProv() {
 		String nombreProv = pConProv.poveedorEliminar();
 		if (nombreProv == null) {
-
+<<<<<<< HEAD
 			JOptionPane.showMessageDialog(pConProv, "No se ha seleccionado ningun proveedor", "Error selección", JOptionPane.ERROR_MESSAGE);
-
+=======
 			JOptionPane.showMessageDialog(pConProv, "No se ha seleccionado ningún proveedor", "Error selección", JOptionPane.ERROR_MESSAGE);
-
+>>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
 		} else {
 			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el proveedor, ¿desea continuar?",
 					"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -363,7 +379,7 @@ public class GestorControl implements ActionListener{
 		}
 	}
 	
-
+<<<<<<< HEAD
 	private void eliminarProducto() {
 		String nombreProd = pConStock.productoEliminar();
 		if (nombreProd == null) {
@@ -378,11 +394,7 @@ public class GestorControl implements ActionListener{
 					JOptionPane.showMessageDialog(pConStock, "Se ha eliminado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(pConStock, "No se ha podido eliminar el producto", "Error eliminación", JOptionPane.ERROR_MESSAGE);
-				}
-			}
-		}
-	}
-
+=======
 	private void eliminarEmple() {
 		String nombreEmple = pConEmple.empleadoEliminar();
 		if (nombreEmple == null) {
@@ -398,13 +410,13 @@ public class GestorControl implements ActionListener{
 					JOptionPane.showMessageDialog(pConProv, "Se ha eliminado el empleado", "Información", JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(pConProv, "No se ha podido eliminar el empleado", "Error eliminación", JOptionPane.ERROR_MESSAGE);
-
+>>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
 				}						
 			}
 		}
 	}
 	
-
+<<<<<<< HEAD
 	private void listarResultadosProd() {
 		ArrayList<Producto> listaProd = new ArrayList<>();
 		listaProd = dbPers.seleccionarProducto();
@@ -414,7 +426,8 @@ public class GestorControl implements ActionListener{
 
 
 
-
+=======
+>>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
 	private void listarResultadosProv() {
 		ArrayList<Proveedor> listaProv = new ArrayList<>();
 		listaProv = dbPers.seleccionarProveedores();
@@ -422,12 +435,12 @@ public class GestorControl implements ActionListener{
 		vMenu.cargarPanel(pConProv);
 	}
 	
-
+<<<<<<< HEAD
 	
 
 
-
-	/*private void registrarProd() {
+=======
+	private void registrarProd() {
 		Producto nuevoProd = pRegProd.obtenerDatosProd();
 		
 		if(nuevoProd != null) {
@@ -447,7 +460,7 @@ public class GestorControl implements ActionListener{
 			}
 		}
 		
-	}*/
+	}
 	
 	private void listarResultadosEmple() {
 		ArrayList<Empleado> listaEmpleados = new ArrayList<>();
@@ -455,7 +468,7 @@ public class GestorControl implements ActionListener{
 		pConEmple.rellenarTabla(listaEmpleados);
 		vMenu.cargarPanel(pConEmple);
 	}
-
+>>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
 
 	public void salirApp() {
 		int resp = JOptionPane.showConfirmDialog(vInicio, "Se va a cerrar la aplicacion, desea continuar?",
