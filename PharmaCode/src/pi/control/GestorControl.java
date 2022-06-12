@@ -12,6 +12,7 @@ import pi.db.persistencia.DBPersistencia;
 import pi.model.Empleado;
 import pi.model.Producto;
 import pi.model.Proveedor;
+import pi.model.Ventas;
 import pi.view.PConsultarEmple;
 import pi.view.PConsultarProv;
 import pi.view.PConsultarStock;
@@ -78,7 +79,7 @@ public class GestorControl implements ActionListener{
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_MOD_PROD)) {
 				vMenu.cargarPanel(pModProd);
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_REG_VENTA)) {
-				vMenu.cargarPanel(pRegVenta);
+				listarResultadosVenta();
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_CONS_EMPLE)) {
 				vMenu.cargarPanel(pConEmple);
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_MOD_EMPLE)) {
@@ -89,6 +90,7 @@ public class GestorControl implements ActionListener{
 				vMenu.cargarPanel(pRegProv);
 			}  else if (ev.getActionCommand().equals(VMenu.MNIM_MOD_PROV)) {
 				vMenu.cargarPanel(pModProv);
+				pModProv.hacerVisibleMod(false);
 			}
 			
 		} else if (ev.getSource() instanceof JButton) {
@@ -106,17 +108,71 @@ public class GestorControl implements ActionListener{
 			} else if (ev.getActionCommand().equals(VInicio.BTN_ACCEDER)) {
 				intentoAcceder();
 			} else if (ev.getActionCommand().equals(PRegistrarProd.BTN_GUARDAR)) {
+<<<<<<< HEAD
 				registrarProd();
 			} else if (ev.getActionCommand().equals(PConsultarStock.BTN_CONSULTAR)) {
 				pConStock.obtenerDatos(dbPers);
 			} else if (ev.getActionCommand().equals(PModificarProd.BTN_MODIFICAR)) {
 				modificarProd();
+=======
+				registrarProd();;
+			} else if (ev.getActionCommand().equals(PConsultarStock.BTN_CONSULTAR)) {
+				pConStock.obtenerDatos(dbPers);
+			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_LIMPIAR_VENTA)) {
+				pRegVenta.limpiarCamposVenta();
+			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_REG_VENTA)) {
+				registrarVenta();
+			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_ACT_VENTAS)) {
+				actualizarVentas();
+>>>>>>> main
 			}
 		}
 			
 	}
+
+
 	
 	
+<<<<<<< HEAD
+=======
+	
+
+	private void actualizarVentas() {
+		ArrayList<Ventas> listaVentas = new ArrayList<Ventas>();
+		listaVentas = dbPers.seleccionarVentas();
+		pRegVenta.rellenarTabla(listaVentas);
+	}
+
+	
+	
+	private void listarResultadosVenta() {
+		actualizarVentas();
+		vMenu.cargarPanel(pRegVenta);
+	}
+
+
+
+	private void registrarVenta() {
+		Ventas venta = pRegVenta.obtenerDatosVenta();
+		if (venta != null) {
+			int idEmple = dbPers.selectIdVenta(venta.getIdVenta());
+			if (idEmple != 0) {
+				pRegVenta.mostrarError("Ya existe una venta con ese ID");
+			} else {
+				int resp = dbPers.registrarVenta(venta);
+				
+				if (resp == 1) {
+					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado la venta", "Información", JOptionPane.INFORMATION_MESSAGE);
+					pRegVenta.limpiarCamposVenta();
+				} else {
+					pRegProv.mostrarError("No se ha podido registrar la venta");
+				}
+			}
+		} 
+	}
+
+
+>>>>>>> main
 
 	private void intentoAcceder() {
 		boolean noAccede = true;
@@ -131,7 +187,7 @@ public class GestorControl implements ActionListener{
 				if (contIntentos < TOTAL_INTENTOS) {
 					error += " Te equedan " + (TOTAL_INTENTOS - contIntentos);
 				}
-				vInicio.mostrarError("Error usuario");
+				vInicio.mostrarError(error);
 			} else if (!pwd.equals(empleado.getPassword())) {
 				vInicio.mostrarError("La contraseña introducida no es correcta");
 			} else {
@@ -191,7 +247,7 @@ public class GestorControl implements ActionListener{
 		Proveedor nuevoProv = pRegProv.obtenerDatosProv();
 		if (nuevoProv != null) {
 			int idProv = dbPers.selecIdProv(nuevoProv.getNombreProv());
-			if (idProv == 0) {
+			if (idProv != 0) {
 				pRegProv.mostrarError("Ese proveedor ya existe");
 			} else {
 				int resp = dbPers.registrarProv(nuevoProv);
@@ -200,7 +256,7 @@ public class GestorControl implements ActionListener{
 					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado el proveedor", "Información", JOptionPane.INFORMATION_MESSAGE);
 					pRegProv.limpiarComponentes();
 				} else {
-					pRegProv.mostrarError("No se ha podido añadir el restaurante");
+					pRegProv.mostrarError("No se ha podido añadir el proveedor");
 				}
 			}
 		}
@@ -216,7 +272,7 @@ public class GestorControl implements ActionListener{
 		if (nombreProv == null) {
 			JOptionPane.showMessageDialog(pConProv, "No se ha seleccionado ning�n restaurante", "Error selección", JOptionPane.ERROR_MESSAGE);
 		} else {
-			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el restaurante, �desea continuar?",
+			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el restaurante, ¿desea continuar?",
 					"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 			if (resp == JOptionPane.YES_OPTION) {
 				int res = dbPers.borrarProv(nombreProv);
@@ -239,20 +295,30 @@ public class GestorControl implements ActionListener{
 		vMenu.cargarPanel(pConProv);
 	}
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> main
 	private void registrarProd() {
 		Producto nuevoProd = pRegProd.obtenerDatosProd();
 		
 		if(nuevoProd != null) {
 			if(nuevoProd.equals(nuevoProd.getNombreProd())) {
 				pRegProd.mostrarMensaje("El producto ya existe", "Error", 1);
+<<<<<<< HEAD
 				pRegProd.mostrarMensaje("No se ha registrado el producto", "Error", 1);
+=======
+>>>>>>> main
 			} else {
 				
 				int resp = dbPers.registrarProd(nuevoProd);;
 				
 				if(resp == 1) {
+<<<<<<< HEAD
 					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+=======
+					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+>>>>>>> main
 					pRegProd.limpiarDatos();
 				} else {
 					pRegProd.mostrarMensaje("No se ha registrado el producto", "Error", 1);

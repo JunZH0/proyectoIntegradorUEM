@@ -19,9 +19,9 @@ public class PConsultarProv extends JPanel {
 
 	public static final String BTN_ELIMINAR_PROV = "Eliminar";
 
-	private JLabel lblListadoRest;
-	private JTable tblRestaurantes;
-	private JScrollPane scrpTablaRest;
+	private JLabel lblListadoProv;
+	private JTable tblProveedores;
+	private JScrollPane scrpTablaProv;
 	private DefaultTableModel dtmTablaConsulta;
 	private JButton btnEliminar;
 	
@@ -43,17 +43,17 @@ public class PConsultarProv extends JPanel {
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblTitulo);
 		
-		lblListadoRest = new JLabel("Listado de proveedores:");
-		lblListadoRest.setBounds(97, 160, 147, 14);
-		add(lblListadoRest);
+		lblListadoProv = new JLabel("Listado de proveedores:");
+		lblListadoProv.setBounds(97, 160, 147, 14);
+		add(lblListadoProv);
 		
 		
-		scrpTablaRest = new JScrollPane();
-		scrpTablaRest.setBounds(62, 213, 681, 286);
-		add(scrpTablaRest);
+		scrpTablaProv = new JScrollPane();
+		scrpTablaProv.setBounds(62, 213, 681, 286);
+		add(scrpTablaProv);
 		
-		tblRestaurantes = new JTable();
-		scrpTablaRest.setViewportView(tblRestaurantes);
+		tblProveedores = new JTable();
+		scrpTablaProv.setViewportView(tblProveedores);
 		
 		btnEliminar = new JButton(BTN_ELIMINAR_PROV);
 		btnEliminar.setBounds(628, 156, 115, 23);
@@ -62,11 +62,7 @@ public class PConsultarProv extends JPanel {
 		configurarTabla();
 	}
 
-	
-	public void hacerTabVisi(boolean b) {
-		scrpTablaRest.setVisible(b);
-		lblListadoRest.setVisible(b);
-	}
+
 	
 	
 	
@@ -78,7 +74,7 @@ public class PConsultarProv extends JPanel {
 			}
 		};
 		
-		tblRestaurantes.setModel(dtmTablaConsulta);
+		tblProveedores.setModel(dtmTablaConsulta);
 		
 		dtmTablaConsulta.addColumn(DBContract.COL_ID_PROV);
 		dtmTablaConsulta.addColumn(DBContract.COL_NOM_PROV);
@@ -86,12 +82,11 @@ public class PConsultarProv extends JPanel {
 		dtmTablaConsulta.addColumn(DBContract.COL_TELF_PROV);
 		
 		
-		tblRestaurantes.getColumn(DBContract.COL_ID_PROV).setPreferredWidth(40);
-		tblRestaurantes.getColumn(DBContract.COL_NOM_PROV).setPreferredWidth(40);
-		tblRestaurantes.getColumn(DBContract.COL_CIF_PROV).setPreferredWidth(20);
-		tblRestaurantes.getColumn(DBContract.COL_TELF_PROV).setPreferredWidth(40);
+		tblProveedores.getColumn(DBContract.COL_ID_PROV).setPreferredWidth(40);
+		tblProveedores.getColumn(DBContract.COL_NOM_PROV).setPreferredWidth(40);
+		tblProveedores.getColumn(DBContract.COL_CIF_PROV).setPreferredWidth(20);
+		tblProveedores.getColumn(DBContract.COL_TELF_PROV).setPreferredWidth(40);
 
-		
 	}
 
 
@@ -125,10 +120,10 @@ public class PConsultarProv extends JPanel {
 	public String poveedorEliminar() {
 		String nombreProv = null;
 		
-		if (tblRestaurantes.getSelectedRow() >= 0) {
+		if (tblProveedores.getSelectedRow() >= 0) {
 			int columna = 1;
-			int fila = tblRestaurantes.getSelectedRow();
-			nombreProv = tblRestaurantes.getModel().getValueAt(fila, columna).toString();
+			int fila = tblProveedores.getSelectedRow();
+			nombreProv = tblProveedores.getModel().getValueAt(fila, columna).toString();
 		}
 		return nombreProv;
 	}

@@ -51,7 +51,8 @@ public class PRegistrarProd extends JPanel {
 		lblCategoria.setBounds(6, 119, 28, 17);
 		add(lblCategoria);
 		
-		cmbTipo = new JComboBox();
+		cmbTipo = new JComboBox<String>();
+		cmbTipo.addItem("Todo");
 		cmbTipo.setBounds(99, 114, 210, 26);
 		add(cmbTipo);
 		
@@ -60,7 +61,7 @@ public class PRegistrarProd extends JPanel {
 		add(lblPrecio);
 		
 		spnPrecio = new JSpinner();
-		spnPrecio.setBounds(99, 169, 28, 22);
+		spnPrecio.setBounds(99, 169, 51, 22);
 		add(spnPrecio);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion");
@@ -111,7 +112,7 @@ public class PRegistrarProd extends JPanel {
 	}
 	
 	
-	public void asignarTipo(GestorControl c) {
+	public void asignarTipo() {
 		
 		DBPersistencia dPersis = new DBPersistencia();
 		DefaultComboBoxModel<String> modelo = (DefaultComboBoxModel<String>) cmbTipo.getModel();

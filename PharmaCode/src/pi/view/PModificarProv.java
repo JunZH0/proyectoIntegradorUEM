@@ -10,7 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import pi.control.GestorControl;
-import pi.model.Producto;
 import pi.model.Proveedor;
 
 public class PModificarProv extends JPanel {
@@ -18,12 +17,12 @@ public class PModificarProv extends JPanel {
 	
 	public static final String BTN_MOD_PROV = "Modificar proveedor";
 	public static final String BTN_BUSC_PROV = "Buscar proveedor";
-	public static final String BTN_CANCEL_PROV = "Cancelar modificaciï¿½n";
+	public static final String BTN_CANCEL_PROV = "Cancelar modificación";
 	
 	private JTextField txtNombre;
 	private JTextField txtCif;
 	private JTextField txtTelefono;
-	JButton btnModificar;
+	private JButton btnModificar;
 	private JButton btnBuscar;
 	private JButton btnCancelar;
 	
@@ -67,7 +66,7 @@ public class PModificarProv extends JPanel {
 		add(txtCif);
 		txtCif.setColumns(10);
 		
-		JLabel lblTelefono = new JLabel("Telï¿½fono:");
+		JLabel lblTelefono = new JLabel("Teléfono:");
 		lblTelefono.setBounds(106, 341, 83, 14);
 		add(lblTelefono);
 		
@@ -79,16 +78,16 @@ public class PModificarProv extends JPanel {
 		
 		btnModificar = new JButton(BTN_MOD_PROV);
 		btnModificar.setEnabled(false);
-		btnModificar.setBounds(39, 498, 178, 23);
+		btnModificar.setBounds(67, 437, 178, 23);
 		add(btnModificar);
 		
 		btnBuscar = new JButton(BTN_BUSC_PROV);
-		btnBuscar.setBounds(307, 498, 178, 23);
+		btnBuscar.setBounds(311, 437, 178, 23);
 		add(btnBuscar);
 		
 		btnCancelar = new JButton(BTN_CANCEL_PROV);
 		btnCancelar.setEnabled(false);
-		btnCancelar.setBounds(569, 498, 178, 23);
+		btnCancelar.setBounds(572, 437, 178, 23);
 		add(btnCancelar);
 		
 	}
@@ -115,15 +114,15 @@ public class PModificarProv extends JPanel {
 		
 		String nombre = txtNombre.getText();
 		if (nombre.isBlank()) {
-			mostrarError("El nombre no puede estar vacï¿½o");
+			mostrarError("El nombre no puede estar vacío");
 		} else {
 			String cif = txtCif.getText();
 			if (cif.isBlank()) {
-				mostrarError("El CIF no puede estar vacï¿½o");
+				mostrarError("El CIF no puede estar vacío");
 			} else {
 				String telefono = txtTelefono.getText();
 				if (telefono.isBlank()) {
-					mostrarError("El telï¿½fono no puede estar vacï¿½o");
+					mostrarError("El teléfono no puede estar vacío");
 				} else {
 					modProv = new Proveedor(0, nombre, cif, telefono);
 				}
@@ -135,9 +134,9 @@ public class PModificarProv extends JPanel {
 
 
 	public void hacerVisibleMod(boolean bandera) {
-		btnBuscar.setVisible(!bandera);
-		btnModificar.setVisible(bandera);
-		btnCancelar.setVisible(bandera);
+		btnBuscar.setEnabled(!bandera);
+		btnModificar.setEnabled(bandera);
+		btnCancelar.setEnabled(bandera);
 		txtCif.setEnabled(bandera);
 		txtTelefono.setEnabled(bandera);
 		txtNombre.setEnabled(!bandera);
@@ -165,6 +164,10 @@ public class PModificarProv extends JPanel {
 		
 	}
 	
-	
+	public void limpiarComponentes() {
+		txtNombre.setText("");
+		txtCif.setText("");
+		txtTelefono.setText("");
+	} 
 }
 

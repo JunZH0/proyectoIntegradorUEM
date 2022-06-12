@@ -2,14 +2,14 @@ package pi.model;
 
 public class Ventas {
 	private int idVenta;
-	private Empleado empleado;
+	private int idEmple;
 	private String horaVenta;
 	private String fechaVenta;
 	
 	
-	public Ventas(int idVenta, Empleado empleado, String horaVenta, String fechaVenta) {
+	public Ventas(int idVenta, int idEmple, String horaVenta, String fechaVenta) {
 		this.idVenta = idVenta;
-		this.empleado = empleado;
+		this.idEmple = idEmple;
 		this.horaVenta = horaVenta;
 		this.fechaVenta = fechaVenta;
 	}
@@ -20,8 +20,8 @@ public class Ventas {
 	}
 
 
-	public Empleado getEmpleado() {
-		return empleado;
+	public int getEmpleado() {
+		return idEmple;
 	}
 
 
