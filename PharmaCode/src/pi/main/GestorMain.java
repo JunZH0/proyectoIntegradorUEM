@@ -44,6 +44,9 @@ public class GestorMain {
 				pModProv.setControlador(controlador);
 				pRegProv.setControlador(controlador);
 				
+				pModEmple.setControlador(controlador);
+				pConEmple.setControlador(controlador);
+				pRegEmple.setControlador(controlador);
 				
 				vInicio.hacerVisible();
 			}

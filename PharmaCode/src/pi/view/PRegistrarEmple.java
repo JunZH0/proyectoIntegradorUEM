@@ -17,7 +17,7 @@ import javax.swing.JComboBox;
 
 public class PRegistrarEmple extends JPanel {
 	
-	public static final String BTN_REG_PROV = "Registrar proveedor";
+	public static final String BTN_REG_EMPLE = "Registrar empleado";
 	
 	private JTextField txtNombreEmpleReg;
 	private JTextField txtIdEmpleReg;
@@ -78,7 +78,7 @@ public class PRegistrarEmple extends JPanel {
 		add(txtApellidoEmpleReg);
 		txtApellidoEmpleReg.setColumns(10);
 		
-		btnRegistrar = new JButton("Registrar empleado");
+		btnRegistrar = new JButton(BTN_REG_EMPLE);
 		btnRegistrar.setBounds(340, 496, 144, 23);
 		add(btnRegistrar);
 		

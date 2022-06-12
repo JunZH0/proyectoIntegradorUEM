@@ -123,7 +123,6 @@ public class PConsultarEmple extends JPanel {
 		
 	}
 	
-	
 }
 
 
