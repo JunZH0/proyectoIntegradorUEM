@@ -62,7 +62,7 @@ public class PModificarEmple extends JPanel {
 		
 		txtIdEmple = new JTextField();
 		txtIdEmple.setEnabled(false);
-		txtIdEmple.setBounds(213, 266, 86, 20);
+		txtIdEmple.setBounds(213, 266, 129, 20);
 		add(txtIdEmple);
 		txtIdEmple.setColumns(10);
 		
@@ -72,22 +72,22 @@ public class PModificarEmple extends JPanel {
 		
 		txtApellidoEmple = new JTextField();
 		txtApellidoEmple.setEnabled(false);
-		txtApellidoEmple.setBounds(213, 226, 114, 20);
+		txtApellidoEmple.setBounds(213, 226, 129, 20);
 		add(txtApellidoEmple);
 		txtApellidoEmple.setColumns(10);
 		
 		btnModificar = new JButton(BTN_MOD_EMPLE);
 		btnModificar.setEnabled(false);
-		btnModificar.setBounds(39, 498, 178, 23);
+		btnModificar.setBounds(39, 366, 178, 23);
 		add(btnModificar);
 		
 		btnBuscar = new JButton(BTN_BUSC_EMPLE);
-		btnBuscar.setBounds(307, 498, 178, 23);
+		btnBuscar.setBounds(305, 366, 178, 23);
 		add(btnBuscar);
 		
 		btnCancelar = new JButton(BTN_CANCEL_EMPLE);
 		btnCancelar.setEnabled(false);
-		btnCancelar.setBounds(569, 498, 178, 23);
+		btnCancelar.setBounds(566, 366, 178, 23);
 		add(btnCancelar);
 		
 	}
@@ -145,9 +145,9 @@ public class PModificarEmple extends JPanel {
 		
 	public void hacerVisibleMod(boolean bandera) {
 		
-		btnBuscar.setVisible(!bandera);
-		btnModificar.setVisible(bandera);
-		btnCancelar.setVisible(bandera);
+		btnBuscar.setEnabled(!bandera);
+		btnModificar.setEnabled(bandera);
+		btnCancelar.setEnabled(bandera);
 		txtIdEmple.setEnabled(bandera);
 		txtApellidoEmple.setEnabled(bandera);
 		txtNombreEmple.setEnabled(!bandera);
@@ -156,8 +156,8 @@ public class PModificarEmple extends JPanel {
 	
 	public String obtenerNombre() {
 		
-		String nombreProv = txtNombreEmple.getText();
-		return nombreProv;
+		String nombreEmple = txtNombreEmple.getText();
+		return nombreEmple;
 		
 	}
 	

@@ -77,9 +77,10 @@ public class GestorControl implements ActionListener{
 				listarResultadosVenta();
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_CONS_EMPLE)) {
 				listarResultadosEmple();
-				
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_MOD_EMPLE)) {
 				vMenu.cargarPanel(pModEmple);
+			} else if (ev.getActionCommand().equals(VMenu.MNIM_REG_EMPLE)) {
+				vMenu.cargarPanel(pRegEmple);
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_CONS_PROV)) {
 				listarResultadosProv();
 			} else if (ev.getActionCommand().equals(VMenu.MNIM_REG_PROV)) {
@@ -94,6 +95,8 @@ public class GestorControl implements ActionListener{
                 registrarProv();
 	        } else if (ev.getActionCommand().equals(PConsultarProv.BTN_ELIMINAR_PROV)) {
                 eliminarProv();
+	        }else if (ev.getActionCommand().equals(PConsultarEmple.BTN_ELIMINAR_EMPLE)) {
+                eliminarEmple();
             } else if (ev.getActionCommand().equals(PModificarProv.BTN_BUSC_PROV)) {
 				buscarProvMod();
 			} else if (ev.getActionCommand().equals(PModificarProv.BTN_MOD_PROV)) {
@@ -126,26 +129,17 @@ public class GestorControl implements ActionListener{
 		}
 	}
 
-
-	
-	
-	
-
 	private void actualizarVentas() {
 		ArrayList<Ventas> listaVentas = new ArrayList<Ventas>();
 		listaVentas = dbPers.seleccionarVentas();
 		pRegVenta.rellenarTabla(listaVentas);
 	}
-
-	
 	
 	private void listarResultadosVenta() {
 		actualizarVentas();
 		vMenu.cargarPanel(pRegVenta);
 	}
-
-
-
+	
 	private void registrarVenta() {
 		Ventas venta = pRegVenta.obtenerDatosVenta();
 		if (venta != null) {
@@ -164,9 +158,7 @@ public class GestorControl implements ActionListener{
 			}
 		} 
 	}
-
-
-
+	
 	private void intentoAcceder() {
 		boolean noAccede = true;
 		Empleado empleado = vInicio.obtenerUsuario();
@@ -284,16 +276,16 @@ public class GestorControl implements ActionListener{
 		Empleado nuevoEmple = pRegEmple.obtenerDatosEmple();
 		if (nuevoEmple != null) {
 			int idEmple = dbPers.selecIdEmple(nuevoEmple.getNombreEmple());
-			if (idEmple == 0) {
+			if (idEmple != 0) {
 				pRegEmple.mostrarError("Ese proveedor ya existe");
 			} else {
 				int resp = dbPers.registrarEmpleado(nuevoEmple);
 				
 				if (resp == 1) {
-					JOptionPane.showMessageDialog(pRegEmple, "Se ha registrado el empleado", "Información", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pRegEmple, "Se ha registrado el empleado", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 					pRegEmple.limpiarComponentes();
 				} else {
-					pRegEmple.mostrarError("No se ha podido añadir el restaurante");
+					pRegEmple.mostrarError("No se ha podido aniadir el empleado");
 				}
 			}
 		}
@@ -321,7 +313,7 @@ public class GestorControl implements ActionListener{
 	private void eliminarEmple() {
 		String nombreEmple = pConEmple.empleadoEliminar();
 		if (nombreEmple == null) {
-			JOptionPane.showMessageDialog(pConEmple, "No se ha seleccionado ningún empleado", "Error selección", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(pConEmple, "No se ha seleccionado ningun usuario", "Error seleccion", JOptionPane.ERROR_MESSAGE);
 		} else {
 			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el empleado, ¿desea continuar?",
 														"Confirmar salida", JOptionPane.YES_NO_OPTION,
@@ -375,7 +367,7 @@ public class GestorControl implements ActionListener{
 	}
 
 	public void salirApp() {
-		int resp = JOptionPane.showConfirmDialog(vInicio, "Se va a cerrar la aplicación, ¿desea continuar?",
+		int resp = JOptionPane.showConfirmDialog(vInicio, "Se va a cerrar la aplicacion, desea continuar?",
 				"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		if (resp == JOptionPane.YES_OPTION) {
 			System.exit(0);

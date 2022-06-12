@@ -17,7 +17,7 @@ import pi.model.Empleado;
 
 public class PConsultarEmple extends JPanel {
 
-	public static final String BTN_ELIMINAR_PROV = "Eliminar";
+	public static final String BTN_ELIMINAR_EMPLE = "Eliminar empleado";
 
 	private JLabel lblListadoEmple;
 	private JTable tblEmpleados;
@@ -42,7 +42,7 @@ public class PConsultarEmple extends JPanel {
 		add(lblTitulo);
 		
 		lblListadoEmple = new JLabel("Listado de Empleados:");
-		lblListadoEmple.setBounds(97, 160, 147, 14);
+		lblListadoEmple.setBounds(97, 160, 177, 14);
 		add(lblListadoEmple);
 		
 		scrpTablaEmple = new JScrollPane();
@@ -52,8 +52,8 @@ public class PConsultarEmple extends JPanel {
 		tblEmpleados = new JTable();
 		scrpTablaEmple.setViewportView(tblEmpleados);
 		
-		btnEliminar = new JButton(BTN_ELIMINAR_PROV);
-		btnEliminar.setBounds(628, 156, 115, 23);
+		btnEliminar = new JButton(BTN_ELIMINAR_EMPLE);
+		btnEliminar.setBounds(572, 156, 171, 23);
 		add(btnEliminar);
 		
 		configurarTabla();
@@ -72,17 +72,19 @@ public class PConsultarEmple extends JPanel {
 			}
 		};
 				
-		dtmTablaConsulta.addColumn(DBContract.COL_ID_PROV);
-		dtmTablaConsulta.addColumn(DBContract.COL_NOM_PROV);
-		dtmTablaConsulta.addColumn(DBContract.COL_CIF_PROV);
-		dtmTablaConsulta.addColumn(DBContract.COL_TELF_PROV);
+		dtmTablaConsulta.addColumn(DBContract.COL_ID_EMP);
+		dtmTablaConsulta.addColumn(DBContract.COL_NOM_EMP);
+		dtmTablaConsulta.addColumn(DBContract.COL_APE_EMP);
+		dtmTablaConsulta.addColumn(DBContract.COL_TURNO_EMP);
+		dtmTablaConsulta.addColumn(DBContract.COL_ES_ADM_EMP);
 		
 		tblEmpleados.setModel(dtmTablaConsulta);
 		
-		tblEmpleados.getColumn(DBContract.COL_ID_PROV).setPreferredWidth(40);
-		tblEmpleados.getColumn(DBContract.COL_NOM_PROV).setPreferredWidth(40);
-		tblEmpleados.getColumn(DBContract.COL_CIF_PROV).setPreferredWidth(20);
-		tblEmpleados.getColumn(DBContract.COL_TELF_PROV).setPreferredWidth(40);
+		tblEmpleados.getColumn(DBContract.COL_ID_EMP).setPreferredWidth(40);
+		tblEmpleados.getColumn(DBContract.COL_NOM_EMP).setPreferredWidth(40);
+		tblEmpleados.getColumn(DBContract.COL_APE_EMP).setPreferredWidth(20);
+		tblEmpleados.getColumn(DBContract.COL_TURNO_EMP).setPreferredWidth(40);
+		tblEmpleados.getColumn(DBContract.COL_ES_ADM_EMP).setPreferredWidth(20);
 		
 	}
 	

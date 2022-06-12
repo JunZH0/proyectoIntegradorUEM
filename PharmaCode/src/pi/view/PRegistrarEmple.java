@@ -14,6 +14,7 @@ import pi.model.Empleado;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class PRegistrarEmple extends JPanel {
 	
@@ -26,9 +27,8 @@ public class PRegistrarEmple extends JPanel {
 	private JButton btnRegistrar;
 	private JTextField txtPWDEmpleReg;
 	
-	private JComboBox cmbAdminEmpleReg;
-	private JComboBox cmbTurnoEmpleReg;
-	
+	private JComboBox<String> cmbAdminEmpleReg;
+	private JComboBox<String> cmbTurnoEmpleReg;
 	
 	public PRegistrarEmple() {
 		
@@ -65,7 +65,7 @@ public class PRegistrarEmple extends JPanel {
 		add(lblIdEmpleReg);
 		
 		txtIdEmpleReg = new JTextField();
-		txtIdEmpleReg.setBounds(172, 159, 86, 20);
+		txtIdEmpleReg.setBounds(172, 159, 129, 20);
 		add(txtIdEmpleReg);
 		txtIdEmpleReg.setColumns(10);
 		
@@ -79,23 +79,25 @@ public class PRegistrarEmple extends JPanel {
 		txtApellidoEmpleReg.setColumns(10);
 		
 		btnRegistrar = new JButton(BTN_REG_EMPLE);
-		btnRegistrar.setBounds(340, 496, 144, 23);
+		btnRegistrar.setBounds(316, 309, 170, 23);
 		add(btnRegistrar);
 		
 		JLabel lblTurnoEmpleReg = new JLabel("Turno:");
 		lblTurnoEmpleReg.setBounds(450, 162, 49, 14);
 		add(lblTurnoEmpleReg);
 		
-		cmbTurnoEmpleReg = new JComboBox();
-		cmbTurnoEmpleReg.setBounds(560, 158, 30, 22);
+		cmbTurnoEmpleReg = new JComboBox<String>();
+		cmbTurnoEmpleReg.setModel(new DefaultComboBoxModel(new String[] {"MAÑANA", "TARDE", "NOCHE"}));
+		cmbTurnoEmpleReg.setBounds(560, 158, 121, 22);
 		add(cmbTurnoEmpleReg);
 		
 		JLabel lblAdminEmpleReg = new JLabel("Administrador");
-		lblAdminEmpleReg.setBounds(450, 201, 77, 14);
+		lblAdminEmpleReg.setBounds(450, 201, 103, 14);
 		add(lblAdminEmpleReg);
 		
-		cmbAdminEmpleReg = new JComboBox();
-		cmbAdminEmpleReg.setBounds(560, 197, 30, 22);
+		cmbAdminEmpleReg = new JComboBox<String>();
+		cmbAdminEmpleReg.setModel(new DefaultComboBoxModel(new String[] {"SI", "NO"}));
+		cmbAdminEmpleReg.setBounds(560, 197, 121, 22);
 		add(cmbAdminEmpleReg);
 		
 		JLabel lblPWDEmpleReg = new JLabel("PassWord");
@@ -103,7 +105,7 @@ public class PRegistrarEmple extends JPanel {
 		add(lblPWDEmpleReg);
 		
 		txtPWDEmpleReg = new JTextField();
-		txtPWDEmpleReg.setBounds(560, 233, 96, 20);
+		txtPWDEmpleReg.setBounds(560, 233, 121, 20);
 		add(txtPWDEmpleReg);
 		txtPWDEmpleReg.setColumns(10);
 		
@@ -147,7 +149,16 @@ public class PRegistrarEmple extends JPanel {
 				if (apellido.isBlank()) {
 					mostrarError("El apellido no puede estar vacío");
 				} else {
-					nuevoEmple = new Empleado(id, nombre, apellido);
+					String textPWD = txtPWDEmpleReg.getText();
+					String error = Empleado.validarPassword(apellido, textPWD);
+					if (error.isBlank()) {
+						String comboAdmin = (String) cmbAdminEmpleReg.getSelectedItem();
+						String comboTurno = (String) cmbTurnoEmpleReg.getSelectedItem();
+						nuevoEmple = new Empleado(id, nombre, apellido, comboTurno, comboAdmin, textPWD);
+					} else {
+						mostrarError("La contrasenia no cumple los requisitos");
+					}
+					
 				}
 			}
 		}

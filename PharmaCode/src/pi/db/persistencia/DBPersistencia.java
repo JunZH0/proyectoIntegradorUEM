@@ -17,12 +17,10 @@ public class DBPersistencia {
 	
 	private AccesoDB acceso;
 	
-	
 	public DBPersistencia() {
 		acceso  = new AccesoDB();
 	}
-
-
+	
 	public ArrayList<Proveedor> seleccionarProveedores() {
 		ArrayList<Proveedor> listaProv = new ArrayList<Proveedor>();
 		
@@ -32,7 +30,6 @@ public class DBPersistencia {
 		Statement stmt = null;
 		ResultSet rst = null;
 		
-
 		try {
 			conexion = acceso.hacerConexion();
 			stmt = conexion.createStatement();
@@ -93,13 +90,17 @@ public class DBPersistencia {
 			int id;
 			String nombre;
 			String apellido;
+			String turno;
+			String admin;
 			
 			while (rst.next()) {
 				id = rst.getInt(DBContract.COL_ID_EMP);
 				nombre = rst.getString(DBContract.COL_NOM_EMP);
 				apellido =  rst.getString(DBContract.COL_APE_EMP);
+				turno = rst.getString(DBContract.COL_TURNO_EMP);
+				admin = rst.getString(DBContract.COL_ES_ADM_EMP);
 				
-				empleado = new Empleado(id, nombre, apellido);
+				empleado = new Empleado(id, nombre, apellido, turno, admin, null);
 				listaEmpleados.add(empleado);
 			}
 			
@@ -122,11 +123,9 @@ public class DBPersistencia {
 		return listaEmpleados;
 		
 	}
-
-
+	
 	public int selecIdProv(String nombreProv) {
 		int idProv = 0;
-		
 		
 		String query = "SELECT " + DBContract.COL_ID_PROV + " FROM " + DBContract.NOM_TAB_PROV + " WHERE " + DBContract.COL_NOM_PROV + " LIKE ?";
 		
@@ -160,14 +159,13 @@ public class DBPersistencia {
 				e.printStackTrace();
 			}
 		}
-
 		
 		return idProv;
+		
 	}
 	
 	public int selecIdEmple(String nombreEmple) {
 		int idEmple = 0;
-		
 		
 		String query = "SELECT " + DBContract.COL_ID_EMP 
 						+ " FROM " + DBContract.NOM_TAB_EMP 
@@ -248,7 +246,10 @@ public class DBPersistencia {
 			String query = "INSERT INTO " + DBContract.NOM_TAB_EMP 
 							+ " (" + DBContract.COL_NOM_EMP + ", " 
 							+ DBContract.COL_ID_EMP + ", " 
-							+ DBContract.COL_APE_EMP + ") VALUES (?, ?, ?)";
+							+ DBContract.COL_APE_EMP + ", "
+							+ DBContract.COL_TURNO_EMP + ", "
+							+ DBContract.COL_ES_ADM_EMP + ", "
+							+ DBContract.COL_PWD_EMP + ") VALUES (?, ?, ?, ?, ?, ?)";
 			
 			Connection conexion = null;
 			PreparedStatement pstm = null;
@@ -260,6 +261,9 @@ public class DBPersistencia {
 				pstm.setString(1, nuevoEmple.getNombreEmple());
 				pstm.setInt(2, nuevoEmple.getIdEmpleado());
 				pstm.setString(3, nuevoEmple.getApellidoEmple());
+				pstm.setString(4, nuevoEmple.getTurnoEmple());
+				pstm.setString(5, nuevoEmple.getAdminEmple());
+				pstm.setString(6, nuevoEmple.getPassword());
 				
 				res = pstm.executeUpdate();
 			
