@@ -4,6 +4,7 @@
   - [1. Descripción del proyecto](#1-descripción-del-proyecto)
   - [2. Enfoque](#2-enfoque)
   - [3. Navigación en la aplicación](#3-navigación-en-la-aplicación)
+  - [4. Conclusiones](#4-conclusiones)
 
 ![LogoPharmaCode](Documentacion/Imagenes/LogoPharma.png)
 
@@ -38,4 +39,22 @@ Aquí vemos el modelo relacional de la aplicación:
 
 
 ## 3. Navigación en la aplicación
+Lo que se puede observar en la aplicación es que, al abrir la aplicación, el usuario se encuentra en la pantalla de login:
 
+![Login](Documentacion/Imagenes/LoginPharmaCode.png)
+
+Al entrar, el usuario tendrá la vista de un menú principal:
+
+![MenuPrincipal](Documentacion/Imagenes/MenuPrincipalPharmaCode.png)
+
+Cada uno de los elementos del menú, despliega un submenú con los paneles correspondientes a cada área de la aplicación:
+
+![Submenus](Documentacion/Imagenes/SubmenuPharmaCode.png)
+
+Esta distribución de paneles facilita la navegación entre las diferentes áreas de la aplicación y permite que el usuario sepa a que área está accediendo sin nignún tipo de distracción.
+Aquí tenemos un ejemplo de cómo se vería uno de los paneles de la aplicación:
+
+![Paneles](Documentacion/Imagenes/EjemploPanelPharmaCode.png)
+
+## 4. Conclusiones
+En definitiva desde PharmaCode hemos desarrollado una aplicación de escritorio que permite la gestión de una farmacia de forma rápida y sencilla, destinado a todo tipo de farmacias. 
