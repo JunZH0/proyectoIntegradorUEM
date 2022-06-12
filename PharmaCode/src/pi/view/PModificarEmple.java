@@ -119,7 +119,7 @@ public class PModificarEmple extends JPanel {
 		
 		String nombre = txtNombreEmple.getText();
 		if (nombre.isBlank()) {
-			mostrarError("El nombre no puede estar vacío");
+			mostrarError("El nombre no puede estar vacio");
 		} else {
 			try {
 				int id = Integer.valueOf(txtIdEmple.getText());
@@ -128,7 +128,7 @@ public class PModificarEmple extends JPanel {
 				} else {
 					String apellido = txtApellidoEmple.getText();
 					if (apellido.isBlank()) {
-						mostrarError("El apellido no puede estar vacío");
+						mostrarError("El apellido no puede estar vacio");
 					} else {
 						modEmple = new Empleado(id, nombre, apellido);
 					}
