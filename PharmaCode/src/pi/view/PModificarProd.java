@@ -5,9 +5,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JTextField;
 
 import pi.control.GestorControl;
+import pi.db.persistencia.DBPersistencia;
 import pi.model.Producto;
 import pi.model.Proveedor;
 
@@ -28,7 +31,9 @@ public class PModificarProd extends JPanel {
 	private JLabel lblPrecio;
 	private JTextField txtPrecio;
 	
-	public final static String BTN_MODIFICAR = "Guardar";
+	public final static String BTN_GUARDAR = "Guardar";
+	public final static String BTN_LIMPIAR = "Limpiar";
+	public final static String BTN_BUSCAR = "Buscar Producto";
 	
 	public PModificarProd() {
 		init();
@@ -56,8 +61,9 @@ public class PModificarProd extends JPanel {
 		add(lblTipo);
 		
 		cmbTipo = new JComboBox();
-		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"Anticonceptivo", "Analgesico", "Antihistaminico", "Antibiotico",
-				"Antitusivo", "Antiinflamatorio", "Antidiabetico", "Relajante muscular", "Antidepresivo", "Citotoxico"}));
+		cmbTipo.setEnabled(false);
+		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"ANTICONCEPTIVO", "ANALGESICO", "ANTIHISTAMINICO", "ANTIBIOTICO",
+				"ANTITUSIVO", "RELAJANTE MUSCULAR", "ANTIDEPRESIVO", "CITOTOXICO", "ANTIINFLAMATORIO", "ANTIDIABETICO"}));
 		cmbTipo.setBounds(195, 203, 146, 26);
 		add(cmbTipo);
 		
@@ -66,6 +72,7 @@ public class PModificarProd extends JPanel {
 		add(lblStock);
 		
 		spnStock = new JSpinner();
+		spnStock.setEnabled(false);
 		spnStock.setBounds(536, 141, 42, 22);
 		add(spnStock);
 		
@@ -74,10 +81,12 @@ public class PModificarProd extends JPanel {
 		add(lblDescripcion);
 		
 		txtArea = new JTextArea();
+		txtArea.setEnabled(false);
 		txtArea.setBounds(195, 279, 273, 119);
 		add(txtArea);
 		
-		btnGuardar = new JButton(BTN_MODIFICAR);
+		btnGuardar = new JButton(BTN_GUARDAR);
+		btnGuardar.setEnabled(false);
 		btnGuardar.setBounds(88, 445, 108, 27);
 		add(btnGuardar);
 		
@@ -94,13 +103,16 @@ public class PModificarProd extends JPanel {
 		add(lblPrecio);
 		
 		txtPrecio = new JTextField();
+		txtPrecio.setEnabled(false);
 		txtPrecio.setBounds(535, 206, 114, 21);
 		add(txtPrecio);
 		txtPrecio.setColumns(10);
 	}
 	
+	DBPersistencia dPersis = new DBPersistencia();
+	
 	public void setControlador(GestorControl c) {
-		btnBuscarProducto.addActionListener(cmbTipo);
+		btnBuscarProducto.addActionListener(c);
 		btnGuardar.addActionListener(c);
 		btnLimpiar.addActionListener(c);
 	}
@@ -113,41 +125,78 @@ public class PModificarProd extends JPanel {
 	public void limpiarCampos() {
 		txtArea.setText("");
 		txtNombre.setText("");
+		cmbTipo.setSelectedIndex(-1);
+		txtPrecio.setText("");
+		spnStock.setValue(0);
 	}
 	
 	public void hacerVisibleMod(boolean bandera) {
-		btnBuscarProducto.setVisible(!bandera);
-		btnGuardar.setVisible(bandera);
-		btnLimpiar.setVisible(bandera);
+		
+		btnGuardar.setEnabled(bandera);
+		btnLimpiar.setEnabled(bandera);
 		txtArea.setEnabled(bandera);
-		txtNombre.setEnabled(bandera);
-		txtPrecio.setEnabled(!bandera);
+		txtPrecio.setEnabled(bandera);
+		cmbTipo.setEnabled(bandera);
+		spnStock.setEnabled(bandera);
 	}
 	
+	public void rellenarDatos(Producto producto) {
+		txtNombre.setText(producto.getNombreProd());
+		txtArea.setText(producto.getDescrProd());
+		txtPrecio.setText(String.valueOf(producto.getPrecioProd()));
+		spnStock.setValue(producto.getStockProd());
+		cmbTipo.setSelectedItem(producto.getTipo());
+		
+		
+	}
 	
-	public Producto comprobrarProducto() {
+	public Producto comprobarDatosModProd() {
 		Producto modProd = null;
 		
 		String nombre = txtNombre.getText();
 		if (nombre.isBlank()) {
-			mostrarError("El nombre no puede estar vacio");
-		}
-		double precio = Double.parseDouble(txtPrecio.getText());
-		String campoPrecio = txtPrecio.getText();
-		if(campoPrecio.isBlank()) {
-			mostrarError("El campo de precio no puede estar vacio");
-		}
-		
-		String tipo = (String) cmbTipo.getSelectedItem();
-		String descripcion = txtArea.getText();
-		int stock = (int) spnStock.getValue();
-		
-		modProd = new Producto(0, nombre, descripcion, tipo, precio, stock);
-		
-		
-		
-		
+			mostrarError("El nombre no puede estar vacío");
+		} else {
+			String descripcion = txtArea.getText();
+			String tipo = (String) cmbTipo.getSelectedItem();
+			double precio;
+			if(txtPrecio.getText().equals("")) {
+				mostrarMensaje("El campo precio no puede estar vacio", "Error de datos", 0);
+			} else {
+				precio = Double.parseDouble(txtPrecio.getText());
+				int stock = (int) spnStock.getValue();
+					modProd = new Producto(0, nombre, descripcion, tipo, precio, stock);
+				}
+			}
 		return modProd;
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	public void comprobrarProducto() {
+		String nomProd = txtNombre.getText();
+		if (nomProd.isBlank()) {
+			mostrarError("El nombre no puedes estar en blanco");
+		} else {
+			String prod = dPersis.seleccionarProductoUnico(nomProd);
+			
+				Producto producto = dPersis.seleccionarUnProducto(prod);
+				rellenarDatos(producto);
+			
+		}
 	}
+	
+	
+
+	public void mostrarMensaje(String mensaje, String titulo, int i) {
+		JOptionPane.showMessageDialog(this, mensaje ,titulo, i);
+		
+	}
+	
 	
 }

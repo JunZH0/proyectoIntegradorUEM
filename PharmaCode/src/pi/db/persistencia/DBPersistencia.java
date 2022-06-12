@@ -420,7 +420,7 @@ public int registrarProd(Producto nuevoProd) {
 	}
 
 
-	public ArrayList<Producto> seleccionarProducto(String tipo1) {
+	public ArrayList<Producto> seleccionarProducto() {
 		ArrayList<Producto> listProd = new ArrayList<>();
 		
 		Producto producto;
@@ -473,6 +473,104 @@ public int registrarProd(Producto nuevoProd) {
 		return listProd;
 
 	}
+	
+	public Producto seleccionarUnProducto(String tipo1) {
+		Producto producto = null;
+		
+		
+		
+		String nombre;
+		String descripcion = null;
+		String tipo;
+		int stock;
+		double precio;
+		
+		String query = "SELECT " + DBContract.COL_NOM_PROD + ", " + DBContract.COL_TIPO_PROD + ", " + DBContract.COL_PRECIO_PROD + ", " + DBContract.COL_STOCK_PROD + " FROM " + DBContract.NOM_TAB_PROD;
+		
+		Connection conexion = null;
+		PreparedStatement pstm = null;
+		ResultSet rslt = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstm = conexion.prepareStatement(query);
+			rslt = pstm.executeQuery();
+			
+			while(rslt.next()) {
+				nombre = rslt.getString(DBContract.COL_NOM_PROD);
+				tipo = rslt.getString(DBContract.COL_TIPO_PROD);
+				stock = rslt.getInt(DBContract.COL_STOCK_PROD);
+				precio = rslt.getDouble(DBContract.COL_PRECIO_PROD);
+				
+				producto = new Producto(0,nombre, descripcion , tipo, precio, stock);
+				
+				
+				
+			}
+						
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: error conexi�n, sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null) pstm.close(); 
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+		
+		return producto;
+
+	}
+	
+	public String seleccionarProductoUnico(String nomProd) {
+	
+		
+	
+		String nombre = "";
+		
+		String query = "SELECT * FROM " + DBContract.NOM_TAB_PROD + " WHERE " + DBContract.COL_NOM_PROD + "= ?";
+		
+		Connection conexion = null;
+		PreparedStatement pstmt = null;
+		ResultSet rst = null;
+		
+		try {
+			conexion = acceso.hacerConexion();
+			pstmt = conexion.prepareStatement(query);
+			pstmt.setString(1, nomProd + "%");
+			
+			rst = pstmt.executeQuery();
+			
+			if (rst.next()) {
+				nombre = rst.getString(DBContract.COL_NOM_PROD);
+				
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rst != null) rst.close();
+				if (pstmt != null) pstmt.close();
+				if (conexion != null) conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return nombre;
+
+	}
+	
+	
 	
 	public int selectIdProducto(int idProd) {
 		int idProducto = 0;
@@ -593,6 +691,42 @@ public int registrarProd(Producto nuevoProd) {
 		
 		
 		return res;
+	}
+	
+	public int borrarProd(String nombreProd) {
+
+		int resultado = 0;
+		
+		String query = "DELETE FROM " + DBContract.NOM_TAB_PROD + " WHERE " + DBContract.COL_NOM_PROD + "=?"; 
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = acceso.hacerConexion();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, nombreProd);
+
+			resultado = pstmt.executeUpdate(); 
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) { 
+			System.out.println("Error en la base de datos: error conexi�n, sentencia incorrecta");
+			e.printStackTrace();
+		} finally { 
+			try {
+				if (pstmt != null) pstmt.close(); 
+				if (con != null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+		
+		return resultado;
+	
 	}
 
 

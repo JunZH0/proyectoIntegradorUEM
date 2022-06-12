@@ -44,6 +44,7 @@ public class GestorControl implements ActionListener{
 	PModificarProv pModProv;
 	PRegistrarProv pRegProv;
 	DBPersistencia dbPers;
+	Producto product;
 	
 	
 	
@@ -111,10 +112,16 @@ public class GestorControl implements ActionListener{
 				pRegProd.obtenerDatosProd();
 			} else if (ev.getActionCommand().equals(PConsultarStock.BTN_CONSULTAR)) {
 				pConStock.obtenerDatos(dbPers);
-			} else if (ev.getActionCommand().equals(PModificarProd.BTN_MODIFICAR)) {
+			} else if (ev.getActionCommand().equals(PConsultarStock.BTN_ELIMINAR)) {
+				eliminarProducto();
+			} else if (ev.getActionCommand().equals(PModificarProd.BTN_GUARDAR)) {
 				modificarProd();
-				
-			} else if (ev.getActionCommand().equals(PConsultarStock.BTN_CONSULTAR)) {
+			} else if (ev.getActionCommand().equals(PModificarProd.BTN_LIMPIAR)) {
+				pModProd.limpiarCampos();
+			} else if (ev.getActionCommand().equals(PModificarProd.BTN_BUSCAR)) {
+				pModProd.comprobrarProducto();
+				pModProd.hacerVisibleMod(true);
+			}else if (ev.getActionCommand().equals(PConsultarStock.BTN_CONSULTAR)) {
 				pConStock.obtenerDatos(dbPers);
 			} else if (ev.getActionCommand().equals(PRegistrarVenta.BTN_LIMPIAR_VENTA)) {
 				pRegVenta.limpiarCamposVenta();
@@ -139,6 +146,8 @@ public class GestorControl implements ActionListener{
 		listaVentas = dbPers.seleccionarVentas();
 		pRegVenta.rellenarTabla(listaVentas);
 	}
+	
+	
 
 	
 	
@@ -236,7 +245,23 @@ public class GestorControl implements ActionListener{
 			}
 		}
 	}
-
+	
+	
+	private void modificarProd() {
+		Producto modProd = pModProd.comprobarDatosModProd();
+		if (modProd  == null) {
+			pModProd.mostrarError("No han podido guardarse los cambios");
+		} else {
+			int resp = dbPers.modProducto(modProd);
+			
+			if (resp == 1) {
+				JOptionPane.showMessageDialog(pModProd, "Se ha modificado el proveedor con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+				pModProd.limpiarCampos();
+			} else {
+				pModProd.mostrarError("No han podido guardarse los cambios");
+			}
+		}
+	}
 
 
 
@@ -267,20 +292,46 @@ public class GestorControl implements ActionListener{
 	private void eliminarProv() {
 		String nombreProv = pConProv.poveedorEliminar();
 		if (nombreProv == null) {
-			JOptionPane.showMessageDialog(pConProv, "No se ha seleccionado ning�n restaurante", "Error selección", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(pConProv, "No se ha seleccionado ningun proveedor", "Error selección", JOptionPane.ERROR_MESSAGE);
 		} else {
-			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el restaurante, ¿desea continuar?",
+			int resp = JOptionPane.showConfirmDialog(pConProv, "Se va a eliminar el proveedor, ¿desea continuar?",
 					"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 			if (resp == JOptionPane.YES_OPTION) {
 				int res = dbPers.borrarProv(nombreProv);
 				listarResultadosProv();
 				if (res==1) {
-					JOptionPane.showMessageDialog(pConProv, "Se ha eliminado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pConProv, "Se ha eliminado el proveedor", "Información", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(pConProv, "No se ha podido eliminar el restaurante", "Error eliminación", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(pConProv, "No se ha podido eliminar el proveedor", "Error eliminación", JOptionPane.ERROR_MESSAGE);
 				}						
 			}
 		}
+	}
+	
+	private void eliminarProducto() {
+		String nombreProd = pConStock.productoEliminar();
+		if (nombreProd == null) {
+			JOptionPane.showMessageDialog(pConStock, "No se ha seleccionado ningun producto", "Error seleccion", JOptionPane.ERROR_MESSAGE);
+		} else {
+			int resp = JOptionPane.showConfirmDialog(pConStock, "Se va a eliminar el producto, �desea continuar?",
+					"Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			if (resp == JOptionPane.YES_OPTION) {
+				int res = dbPers.borrarProd(nombreProd);
+				listarResultadosProd();
+				if (res==1) {
+					JOptionPane.showMessageDialog(pConStock, "Se ha eliminado el producto", "Información", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(pConStock, "No se ha podido eliminar el producto", "Error eliminación", JOptionPane.ERROR_MESSAGE);
+				}						
+			}
+		}
+	}
+	
+	private void listarResultadosProd() {
+		ArrayList<Producto> listaProd = new ArrayList<>();
+		listaProd = dbPers.seleccionarProducto();
+		pConStock.rellenarTabla(listaProd);
+		vMenu.cargarPanel(pConStock);
 	}
 
 
@@ -292,56 +343,8 @@ public class GestorControl implements ActionListener{
 		vMenu.cargarPanel(pConProv);
 	}
 	
-
-	/*private void registrarProd() {
-		Producto nuevoProd = pRegProd.obtenerDatosProd();
-		
-		if(nuevoProd != null) {
-			int prod = dbPers.selectIdProducto(nuevoProd.getIdProducto());
-				
-			if (prod != 0) {
-				pRegProd.mostrarMensaje("Ya existe un producto con ese ID", "Error", 1);
-			}
-			
-			} else {
-				
-				int resp = dbPers.registrarProd(nuevoProd);;
-				
-				if(resp == 1) {
-
-					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con éxito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-
-					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-
-					pRegProd.limpiarDatos();
-				} else {
-					pRegProd.mostrarMensaje("No se ha registrado el producto", "Error", 1);
-				}
-				
-			}
-		}
-		*/
 	
 
-	public void comprobarStock() {
-		
-	}
-	
-	public void modificarProd() {
-		Producto modProd = pModProd.comprobrarProducto();
-		if (modProd  == null) {
-			pModProd.mostrarError("No han podido guardarse los cambios");
-		} else {
-			int resp = dbPers.modProducto(modProd);
-			
-			if (resp == 1) {
-				JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
-				pModProd.limpiarCampos();
-			} else {
-				pModProd.mostrarError("No han podido guardarse los cambios");
-			}
-		}
-	}
 
 
 	public void salirApp() {

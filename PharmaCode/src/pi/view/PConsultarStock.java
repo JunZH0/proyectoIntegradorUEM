@@ -5,6 +5,7 @@ import pi.control.GestorControl;
 import pi.db.persistencia.DBContract;
 import pi.db.persistencia.DBPersistencia;
 import pi.model.Producto;
+import pi.model.Proveedor;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,6 +29,8 @@ public class PConsultarStock extends JPanel {
 	private JScrollPane scrollPane;
 	private JButton btnConsultar;
 	public final static String BTN_CONSULTAR = "Consultar";
+	public final static String BTN_ELIMINAR = "Eliminar";
+	private JButton btnEliminar;
 	
 	
 	public PConsultarStock() {
@@ -63,12 +66,20 @@ public class PConsultarStock extends JPanel {
 		scrollPane.setViewportView(tblProd);
 		
 		btnConsultar = new JButton("Consultar");
-		btnConsultar.setBounds(300, 391, 110, 23);
+		btnConsultar.setBounds(75, 395, 110, 23);
 		add(btnConsultar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(403, 395, 89, 23);
+		add(btnEliminar);
 	}
+	
+	Producto product;
+	
 	
 	public void setControlador(GestorControl c) {
 		btnConsultar.addActionListener(c);
+		btnEliminar.addActionListener(c);
 		asignarTipo();
 	}
 	
@@ -107,13 +118,13 @@ public class PConsultarStock extends JPanel {
 		listaProd = new ArrayList<>();
 		
 		if(tipo.equals("Todas")) {
-			for (Producto prod : dbP.seleccionarProducto(tipo) ) {
+			for (Producto prod : dbP.seleccionarProducto() ) {
 				listaProd.add(prod);
 			}
 			
 		} else {
 			scrollPane.setVisible(true);
-			for (Producto prod : dbP.seleccionarProducto(tipo) ) {
+			for (Producto prod : dbP.seleccionarProducto() ) {
 				if(prod.getTipo().equals(tipo)) {
 					listaProd.add(prod);
 				}
@@ -131,8 +142,33 @@ public class PConsultarStock extends JPanel {
 		}
 	
 		
+		
 	}
 	
+	public String productoEliminar() {
+		String nombreProd = null;
+		
+		if (tblProd.getSelectedRow() >= 0) {
+			int columna = 1;
+			int fila = tblProd.getSelectedRow();
+			nombreProd = tblProd.getModel().getValueAt(fila, columna).toString();
+		}
+		return nombreProd;
+	}
+	
+	public void rellenarTabla(ArrayList<Producto> listaProd) {
+		dtmProd.getDataVector().clear();
+		Object[] data = new Object[4];
+		
+		for (Producto producto : listaProd) {
+			data[0] = product.getNombreProd();
+			data[1] = product.getTipo();
+			data[2] = product.getStockProd();
+			data[3] = product.getPrecioProd();
+			
+			dtmProd.addRow(data);
+		}
+	}
 	
 	
 	
