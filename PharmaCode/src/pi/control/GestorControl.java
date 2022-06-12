@@ -238,7 +238,7 @@ public class GestorControl implements ActionListener{
 			int resp = dbPers.modProveedor(modProv);
 			
 			if (resp == 1) {
-				JOptionPane.showMessageDialog(pModProv, "Se ha modificado el proveedor con éxito", "Información", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(pModProv, "Se ha modificado el proveedor con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				pModProv.limpiarComponentes();
 			} else {
 				pModProv.mostrarError("No han podido guardarse los cambios");
@@ -275,7 +275,7 @@ public class GestorControl implements ActionListener{
 				int resp = dbPers.registrarProv(nuevoProv);
 				
 				if (resp == 1) {
-					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado el proveedor", "Información", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pRegProv, "Se ha registrado el proveedor", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 					pRegProv.limpiarComponentes();
 				} else {
 					pRegProv.mostrarError("No se ha podido añadir el proveedor");

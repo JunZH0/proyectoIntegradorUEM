@@ -29,7 +29,7 @@ public class PConsultarStock extends JPanel {
 	private JScrollPane scrollPane;
 	private JButton btnConsultar;
 	public final static String BTN_CONSULTAR = "Consultar";
-	public final static String BTN_ELIMINAR = "Eliminar";
+	public final static String BTN_ELIMINAR = "Eliminar Datos";
 	private JButton btnEliminar;
 	
 	
@@ -69,7 +69,7 @@ public class PConsultarStock extends JPanel {
 		btnConsultar.setBounds(75, 395, 110, 23);
 		add(btnConsultar);
 		
-		btnEliminar = new JButton("Eliminar");
+		btnEliminar = new JButton("Eliminar Datos");
 		btnEliminar.setBounds(403, 395, 89, 23);
 		add(btnEliminar);
 	}
@@ -149,7 +149,7 @@ public class PConsultarStock extends JPanel {
 		String nombreProd = null;
 		
 		if (tblProd.getSelectedRow() >= 0) {
-			int columna = 1;
+			int columna = 0;
 			int fila = tblProd.getSelectedRow();
 			nombreProd = tblProd.getModel().getValueAt(fila, columna).toString();
 		}
@@ -158,13 +158,14 @@ public class PConsultarStock extends JPanel {
 	
 	public void rellenarTabla(ArrayList<Producto> listaProd) {
 		dtmProd.getDataVector().clear();
-		Object[] data = new Object[4];
+		Object[] data = new Object[5];
 		
 		for (Producto producto : listaProd) {
-			data[0] = product.getNombreProd();
-			data[1] = product.getTipo();
-			data[2] = product.getStockProd();
-			data[3] = product.getPrecioProd();
+			data[0] = producto.getNombreProd();
+			data[1] = producto.getDescrProd();
+			data[2] = producto.getTipo();
+			data[3] = producto.getStockProd();
+			data[4] = producto.getPrecioProd();
 			
 			dtmProd.addRow(data);
 		}

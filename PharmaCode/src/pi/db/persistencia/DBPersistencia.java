@@ -349,7 +349,7 @@ public int registrarProd(Producto nuevoProd) {
 			pstm.setString(1, nuevoProd.getNombreProd());
 			pstm.setString(2, nuevoProd.getDescrProd());
 			pstm.setString(3, nuevoProd.getTipo());
-			pstm.setDouble(4, (double) nuevoProd.getPrecioProd());
+			pstm.setDouble(4, nuevoProd.getPrecioProd());
 			pstm.setInt(5, nuevoProd.getStockProd());
 			
 			res = pstm.executeUpdate();

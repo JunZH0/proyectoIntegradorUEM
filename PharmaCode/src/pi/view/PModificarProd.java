@@ -31,8 +31,8 @@ public class PModificarProd extends JPanel {
 	private JLabel lblPrecio;
 	private JTextField txtPrecio;
 	
-	public final static String BTN_GUARDAR = "Guardar";
-	public final static String BTN_LIMPIAR = "Limpiar";
+	public final static String BTN_GUARDAR = "Guardar M";
+	public final static String BTN_LIMPIAR = "Limpiar M";
 	public final static String BTN_BUSCAR = "Buscar Producto";
 	
 	public PModificarProd() {
