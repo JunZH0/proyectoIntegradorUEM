@@ -393,8 +393,7 @@ public class DBPersistencia {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			System.out.println("Error en la base de datos: error conexi�n, sentencia incorrecta");
-<<<<<<< HEAD
-=======
+
 			e.printStackTrace();
 		} finally {
 			try {
@@ -445,7 +444,7 @@ public class DBPersistencia {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			System.out.println("Error en la base de datos: error conexi�n, sentencia incorrecta");
->>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
+
 			e.printStackTrace();
 		} finally {
 			try {
@@ -582,17 +581,13 @@ public class DBPersistencia {
 	
 	public int registrarProd(Producto nuevoProd) {
 		
-<<<<<<< HEAD
+
 		String query = "INSERT INTO " + DBContract.NOM_TAB_PROD + " (" +  DBContract.COL_NOM_PROD + ", " + DBContract.COL_DESCR_PROD + ", " + DBContract.COL_TIPO_PROD 
 				+ ", " + DBContract.COL_PRECIO_PROD + ", " + DBContract.COL_STOCK_PROD + ") VALUES (?, ?, ?, ?, ?)";
 		
 
-=======
-		String query = "INSERT INTO " + DBContract.NOM_TAB_PROD + " (" 
-						+  DBContract.COL_NOM_PROD + ", " + DBContract.COL_DESCR_PROD 
-						+ ", " + DBContract.COL_TIPO_PROD + ", " 
-						+ DBContract.COL_PRECIO_PROD + ") VALUES (?,?,?,?)";
->>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
+
+
 		
 		Connection conexion = null;
 		PreparedStatement pstm = null;
