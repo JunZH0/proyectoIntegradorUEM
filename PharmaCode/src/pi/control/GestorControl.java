@@ -212,7 +212,7 @@ public class GestorControl implements ActionListener{
 		} else {
 			int idEmple = dbPers.selecIdEmple(nomEmple);
 			if (idEmple <= 0) {
-				pModEmple.mostrarError("No se ha encontrado ningun dato de emple");
+				pModEmple.mostrarError("No se ha encontrado ningun dato de ese empleado");
 			} else {
 				Empleado empleado = dbPers.selecionarUnEmpleado(nomEmple);
 				pModEmple.rellenarDatos(empleado);
@@ -302,9 +302,9 @@ public class GestorControl implements ActionListener{
 				int res = dbPers.borrarProv(nombreProv);
 				listarResultadosProv();
 				if (res==1) {
-					JOptionPane.showMessageDialog(pConProv, "Se ha eliminado el restaurante", "Información", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pConProv, "Se ha eliminado el proveedor", "Información", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(pConProv, "No se ha podido eliminar el restaurante", "Error eliminación", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(pConProv, "No se ha podido eliminar el proveedor", "Error eliminación", JOptionPane.ERROR_MESSAGE);
 				}						
 			}
 		}
@@ -348,10 +348,10 @@ public class GestorControl implements ActionListener{
 				int resp = dbPers.registrarProd(nuevoProd);;
 				
 				if(resp == 1) {
-					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el proveedor con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pModProv, "Se ha modificado el producto con exito", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 					pRegProd.limpiarDatos();
 				} else {
-					pRegProd.mostrarMensaje("No se ha registrado el proveedor", "Error", 1);
+					pRegProd.mostrarMensaje("No se ha registrado el producto", "Error", 1);
 				}
 				
 			}
