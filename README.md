@@ -1,30 +1,30 @@
-<<<<<<< HEAD
+
+
+# Proyecto Integrador UEM - MEMORIA 
+
+
+![LogoPharmaCode](Documentacion/Imagenes/LogoPharma.png)
+
+
+
+En esta **repositorio** se subiran todos los archivos relacionados con el Worskspace para el proyecto integrador de la UEM
+
+
+
+
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
-- [Proyecto Integrador UEM](#proyecto-integrador-uem)
+- [Proyecto Integrador UEM - MEMORIA](#proyecto-integrador-uem-memoria)
   - [Estructura](#estructura)
-
-<!-- /code_chunk_output -->
-
-# Proyecto Integrador UEM
-=======
-# Proyecto Integrador UEM - MEMORIA 
->>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
-
-- [Proyecto Integrador UEM - MEMORIA](#proyecto-integrador-uem---memoria)
   - [1. Descripción del proyecto](#1-descripción-del-proyecto)
   - [2. Enfoque](#2-enfoque)
   - [3. Navigación en la aplicación](#3-navigación-en-la-aplicación)
   - [4. Conclusiones](#4-conclusiones)
 
-<<<<<<< HEAD
-En esta ** repositorio** se subiran todos los archivos relacionados con el Worskspace para el proyecto integrador de la UEM
+<!-- /code_chunk_output -->
 
-
-
-#Memoria
 
 ## Estructura
 
@@ -33,8 +33,7 @@ En esta ** repositorio** se subiran todos los archivos relacionados con el Worsk
 
 
 
-=======
-![LogoPharmaCode](Documentacion/Imagenes/LogoPharma.png)
+
 
 **Integrantes de PharmaCode:**
 - Cloud Master ----- JUN ZHOU
@@ -86,4 +85,4 @@ Aquí tenemos un ejemplo de cómo se vería uno de los paneles de la aplicación
 
 ## 4. Conclusiones
 En definitiva desde PharmaCode hemos desarrollado una aplicación de escritorio que permite la gestión de una farmacia de forma rápida y sencilla, destinado a todo tipo de farmacias. 
->>>>>>> 81c795ad9502e9eab80bbf7b35bd0bc046304ca1
+
