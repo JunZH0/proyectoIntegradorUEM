@@ -39,8 +39,8 @@ public class VInicio extends JFrame{
 		setSize(ANCHO, ALTO);
 		
 
-		JLabel lblTitulo = new JLabel("* * * PHARMACODE * * *");
-		lblTitulo.setBounds(0, 0, 800, 25);
+		JLabel lblTitulo = new JLabel("PHARMACODE ");
+		lblTitulo.setBounds(-20, 0, 800, 25);
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblTitulo);
@@ -49,8 +49,8 @@ public class VInicio extends JFrame{
 		txtEmpleado.setToolTipText("Empleado");
 		txtEmpleado.setBounds(338, 171, 114, 21);
 
-		JLabel lblPharmacode = new JLabel("PharmaCode");
-		lblPharmacode.setBounds(340, 34, 120, 17);
+		JLabel lblPharmacode = new JLabel("Empleado");
+		lblPharmacode.setBounds(337, 57, 120, 17);
 		getContentPane().add(lblPharmacode);
 		
 		txtEmpleado = new JTextField();
@@ -62,13 +62,13 @@ public class VInicio extends JFrame{
 		
 		txtPwd = new JTextField();
 
-		txtPwd.setToolTipText("ContraseÒa");
+		txtPwd.setToolTipText("Contrase√±a");
 		txtPwd.setBounds(338, 275, 114, 21);
 		getContentPane().add(txtPwd);
 		txtPwd.setColumns(10);
 		
 		btnAcceso = new JButton(BTN_ACCEDER);
-		btnAcceso.setBounds(349, 356, 86, 27);
+		btnAcceso.setBounds(337, 273, 86, 27);
 		txtPwd.setToolTipText("Contrase√±a");
 		txtPwd.setBounds(318, 142, 114, 21);
 		getContentPane().add(txtPwd);
@@ -81,9 +81,9 @@ public class VInicio extends JFrame{
 		lblUsuario.setBounds(369, 144, 46, 14);
 		getContentPane().add(lblUsuario);
 		
-		JLabel lblPwd = new JLabel("ContraseÒa");
+		JLabel lblPwd = new JLabel("Contrase√±a");
 		lblPwd.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPwd.setBounds(328, 118, 86, 14);
+		lblPwd.setBounds(328, 119, 86, 14);
 		getContentPane().add(lblPwd);
 		
 		
@@ -137,6 +137,4 @@ public class VInicio extends JFrame{
 		txtEmpleado.setText("");
 		txtPwd.setText("");
 	}
-	
-	
 }

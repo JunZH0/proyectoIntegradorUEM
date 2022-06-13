@@ -392,7 +392,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexion, sentencia incorrecta");
 
 			e.printStackTrace();
 		} finally {
@@ -847,7 +847,7 @@ public class DBPersistencia {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.println("Error en la base de datos: error conexión, sentencia incorrecta");
+			System.out.println("Error en la base de datos: error conexiï¿½n, sentencia incorrecta");
 			e.printStackTrace();
 		} finally {
 			try {
